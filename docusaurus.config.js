@@ -3,7 +3,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 const config = {
   title: 'LINC Gallery',
   staticDirectories: ['static'],
-  tagline: 'A showcase of the projects from the LINC center',
+  tagline: 'Showcase of the science from a NIH BRAIN CONNECTS center',
   favicon: 'img/linc.logo.color+white.notext+square.png',
 
   url: 'https://gallery.lincbrain.org',
