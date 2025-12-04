@@ -10,6 +10,7 @@ const config = {
   baseUrl: '/',
   organizationName: 'lincbrain',
   projectName: 'linc-gallery',
+  trailingSlash: false,
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
