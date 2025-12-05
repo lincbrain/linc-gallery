@@ -42,6 +42,7 @@ const config = {
         items: [
           {to: '/pathways', label: 'Pathway Atlas', position: 'right'},
           {to: '/dmri', label: 'High-resolution dMRI', position: 'right'},
+          {to: '/team', label: 'Team', position: 'right'},
           {to: 'https://connects.mgh.harvard.edu/', label: 'Project Homepage', position: 'right'},
         ],
       },

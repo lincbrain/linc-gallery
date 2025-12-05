@@ -73,7 +73,7 @@
   margin-bottom: 0;
 }
 
-/* Page stlying*/
+/* Page stlying */
 .resource-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -110,7 +110,6 @@
 
 .team-member {
   padding: 1.5rem;
-  transition: all 0.3s ease;
   background-color: var(--ifm-background-surface-color);
   text-align: center;
 }
@@ -130,12 +129,15 @@
   margin-bottom: 0.3rem;
   font-size: 1.2rem;
   text-align: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .team-member p {
   font-size: 0.9rem;
-  line-height: 1.5;
 }
+
+
 
 @media (max-width: 768px) {
   .team-grid {
