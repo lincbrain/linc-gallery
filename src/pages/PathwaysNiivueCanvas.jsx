@@ -133,7 +133,7 @@ export const PathwaysNiivueCanvas = () => (
 
   const handleMRIChange = (event) => {
       const mriState = event.target.checked;
-      niivue_slice.current.volumes[0].visible = mriState;
+      niivue_slice.current.volumes[0].opacity = mriState ? 1 : 0;
       niivue_slice.current.updateGLVolume();
       setIsMRI(mriState);
     };
