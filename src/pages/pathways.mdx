@@ -7,6 +7,8 @@ hide_table_of_contents: true
 
 import { NiivueBrowserWrapper } from './NiivueBrowserWrapper';
 import { PathwaysNiivueCanvas } from './PathwaysNiivueCanvas';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 <div className="resource-cards">
   <div className="resource-card">
@@ -28,8 +30,15 @@ import { PathwaysNiivueCanvas } from './PathwaysNiivueCanvas';
 </div>
 
 <div className="niivue-card">
-  <h3>🔍 Explore the data</h3>
-  <NiivueBrowserWrapper>
-    <PathwaysNiivueCanvas/>
-  </NiivueBrowserWrapper>
+  <h3>🔍 Explore the atlas </h3>
+  <Tabs>
+    <TabItem value="subject-space" label="Subject I74 space" default>
+      <NiivueBrowserWrapper>
+        <PathwaysNiivueCanvas/>
+      </NiivueBrowserWrapper>
+    </TabItem>
+    <TabItem value="mni-space" label="MNI space">
+      Coming soon
+    </TabItem>
+  </Tabs>
 </div>
