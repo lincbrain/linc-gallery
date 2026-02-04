@@ -40,9 +40,9 @@ const config = {
           src: 'img/linc.logo.color+white.notext.png',
         },
         items: [
-          {to: '/pathways', label: 'Pathway Atlas', position: 'right'},
           {to: '/dmri', label: 'Diffusion MRI', position: 'right'},
           {to: '/dmri-xray', label: 'Diffusion MRI + X-ray', position: 'right'},
+          {to: '/pathways', label: 'Pathway Atlas', position: 'right'},
           {to: '/team', label: 'Team', position: 'right'},
           {to: 'https://connects.mgh.harvard.edu/', label: 'Project Homepage', position: 'right'},
         ],
