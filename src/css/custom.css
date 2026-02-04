@@ -124,6 +124,10 @@
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 2rem;
   margin: 2rem 0;
+  min-width: 95vw;
+  max-width: 95vw;
+  min-height: 90vh;
+  max-height: 90vh;
 }
 
 .team-member {
