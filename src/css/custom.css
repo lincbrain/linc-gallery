@@ -89,7 +89,7 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.neuroglancer-card {
+.viewer-card {
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   padding: 1rem;
@@ -100,7 +100,7 @@
   max-height: 90vh;
 }
 
-.neuroglancer-card iframe {
+.viewer-card iframe {
   min-width: 93vw;
   max-width: 93vw;
   min-height: 80vh;
