@@ -5,6 +5,11 @@ hide_table_of_contents: true
 
 # High-resolution dMRI
 
+import { NiivueBrowserWrapper } from './NiivueBrowserWrapper';
+import { DmriNiivueCanvas } from './DmriNiivueCanvas';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <div className="resource-cards">
   <div className="resource-card">
     <h3>📝 Reference</h3>
@@ -28,5 +33,14 @@ hide_table_of_contents: true
 
 <div className="viewer-card">
   <h3>🔍 Explore the data</h3>
-    Coming soon
+  <Tabs>
+    <TabItem value="human" label="Human data" default>
+      <NiivueBrowserWrapper>
+        <DmriNiivueCanvas/>
+      </NiivueBrowserWrapper>
+    </TabItem>
+    <TabItem value="macaque" label="Macaque data">
+      Coming soon
+    </TabItem>
+  </Tabs>
 </div>
