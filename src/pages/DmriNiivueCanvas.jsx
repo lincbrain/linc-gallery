@@ -53,6 +53,11 @@ export const DmriNiivueCanvas = () => (
         await niivue_slice.current.loadVolumes(imageList);
         await niivue_slice.current.volumes[1].loadImgV1()
         niivue_slice.current.setInterpolation(true); // V1 lines require nearest neighbor interpolation
+        niivue_slice.current.volumes[0].colorbarVisible=false;
+        niivue_slice.current.volumes[1].colorbarVisible=false;
+        niivue_slice.current.volumes[2].colorbarVisible=false;
+        niivue_slice.current.volumes[3].colorbarVisible=false;
+        niivue_slice.current.volumes[4].colorbarVisible=false;
         niivue_slice.current.updateGLVolume();
     }
     loadImages();
