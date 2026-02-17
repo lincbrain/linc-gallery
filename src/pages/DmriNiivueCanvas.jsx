@@ -11,10 +11,11 @@ export const DmriNiivueCanvas = () => (
   React.useEffect(() => {
     async function loadImages() {
 
-        niivue_slice.current = new Niivue({logLevel: 'debug', 
+        niivue_slice.current = new Niivue({logLevel: 'debug',
                                     backColor: [0, 0, 0, 1],
                                     show3Dcrosshair: true,
-                                    isColorbar: false,
+                                    isColorbar: true,
+                                    isRuler: false,
                                     crosshairWidth: 1,
                                 });
         niivue_slice.current.attachToCanvas(document.getElementById('niivue-canvas-slice'))
