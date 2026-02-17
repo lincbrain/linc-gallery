@@ -165,13 +165,27 @@ export const DmriNiivueCanvas = () => (
               </label>
             </div>
             <hr />
-            <h4>Mouse tooltips</h4>
-            <ul>
-              <li>Scroll slices - Scroll wheel</li>
-              <li>Pan - Middle click</li>
-              <li>Zoom - Right click</li>
-              <li>Move crosshair - Left click</li>
-            </ul>
+            <h4>Mouse controls</h4>
+            <table style={{ width: '100%', fontSize: '0.9em' }}>
+              <tbody>
+                <tr style={{ border: 'none' }}>
+                  <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Scroll slices</td>
+                  <td style={{ padding: '6px' , borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: 'none', background: '#F7F8F9' }}>Scroll wheel</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Move crosshair</td>
+                  <td style={{ padding: '6px', border: 'none', background: '#F7F8F9' }}>Left click</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Pan</td>
+                  <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: 'none', background: '#F7F8F9' }}>Middle click</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Zoom</td>
+                  <td style={{ padding: '6px', border: 'none', background: '#F7F8F9' }}>Right click</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </aside>
         <div id= "coronal-slice-container" 
