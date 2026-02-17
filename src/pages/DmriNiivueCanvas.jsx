@@ -29,8 +29,18 @@ export const DmriNiivueCanvas = () => (
                 opacity: 1,
             },
             {
-                url: "img/sub-I80_sample-hemi_acq-HighRes_desc-CSD_tdi.nii.gz",
+            },
+            {
+                url: "img/sub-I80_sample-hemi_acq-HighRes_desc-SANDIdot_fsoma.nii.gz",
                 opacity: 0,
+                cal_min: 0,
+                cal_max: 0.8,
+            },
+            {
+                url: "img/sub-I80_sample-hemi_acq-HighRes_desc-SANDIdot_fneurite.nii.gz",
+                opacity: 0,
+                cal_min: 0,
+                cal_max: 0.8,
             }
         ];
 
@@ -52,6 +62,8 @@ export const DmriNiivueCanvas = () => (
   const [isMRI, setIsMRI] = useState(true);
   const [isFODF, setIsFODF] = useState(true);
   const [isDensity, setIsDensity] = useState(false);
+  const [isSoma, setIsSoma] = useState(false);
+  const [isNeurite, setIsNeurite] = useState(false);
 
   const handleMRIChange = (event) => {
       const mriState = event.target.checked;
@@ -70,6 +82,20 @@ export const DmriNiivueCanvas = () => (
       niivue_slice.current.volumes[2].opacity = densityState ? 1 : 0;
       niivue_slice.current.updateGLVolume();
       setIsDensity(densityState);
+    };
+  const handleSomaChange = (event) => {
+      const somaState = event.target.checked;
+      niivue_slice.current.volumes[3].opacity = somaState ? 1 : 0;
+      niivue_slice.current.volumes[3].colorbarVisible = somaState;
+      niivue_slice.current.updateGLVolume();
+      setIsSoma(somaState);
+    };
+  const handleNeuriteChange = (event) => {
+      const neuriteState = event.target.checked;
+      niivue_slice.current.volumes[4].opacity = neuriteState ? 1 : 0;
+      niivue_slice.current.volumes[4].colorbarVisible = neuriteState;
+      niivue_slice.current.updateGLVolume();
+      setIsNeurite(neuriteState);
     };
 
   return (
@@ -107,7 +133,29 @@ export const DmriNiivueCanvas = () => (
                 onChange={handleDensityChange}
               />
               <label htmlFor="showDensity" style={{ marginLeft: "5px" }}>
-                Tract Density
+                Tract density
+              </label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="showSoma"
+                checked={isSoma}
+                onChange={handleSomaChange}
+              />
+              <label htmlFor="showSoma" style={{ marginLeft: "5px" }}>
+                Intra-soma signal fraction
+              </label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="showNeurite"
+                checked={isNeurite}
+                onChange={handleNeuriteChange}
+              />
+              <label htmlFor="showNeurite" style={{ marginLeft: "5px" }}>
+                Intra-neurite signal fraction
               </label>
             </div>
             <hr />
