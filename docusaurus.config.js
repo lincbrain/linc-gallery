@@ -28,6 +28,10 @@ const config = {
           customCss: './src/css/custom.css',
         },
         docs: false,
+        gtag: {
+          trackingID: 'G-JT8NM7QK71',
+          anonymizeIP: true,
+        },
       },
     ],
   ],
