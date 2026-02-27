@@ -17,6 +17,7 @@ export const DmriNiivueCanvas = () => (
                                     isColorbar: true,
                                     isRuler: false,
                                     crosshairWidth: 1,
+                                    multiplanarPadPixels: 50,
                                 });
         niivue_slice.current.attachToCanvas(document.getElementById('niivue-canvas-slice'))
 
@@ -26,11 +27,11 @@ export const DmriNiivueCanvas = () => (
                 opacity: 1,
             },
             {
-                url: "https://dandiarchive.s3.amazonaws.com/blobs/cc1/3d0/cc13d0c0-5d49-4014-a843-e890f80ceab2",
+                url: "https://dandiarchive.s3.amazonaws.com/blobs/14b/62f/14b62f2d-1251-46a6-b736-8c455b3cbd71",
                 opacity: 1,
             },
             {
-                url: "https://dandiarchive.s3.amazonaws.com/blobs/e56/b7e/e56b7ec7-bf65-46c7-9793-349aa13b9230",
+                url: "https://dandiarchive.s3.amazonaws.com/blobs/14b/62f/14b62f2d-1251-46a6-b736-8c455b3cbd71",
                 opacity: 0,
             },
             {
@@ -54,7 +55,8 @@ export const DmriNiivueCanvas = () => (
 
         // Load data
         await niivue_slice.current.loadVolumes(imageList);
-        await niivue_slice.current.volumes[1].loadImgV1()
+        await niivue_slice.current.volumes[1].loadImgV1();
+        await niivue_slice.current.volumes[2].loadImgV1();
         niivue_slice.current.setInterpolation(true); // V1 lines require nearest neighbor interpolation
         niivue_slice.current.setColormap(niivue_slice.current.volumes[3].id, "jet");
         niivue_slice.current.setColormap(niivue_slice.current.volumes[4].id, "jet");
@@ -134,7 +136,7 @@ export const DmriNiivueCanvas = () => (
                 dMRI
               </label>
             </div>
-            <div>
+            {/* <div>
               <input
                 type="checkbox"
                 id="showFODF"
@@ -155,7 +157,7 @@ export const DmriNiivueCanvas = () => (
               <label htmlFor="showDensity" style={{ marginLeft: "5px" }}>
                 Tract density
               </label>
-            </div>
+            </div> */}
             <div>
               <input
                 type="checkbox"
