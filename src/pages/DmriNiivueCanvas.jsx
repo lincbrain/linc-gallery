@@ -97,6 +97,11 @@ export const DmriNiivueCanvas = () => (
       const somaState = event.target.checked;
       niivue_slice.current.volumes[3].opacity = somaState ? 1 : 0;
       niivue_slice.current.volumes[3].colorbarVisible = somaState;
+      if (somaState) {
+        niivue_slice.current.volumes[4].opacity = 0;
+        niivue_slice.current.volumes[4].colorbarVisible = false;
+        setIsNeurite(false);
+      }
       niivue_slice.current.updateGLVolume();
       setIsSoma(somaState);
     };
@@ -104,6 +109,11 @@ export const DmriNiivueCanvas = () => (
       const neuriteState = event.target.checked;
       niivue_slice.current.volumes[4].opacity = neuriteState ? 1 : 0;
       niivue_slice.current.volumes[4].colorbarVisible = neuriteState;
+      if (neuriteState) {
+        niivue_slice.current.volumes[3].opacity = 0;
+        niivue_slice.current.volumes[3].colorbarVisible = false;
+        setIsSoma(false);
+      }
       niivue_slice.current.updateGLVolume();
       setIsNeurite(neuriteState);
     };
