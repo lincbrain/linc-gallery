@@ -22,23 +22,25 @@ export const DmriNiivueCanvas = () => (
 
         const imageList = [
             {
-                url: "img/sub-I80_sample-hemi_acq-HighRes_desc-CSD_fodf_l0.nii.gz",
+                url: "https://dandiarchive.s3.amazonaws.com/blobs/14b/62f/14b62f2d-1251-46a6-b736-8c455b3cbd71",
                 opacity: 1,
             },
             {
-                url: "img/sub-I80_sample-hemi_acq-HighRes_desc-CSD_fodf_dec.nii.gz",
+                url: "https://dandiarchive.s3.amazonaws.com/blobs/cc1/3d0/cc13d0c0-5d49-4014-a843-e890f80ceab2",
                 opacity: 1,
             },
             {
+                url: "https://dandiarchive.s3.amazonaws.com/blobs/e56/b7e/e56b7ec7-bf65-46c7-9793-349aa13b9230",
+                opacity: 0,
             },
             {
-                url: "img/sub-I80_sample-hemi_acq-HighRes_desc-SANDIdot_fsoma.nii.gz",
+                url: "https://dandiarchive.s3.amazonaws.com/blobs/92e/3aa/92e3aa4b-3bc0-4e09-b603-76e6dcfc40dc",
                 opacity: 0,
                 cal_min: 0,
                 cal_max: 0.8,
             },
             {
-                url: "img/sub-I80_sample-hemi_acq-HighRes_desc-SANDIdot_fneurite.nii.gz",
+                url: "https://dandiarchive.s3.amazonaws.com/blobs/53a/a73/53aa7317-3de3-4f9f-97a0-0cf7d9969122",
                 opacity: 0,
                 cal_min: 0,
                 cal_max: 0.8,
@@ -54,6 +56,8 @@ export const DmriNiivueCanvas = () => (
         await niivue_slice.current.loadVolumes(imageList);
         await niivue_slice.current.volumes[1].loadImgV1()
         niivue_slice.current.setInterpolation(true); // V1 lines require nearest neighbor interpolation
+        niivue_slice.current.setColormap(niivue_slice.current.volumes[3].id, "jet");
+        niivue_slice.current.setColormap(niivue_slice.current.volumes[4].id, "jet");
         niivue_slice.current.volumes[0].colorbarVisible=false;
         niivue_slice.current.volumes[1].colorbarVisible=false;
         niivue_slice.current.volumes[2].colorbarVisible=false;
