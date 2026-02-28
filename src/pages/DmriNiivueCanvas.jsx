@@ -28,7 +28,7 @@ export const DmriNiivueCanvas = () => (
             },
             {
                 url: "https://dandiarchive.s3.amazonaws.com/blobs/14b/62f/14b62f2d-1251-46a6-b736-8c455b3cbd71",
-                opacity: 1,
+                opacity: 0,
             },
             {
                 url: "https://dandiarchive.s3.amazonaws.com/blobs/14b/62f/14b62f2d-1251-46a6-b736-8c455b3cbd71",
