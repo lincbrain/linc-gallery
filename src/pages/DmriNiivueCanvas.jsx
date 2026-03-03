@@ -136,28 +136,30 @@ export const DmriNiivueCanvas = () => (
                 dMRI
               </label>
             </div>
-            {/* <div>
+            <div style={{ opacity: 0.4, cursor: "not-allowed" }}>
               <input
                 type="checkbox"
                 id="showFODF"
                 checked={isFODF}
                 onChange={handleFODFChange}
+                disabled
               />
               <label htmlFor="showFODF" style={{ marginLeft: "5px" }}>
-                fODF
+                fODF (coming soon)
               </label>
             </div>
-            <div>
+            <div style={{ opacity: 0.4, cursor: "not-allowed" }}>
               <input
                 type="checkbox"
                 id="showDensity"
                 checked={isDensity}
                 onChange={handleDensityChange}
+                disabled
               />
               <label htmlFor="showDensity" style={{ marginLeft: "5px" }}>
-                Tract density
+                Tract density (coming soon)
               </label>
-            </div> */}
+            </div>
             <div>
               <input
                 type="checkbox"
