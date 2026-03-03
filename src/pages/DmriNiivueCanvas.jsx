@@ -72,7 +72,7 @@ export const DmriNiivueCanvas = () => (
 
   // Handlers for displaying each volume with checkboxes
   const [isMRI, setIsMRI] = useState(true);
-  const [isFODF, setIsFODF] = useState(true);
+  const [isFODF, setIsFODF] = useState(false);
   const [isDensity, setIsDensity] = useState(false);
   const [isSoma, setIsSoma] = useState(false);
   const [isNeurite, setIsNeurite] = useState(false);
