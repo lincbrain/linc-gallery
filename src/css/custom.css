@@ -135,6 +135,20 @@
   max-height: 90vh;
 }
 
+.viewer-card-mobile-message {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .viewer-card-mobile-message {
+    display: block;
+  }
+
+  .viewer-card-content {
+    display: none;
+  }
+}
+
 .viewer-card iframe {
   min-width: 93vw;
   max-width: 93vw;
