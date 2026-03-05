@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Niivue, DRAG_MODE } from "@niivue/niivue";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 
-export const DmriNiivueCanvas = () => (
+export const DmriNiivueCanvasHuman = () => (
     <BrowserOnly fallback={<div>Loading...</div>}>
   {() => {
 
@@ -221,4 +221,4 @@ export const DmriNiivueCanvas = () => (
   </BrowserOnly>
 );
 
-export default DmriNiivueCanvas;
+export default DmriNiivueCanvasHuman;
