@@ -129,7 +129,7 @@ export const DmriNiivueCanvasHuman = () => (
       <div id='niivue-container' style={{ display: 'flex' }}>
         <aside class="niivue-sidebar">
           <div class="global-controls">
-            <h4>Controls</h4>
+            <h4>Layers</h4>
             <div>
               <input
                 type="checkbox"
