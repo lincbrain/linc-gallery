@@ -19,7 +19,7 @@ export const DmriNiivueCanvasHuman = () => (
                                     crosshairWidth: 1,
                                     multiplanarPadPixels: 50,
                                 });
-        niivue_slice.current.attachToCanvas(document.getElementById('niivue-canvas-slice'))
+        niivue_slice.current.attachToCanvas(document.getElementById('niivue-canvas-slice-human'))
 
         const imageList = [
             {
@@ -213,7 +213,8 @@ export const DmriNiivueCanvasHuman = () => (
                     flexDirection: 'column', 
                     flex: 1,
           }}>
-          <canvas id="niivue-canvas-slice"></canvas>
+          <canvas id="niivue-canvas-slice-human"
+              ></canvas>
         </div>
       </div>
   );
