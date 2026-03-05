@@ -138,7 +138,7 @@ export const DmriNiivueCanvasHuman = () => (
                 onChange={handleMRIChange}
               />
               <label htmlFor="showMRI" style={{ marginLeft: "5px" }}>
-                dMRI
+                Diffusion MRI
               </label>
             </div>
             <div style={{ opacity: 0.4, cursor: "not-allowed" }}>
