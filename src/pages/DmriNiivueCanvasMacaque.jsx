@@ -141,7 +141,7 @@ export const DmriNiivueCanvasMacaque = () => (
                 Diffusion MRI
               </label>
             </div>
-            <div style={{ opacity: 0.4, cursor: "not-allowed" }}>
+            <div>
               <input
                 type="checkbox"
                 id="showFODF"
