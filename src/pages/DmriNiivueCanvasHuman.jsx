@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Niivue, DRAG_MODE } from "@niivue/niivue";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 
-export const DmriNiivueCanvas = () => (
+export const DmriNiivueCanvasHuman = () => (
     <BrowserOnly fallback={<div>Loading...</div>}>
   {() => {
 
@@ -19,32 +19,37 @@ export const DmriNiivueCanvas = () => (
                                     crosshairWidth: 1,
                                     multiplanarPadPixels: 50,
                                 });
-        niivue_slice.current.attachToCanvas(document.getElementById('niivue-canvas-slice'))
+        niivue_slice.current.attachToCanvas(document.getElementById('niivue-canvas-slice-human'))
 
         const imageList = [
             {
-                url: "https://dandiarchive.s3.amazonaws.com/blobs/14b/62f/14b62f2d-1251-46a6-b736-8c455b3cbd71",
-                opacity: 1,
+              name: "sub-Ha1_sample-hemi_acq-highres_desc-CSD+fodf+l0.nii.gz",  
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/14b/62f/14b62f2d-1251-46a6-b736-8c455b3cbd71",
+              opacity: 1,
             },
             {
-                url: "https://dandiarchive.s3.amazonaws.com/blobs/14b/62f/14b62f2d-1251-46a6-b736-8c455b3cbd71",
-                opacity: 0,
+              name: "sub-Ha1_sample-hemi_acq-highres_desc-CSD+fodf+dec.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/cc1/3d0/cc13d0c0-5d49-4014-a843-e890f80ceab2",
+              opacity: 0,
             },
             {
-                url: "https://dandiarchive.s3.amazonaws.com/blobs/14b/62f/14b62f2d-1251-46a6-b736-8c455b3cbd71",
-                opacity: 0,
+              name: "sub-Ha1_sample-hemi_acq-highres_res-p4_desc-CSD+tdi.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/f69/9ec/f699ec38-cb5b-46ff-92eb-b3ea2a75d3bb",
+              opacity: 0,
             },
             {
-                url: "https://dandiarchive.s3.amazonaws.com/blobs/92e/3aa/92e3aa4b-3bc0-4e09-b603-76e6dcfc40dc",
-                opacity: 0,
-                cal_min: 0,
-                cal_max: 0.8,
+              name: "sub-Ha1_sample-hemi_acq-highres_desc-SANDIdot+fsoma.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/92e/3aa/92e3aa4b-3bc0-4e09-b603-76e6dcfc40dc",
+              opacity: 0,
+              cal_min: 0,
+              cal_max: 0.8,
             },
             {
-                url: "https://dandiarchive.s3.amazonaws.com/blobs/53a/a73/53aa7317-3de3-4f9f-97a0-0cf7d9969122",
-                opacity: 0,
-                cal_min: 0,
-                cal_max: 0.8,
+              name: "sub-Ha1_sample-hemi_acq-highres_desc-SANDIdot+fneurite.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/53a/a73/53aa7317-3de3-4f9f-97a0-0cf7d9969122",
+              opacity: 0,
+              cal_min: 0,
+              cal_max: 0.8,
             }
         ];
 
@@ -121,10 +126,10 @@ export const DmriNiivueCanvas = () => (
     };
 
   return (
-      <div id='niivue-container' style={{ display: 'flex'}}>
+      <div id='niivue-container' style={{ display: 'flex' }}>
         <aside class="niivue-sidebar">
           <div class="global-controls">
-            <h4>Controls</h4>
+            <h4>Layers</h4>
             <div>
               <input
                 type="checkbox"
@@ -133,7 +138,7 @@ export const DmriNiivueCanvas = () => (
                 onChange={handleMRIChange}
               />
               <label htmlFor="showMRI" style={{ marginLeft: "5px" }}>
-                dMRI
+                Diffusion MRI
               </label>
             </div>
             <div style={{ opacity: 0.4, cursor: "not-allowed" }}>
@@ -182,36 +187,38 @@ export const DmriNiivueCanvas = () => (
                 Intra-neurite signal fraction
               </label>
             </div>
-            <hr />
-            <h4>Mouse controls</h4>
-            <table style={{ width: '100%', fontSize: '0.9em' }}>
-              <tbody>
-                <tr style={{ border: 'none' }}>
-                  <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Scroll slices</td>
-                  <td style={{ padding: '6px' , borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: 'none', background: '#F7F8F9' }}>Scroll wheel</td>
-                </tr>
-                <tr>
-                  <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Move crosshair</td>
-                  <td style={{ padding: '6px', border: 'none', background: '#F7F8F9' }}>Left click</td>
-                </tr>
-                <tr>
-                  <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Pan</td>
-                  <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: 'none', background: '#F7F8F9' }}>Middle click</td>
-                </tr>
-                <tr>
-                  <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Zoom</td>
-                  <td style={{ padding: '6px', border: 'none', background: '#F7F8F9' }}>Right click</td>
-                </tr>
-              </tbody>
-            </table>
+            <div style={{ position: 'absolute', top: '40%', width: 'calc(100% - 40px)' }}>
+              <hr />
+              <h4>Mouse controls</h4>
+              <table style={{ width: '100%', fontSize: '0.9em' }}>
+                <tbody>
+                  <tr style={{ border: 'none' }}>
+                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Scroll slices</td>
+                    <td style={{ padding: '6px' , borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: 'none', background: '#F7F8F9' }}>Scroll wheel</td>
+                  </tr>
+                  <tr>
+                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Move crosshair</td>
+                    <td style={{ padding: '6px', border: 'none', background: '#F7F8F9' }}>Left click</td>
+                  </tr>
+                  <tr>
+                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Pan</td>
+                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: 'none', background: '#F7F8F9' }}>Middle click</td>
+                  </tr>
+                  <tr>
+                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Zoom</td>
+                    <td style={{ padding: '6px', border: 'none', background: '#F7F8F9' }}>Right click</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </aside>
-        <div id= "coronal-slice-container" 
-            style={{ display: 'flex', 
-                    flexDirection: 'column', 
+        <div id= "coronal-slice-container"
+            style={{ display: 'flex',
+                    flexDirection: 'column',
                     flex: 1,
           }}>
-          <canvas id="niivue-canvas-slice"></canvas>
+          <canvas id="niivue-canvas-slice-human"></canvas>
         </div>
       </div>
   );
@@ -219,4 +226,4 @@ export const DmriNiivueCanvas = () => (
   </BrowserOnly>
 );
 
-export default DmriNiivueCanvas;
+export default DmriNiivueCanvasHuman;
