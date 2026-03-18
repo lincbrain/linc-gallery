@@ -3,28 +3,50 @@ title: High-resolution dMRI
 hide_table_of_contents: true
 ---
 
-# High-resolution dMRI
+# High-resolution Diffusion MRI
 
-<div className="resource-card">
-  <h3>🔍 Explore the data</h3>
-    Coming soon
-</div>
+import { NiivueBrowserWrapper } from './NiivueBrowserWrapper';
+import { DmriNiivueCanvasHuman } from './DmriNiivueCanvasHuman';
+import { DmriNiivueCanvasMacaque } from './DmriNiivueCanvasMacaque';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 <div className="resource-cards">
   <div className="resource-card">
     <h3>📝 Reference</h3>
-    <p>Manuscript on bioRxiv (Coming soon)</p>
+    <p>[Gong et al., bioRxiv 2026](https://doi.org/10.64898/2026.02.18.705310)</p>
   </div>
   <div className="resource-card">
     <h3>📊 Data</h3>
-    <p>[Dandiset 1278](https://dandiarchive.org/dandiset/001278) on DANDI Archive (Coming soon)</p>
+    <p>DANDI Archive [001278](https://dandiarchive.org/dandiset/001278) & [001372](https://dandiarchive.org/dandiset/001372)</p>
   </div>
   <div className="resource-card">
     <h3>💻 Source Code</h3>
-    <p>[Repository](https://github.com/lincbrain) on GitHub (Coming soon)</p>
+    <p>Repository on GitHub (Coming soon)</p>
   </div>
   <div className="resource-card">
     <h3>Acknowledgements</h3>
-    <p>Our work is made possible through funding from the National Institute of Health (NIH) BRAIN CONNECTS program ([UM1 NS132358](https://reporter.nih.gov/project-details/10672681)).</p>
+    <p>National Institutes of Health (NIH)<br/>
+    [BRAIN CONNECTS program](https://www.brain-connects.org/)<br/>
+    [UM1 NS132358](https://reporter.nih.gov/project-details/10672681)</p>
+  </div>
+</div>
+
+<div className="viewer-card">
+  <h3>🔍 Explore the data</h3>
+  <p className="viewer-card-mobile-message">Switch to a larger screen to view and interact with the visualization.</p>
+  <div className="viewer-card-content">
+    <Tabs>
+      <TabItem value="human" label="Human data" default>
+        <NiivueBrowserWrapper>
+          <DmriNiivueCanvasHuman/>
+        </NiivueBrowserWrapper>
+      </TabItem>
+      <TabItem value="macaque" label="Macaque data">
+        <NiivueBrowserWrapper>
+          <DmriNiivueCanvasMacaque/>
+        </NiivueBrowserWrapper>
+      </TabItem>
+    </Tabs>
   </div>
 </div>

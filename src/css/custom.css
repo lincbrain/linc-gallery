@@ -61,7 +61,6 @@
   }
 }
 
-
 /* Reduce footer height */
 .footer {
   padding-top: 0rem;
@@ -89,7 +88,43 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.neuroglancer-card {
+.niivue-sidebar {
+  width: 300px;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  padding: 20px;
+  min-height: 72vh;
+  max-height: 72vh;
+  overflow-y: auto;
+  position: sticky;
+  top: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.niivue-sidebar h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: 500;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 8px;
+}
+
+.niivue-sidebar h4 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #333;
+  font-weight: 500;
+}
+
+.niivue-sidebar-divider {
+  border: none;
+  height: 1px;
+  background-color: #dee2e6;
+  margin: 15px 0;
+}
+
+.viewer-card {
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   padding: 1rem;
@@ -100,7 +135,21 @@
   max-height: 90vh;
 }
 
-.neuroglancer-card iframe {
+.viewer-card-mobile-message {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .viewer-card-mobile-message {
+    display: block;
+  }
+
+  .viewer-card-content {
+    display: none;
+  }
+}
+
+.viewer-card iframe {
   min-width: 93vw;
   max-width: 93vw;
   min-height: 80vh;
@@ -124,12 +173,20 @@
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 2rem;
   margin: 2rem 0;
+  min-width: 95vw;
+  max-width: 95vw;
 }
 
 .team-member {
   padding: 1.5rem;
   background-color: var(--ifm-background-surface-color);
   text-align: center;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
 }
 
 .team-member img {
@@ -144,6 +201,7 @@
 }
 
 .team-member h3 {
+  margin-top: auto;
   margin-bottom: 0.3rem;
   font-size: 1.2rem;
   text-align: center;
@@ -153,6 +211,7 @@
 
 .team-member p {
   font-size: 0.9rem;
+  min-height: 1.4rem;
 }
 
 
