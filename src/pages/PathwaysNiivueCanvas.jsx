@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Niivue } from "@niivue/niivue";
+import { Niivue, DRAG_MODE } from "@niivue/niivue";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 export const PathwaysNiivueCanvas = () => (
     <BrowserOnly fallback={<div>Loading...</div>}>
@@ -119,12 +119,15 @@ export const PathwaysNiivueCanvas = () => (
         },
       ]
 
+    // Initialize viewer
+    await niivue_slice.current.setSliceType(niivue_slice.current.sliceTypeCoronal);
+    niivue_slice.current.opts.dragMode = DRAG_MODE.slicer3D;
+
+    // Load data
     await niivue_render.current.loadMeshes(segmentationList);
     await niivue_slice.current.loadVolumes(imageList);
     await niivue_slice.current.loadMeshes(trackList);
     await niivue_slice.current.setMeshThicknessOn2D(1);
-
-    await niivue_slice.current.setSliceType(niivue_slice.current.sliceTypeCoronal);
     }
     loadImages();
   }, []);
