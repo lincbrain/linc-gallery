@@ -32,18 +32,20 @@ export const PathwaysNiivueCanvas = () => (
     const nucleiOpacity=1;
     const imageList = [
           {
-            url:"img/mySTNAtlas/highb.mean.norm.brain.nii.gz",
+            url:"https://dandiarchive.s3.amazonaws.com/blobs/5df/2ec/5df2ec3d-ec43-4a33-aa38-49a141f8f05d",
+            name: "sub-Hb1_sample_hemi_acq-highb_desc-mean+norm+brain.nii.gz",
             colormap: "whiteBackgroundGray",
           },
       ];
     const trackList =[
         {
-          url: "img/mySTNAtlas/STN-Atlas_merged.trk",
-          name:"sub-I58_dwi_space-dwi_model-CSD_tractography.trk",
+          url: "https://dandiarchive.s3.amazonaws.com/blobs/67e/980/67e980ca-9220-4960-8b0a-dd4ac48d1c4b",
+          name:"sub-Hb1_sample-hemi_acq-highb_desc-stn+atlas+merged.trk",
         },]
     const segmentationList=[
         {
-          url: "img/mySTNAtlas/STN-Atlas_merged.trk",
+          url: "https://dandiarchive.s3.amazonaws.com/blobs/67e/980/67e980ca-9220-4960-8b0a-dd4ac48d1c4b",
+          name: "sub-Hb1_sample-hemi_acq-highb_desc-stn+atlas+merged.trk",
         },
         {
           url: "img/mySTNAtlas/sublabels1.gii",
