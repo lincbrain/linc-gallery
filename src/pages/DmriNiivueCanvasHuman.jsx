@@ -138,7 +138,7 @@ export const DmriNiivueCanvasHuman = () => (
                 onChange={handleMRIChange}
               />
               <label htmlFor="showMRI" style={{ marginLeft: "5px" }}>
-                Diffusion MRI
+                Isotropic component (l0)
               </label>
             </div>
             <div style={{ opacity: 0.4, cursor: "not-allowed" }}>
@@ -150,7 +150,7 @@ export const DmriNiivueCanvasHuman = () => (
                 disabled
               />
               <label htmlFor="showFODF" style={{ marginLeft: "5px" }}>
-                fODF (coming soon)
+                Direction-encoded color (DEC) map (coming soon)
               </label>
             </div>
             <div style={{ opacity: 0.4, cursor: "not-allowed" }}>
