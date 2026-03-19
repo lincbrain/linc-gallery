@@ -113,7 +113,7 @@ export const PathwaysNiivueCanvas = () => (
             </div>
             <div style={{ position: 'absolute', top: '40%', width: 'calc(100% - 40px)' }}>
               <hr />
-              <h4>Mouse controls</h4>
+              <h4>Mouse controls for coronal view</h4>
               <table style={{ width: '100%', fontSize: '0.9em' }}>
                 <tbody>
                   <tr style={{ border: 'none' }}>
