@@ -12,7 +12,7 @@ export const PathwaysNiivueCanvas = () => (
     async function loadImages() {
     niivue_slice.current = new Niivue({logLevel: 'debug',
                                   backColor: [1, 1, 1, 1],
-                                  crosshairWidth: 0,
+                                  crosshairWidth: 1,
                                   isColorbar: false});
     niivue_render.current = new Niivue({logLevel: 'debug',
                                   backColor: [1, 1, 1, 1],
@@ -84,7 +84,7 @@ export const PathwaysNiivueCanvas = () => (
       setIsStreamlines(streamlinesState);
     };
 
-  const [isCrosshair, setIsCrosshair] = useState(false);
+  const [isCrosshair, setIsCrosshair] = useState(true);
 
   const handleCrosshairChange = (event) => {
       const crosshairState = event.target.checked;
