@@ -13,7 +13,6 @@ export const DmriNiivueCanvasMacaque = () => (
 
         niivue_slice.current = new Niivue({logLevel: 'debug',
                                     backColor: [0, 0, 0, 1],
-                                    show3Dcrosshair: true,
                                     isColorbar: true,
                                     isRuler: false,
                                     crosshairWidth: 1,
