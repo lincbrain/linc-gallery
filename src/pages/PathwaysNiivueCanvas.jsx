@@ -10,11 +10,11 @@ export const PathwaysNiivueCanvas = () => (
 
   React.useEffect(() => {
     async function loadImages() {
-    niivue_slice.current = new Niivue({logLevel: 'debug', 
+    niivue_slice.current = new Niivue({logLevel: 'debug',
                                   backColor: [1, 1, 1, 1],
                                   crosshairWidth: 0,
                                   isColorbar: false});
-    niivue_render.current = new Niivue({logLevel: 'debug', 
+    niivue_render.current = new Niivue({logLevel: 'debug',
                                   backColor: [1, 1, 1, 1],
                                   show3Dcrosshair: false,
                                   isColorbar: false});
