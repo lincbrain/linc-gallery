@@ -167,8 +167,8 @@ export const PathwaysNiivueCanvas = () => (
     };
 
   return (
-      <div id='niivue-container' style={{ display: 'flex' }}>
-        <aside class="niivue-sidebar">
+      <div className="sidebar-and-niivue-container">
+        <aside class="sidebar-container">
           <div class="global-controls">
             <h4>Layers</h4>
             <div>
@@ -230,8 +230,10 @@ export const PathwaysNiivueCanvas = () => (
             </div>
           </div>
         </aside>
-        <canvas id="niivue-canvas-slice"></canvas>
-        <canvas id="niivue-canvas-render"></canvas>
+        <div className="niivue-container">
+          <canvas id="niivue-canvas-slice" style={{ flex: 1, minWidth: 0 }}></canvas>
+          <canvas id="niivue-canvas-render" style={{ flex: 1, minWidth: 0 }}></canvas>
+        </div>
       </div>
   );
 }}
