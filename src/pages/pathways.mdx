@@ -5,6 +5,11 @@ hide_table_of_contents: true
 
 # Pathway Atlas
 
+import { NiivueBrowserWrapper } from './NiivueBrowserWrapper';
+import { PathwaysNiivueCanvas } from './PathwaysNiivueCanvas';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <div className="resource-cards">
   <div className="resource-card">
     <h3>📝 Reference</h3>
@@ -27,6 +32,15 @@ hide_table_of_contents: true
 </div>
 
 <div className="viewer-card">
-  <h3>🔍 Explore the data</h3>
-    Coming soon
+  <h3>🔍 Explore the data </h3>
+  <Tabs>
+    <TabItem value="subject-space" label="Subject Hb1 space" default>
+      <NiivueBrowserWrapper>
+        <PathwaysNiivueCanvas/>
+      </NiivueBrowserWrapper>
+    </TabItem>
+    <TabItem value="mni-space" label="MNI space">
+      Coming soon
+    </TabItem>
+  </Tabs>
 </div>

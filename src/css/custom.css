@@ -88,7 +88,7 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.niivue-sidebar {
+.sidebar-container {
   width: 300px;
   background-color: #f8f9fa;
   border: 1px solid #ddd;
@@ -101,7 +101,7 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.niivue-sidebar h3 {
+.sidebar-container h3 {
   font-size: 1.2rem;
   margin-bottom: 15px;
   color: #333;
@@ -110,18 +110,32 @@
   padding-bottom: 8px;
 }
 
-.niivue-sidebar h4 {
+.sidebar-container h4 {
   font-size: 1rem;
   margin-bottom: 10px;
   color: #333;
   font-weight: 500;
 }
 
-.niivue-sidebar-divider {
+.sidebar-container-divider {
   border: none;
   height: 1px;
   background-color: #dee2e6;
   margin: 15px 0;
+}
+
+.sidebar-and-niivue-container {
+  min-height: 72vh;
+  max-height: 72vh;
+  overflow: hidden;
+  display: flex;
+}
+
+.niivue-container{
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  min-width: 0;
 }
 
 .viewer-card {
@@ -133,6 +147,7 @@
   max-width: 95vw;
   min-height: 90vh;
   max-height: 90vh;
+  overflow: hidden;
 }
 
 .viewer-card-mobile-message {

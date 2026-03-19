@@ -126,8 +126,8 @@ export const DmriNiivueCanvasMacaque = () => (
     };
 
   return (
-      <div id='niivue-container' style={{ display: 'flex' }}>
-        <aside class="niivue-sidebar">
+      <div className="sidebar-and-niivue-container">
+        <aside class="sidebar-container">
           <div class="global-controls">
             <h4>Layers</h4>
             <div>
@@ -213,11 +213,7 @@ export const DmriNiivueCanvasMacaque = () => (
             </div>
           </div>
         </aside>
-        <div id= "coronal-slice-container"
-            style={{ display: 'flex',
-                    flexDirection: 'column',
-                    flex: 1,
-          }}>
+        <div className="niivue-container">
           <canvas id="niivue-canvas-slice-macaque"></canvas>
         </div>
       </div>
