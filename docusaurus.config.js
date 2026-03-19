@@ -38,6 +38,7 @@ const config = {
 
   themeConfig:
     ({
+      image: 'img/linc.logo.color+white.png',
       navbar: {
         logo: {
           alt: 'Logo',
