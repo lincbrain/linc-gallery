@@ -29,7 +29,6 @@ export const PathwaysNiivueCanvas = () => (
     };
     niivue_slice.current.addColormap('whiteBackgroundGray', whiteBackgroundGray);
 
-    const nucleiOpacity=1;
     const imageList = [
           {
             url:"https://dandiarchive.s3.amazonaws.com/blobs/5df/2ec/5df2ec3d-ec43-4a33-aa38-49a141f8f05d",
@@ -47,78 +46,6 @@ export const PathwaysNiivueCanvas = () => (
           url: "https://dandiarchive.s3.amazonaws.com/blobs/67e/980/67e980ca-9220-4960-8b0a-dd4ac48d1c4b",
           name: "sub-Hb1_sample-hemi_acq-highb_desc-stn+atlas+merged.trk",
         },
-        {
-          url: "img/mySTNAtlas/sublabels1.gii",
-          name: "sublabels1.gii",
-          rgba255: [65, 94, 177, 255],
-          opacity: nucleiOpacity,
-        },
-        {
-          url: "img/mySTNAtlas/sublabels2.gii",
-          name: "sublabels2.gii",
-          rgba255: [154, 125, 133, 255],
-          opacity: nucleiOpacity,
-        },
-        {
-          url: "img/mySTNAtlas/sublabels3.gii",
-          name: "sublabels3.gii",
-          rgba255: [142, 161, 97, 255],
-          opacity: nucleiOpacity,
-        },
-        {
-          url: "img/mySTNAtlas/sublabels4.gii",
-          name: "sublabels4.gii",
-          rgba255: [164, 180, 246, 255],
-          opacity: nucleiOpacity,
-        },
-        {
-          url: "img/mySTNAtlas/sublabels5.gii",
-          name: "sublabels5.gii",
-          rgba255: [173, 182, 86, 255],
-          opacity: nucleiOpacity,
-        },
-        {
-          url: "img/mySTNAtlas/sublabels6.gii",
-          name: "sublabels6.gii",
-          rgba255: [197, 195, 223, 255],
-          opacity: nucleiOpacity,
-        },
-        {
-          url: "img/mySTNAtlas/sublabels7.gii",
-          name: "sublabels7.gii",
-          rgba255: [65, 178, 254, 255],
-          opacity: nucleiOpacity,
-        },
-        {
-          url: "img/mySTNAtlas/sublabels8.gii",
-          name: "sublabels8.gii",
-          rgba255: [113, 61, 186, 255],
-          opacity: nucleiOpacity,
-        },
-        {
-          url: "img/mySTNAtlas/sublabels9.gii",
-          name: "sublabels9.gii",
-          rgba255: [207, 73, 253, 255],
-          opacity: nucleiOpacity,
-        },
-        {
-          url: "img/mySTNAtlas/sublabels10.gii",
-          name: "sublabels10.gii",
-          rgba255: [153, 252, 171, 255],
-          opacity: nucleiOpacity,
-        },
-        {
-          url: "img/mySTNAtlas/sublabels11.gii",
-          name: "sublabels11.gii",
-          rgba255: [171, 252, 102, 255],
-          opacity: nucleiOpacity,
-        },
-        {
-          url: "img/mySTNAtlas/sublabels12.gii",
-          name: "sublabels12.gii",
-          rgba255: [60, 172, 225, 255],
-          opacity: nucleiOpacity,
-        },
       ]
 
     // Initialize viewer
@@ -134,7 +61,7 @@ export const PathwaysNiivueCanvas = () => (
     loadImages();
   }, []);
 
-  // Handlers for showing MRI, streamlines, nuclei
+  // Handlers for showing MRI, streamlines
   const [isMRI, setIsMRI] = useState(true);
 
   const handleMRIChange = (event) => {
@@ -153,17 +80,6 @@ export const PathwaysNiivueCanvas = () => (
       niivue_slice.current.meshes[0].visible = streamlinesState;
       niivue_slice.current.updateGLVolume();
       setIsStreamlines(streamlinesState);
-    };
-
-  const [isNuclei, setIsNuclei] = useState(true);
-
-  const handleNucleiChange = (event) => {
-      const nucleiState = event.target.checked;
-      for (let i = 1; i < niivue_render.current.meshes.length; i++) {
-        niivue_render.current.meshes[i].visible = nucleiState;
-      }
-      niivue_render.current.updateGLVolume();
-      setIsNuclei(nucleiState);
     };
 
   return (
@@ -191,17 +107,6 @@ export const PathwaysNiivueCanvas = () => (
               />
               <label htmlFor="showStreamlines" style={{ marginLeft: "5px" }}>
                 Streamlines
-              </label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="showNuclei"
-                checked={isNuclei}
-                onChange={handleNucleiChange}
-              />
-              <label htmlFor="showNuclei" style={{ marginLeft: "5px" }}>
-                Nuclei
               </label>
             </div>
             <div style={{ position: 'absolute', top: '40%', width: 'calc(100% - 40px)' }}>
