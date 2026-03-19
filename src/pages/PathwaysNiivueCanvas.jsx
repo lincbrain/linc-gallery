@@ -34,7 +34,7 @@ export const PathwaysNiivueCanvas = () => (
     const imageList = [
           {
             url:"https://dandiarchive.s3.amazonaws.com/blobs/5df/2ec/5df2ec3d-ec43-4a33-aa38-49a141f8f05d",
-            name: "sub-Hb1_sample_hemi_acq-highb_desc-mean+norm+brain.nii.gz",
+            name: "sub-Hb1_sample-hemi_acq-highb_desc-mean+norm+brain.nii.gz",
             colormap: "whiteBackgroundGray",
           },
       ];
