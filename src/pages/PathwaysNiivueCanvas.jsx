@@ -10,11 +10,11 @@ export const PathwaysNiivueCanvas = () => (
 
   React.useEffect(() => {
     async function loadImages() {
-    niivue_slice.current = new Niivue({logLevel: 'debug', 
+    niivue_slice.current = new Niivue({logLevel: 'debug',
                                   backColor: [1, 1, 1, 1],
-                                  show3Dcrosshair: false,
+                                  crosshairWidth: 1,
                                   isColorbar: false});
-    niivue_render.current = new Niivue({logLevel: 'debug', 
+    niivue_render.current = new Niivue({logLevel: 'debug',
                                   backColor: [1, 1, 1, 1],
                                   show3Dcrosshair: false,
                                   isColorbar: false});
@@ -84,6 +84,15 @@ export const PathwaysNiivueCanvas = () => (
       setIsStreamlines(streamlinesState);
     };
 
+  const [isCrosshair, setIsCrosshair] = useState(true);
+
+  const handleCrosshairChange = (event) => {
+      const crosshairState = event.target.checked;
+      niivue_slice.current.opts.crosshairWidth = crosshairState ? 1 : 0;
+      niivue_slice.current.drawScene();
+      setIsCrosshair(crosshairState);
+    };
+
   return (
       <div className="sidebar-and-niivue-container">
         <aside class="sidebar-container">
@@ -109,6 +118,17 @@ export const PathwaysNiivueCanvas = () => (
               />
               <label htmlFor="showStreamlines" style={{ marginLeft: "5px" }}>
                 Streamlines
+              </label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="showCrosshair"
+                checked={isCrosshair}
+                onChange={handleCrosshairChange}
+              />
+              <label htmlFor="showCrosshair" style={{ marginLeft: "5px" }}>
+                Crosshair
               </label>
             </div>
             <div style={{ position: 'absolute', top: '40%', width: 'calc(100% - 40px)' }}>
