@@ -167,10 +167,10 @@ export const PathwaysNiivueCanvas = () => (
     };
 
   return (
-      <div style={{ display: 'flex' }}>
+      <div id='niivue-container' style={{ display: 'flex' }}>
         <aside class="niivue-sidebar">
           <div class="global-controls">
-            <h4>Controls</h4>
+            <h4>Layers</h4>
             <div>
               <input
                 type="checkbox"
@@ -179,9 +179,9 @@ export const PathwaysNiivueCanvas = () => (
                 onChange={handleMRIChange}
               />
               <label htmlFor="showMRI" style={{ marginLeft: "5px" }}>
-                dMRI
+                Isotropic component (l0)
               </label>
-            </div>            
+            </div>
             <div>
               <input
                 type="checkbox"
