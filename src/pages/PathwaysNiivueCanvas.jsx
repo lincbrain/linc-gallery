@@ -18,9 +18,10 @@ export const PathwaysNiivueCanvas = () => (
                                   backColor: [1, 1, 1, 1],
                                   show3Dcrosshair: false,
                                   isColorbar: false});
-    niivue_slice.current.attachToCanvas(document.getElementById('niivue-canvas-slice'))
 
+    niivue_slice.current.attachToCanvas(document.getElementById('niivue-canvas-slice'))
     niivue_render.current.attachToCanvas(document.getElementById('niivue-canvas-render'))
+
     const whiteBackgroundGray = {
       R: [255, 0, 255],
       G: [255, 0, 255],
