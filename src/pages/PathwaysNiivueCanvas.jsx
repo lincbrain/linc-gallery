@@ -204,6 +204,30 @@ export const PathwaysNiivueCanvas = () => (
                 Nuclei
               </label>
             </div>
+            <div style={{ position: 'absolute', top: '40%', width: 'calc(100% - 40px)' }}>
+              <hr />
+              <h4>Mouse controls</h4>
+              <table style={{ width: '100%', fontSize: '0.9em' }}>
+                <tbody>
+                  <tr style={{ border: 'none' }}>
+                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Scroll slices</td>
+                    <td style={{ padding: '6px' , borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: 'none', background: '#F7F8F9' }}>Scroll wheel</td>
+                  </tr>
+                  <tr>
+                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Move crosshair</td>
+                    <td style={{ padding: '6px', border: 'none', background: '#F7F8F9' }}>Left click</td>
+                  </tr>
+                  <tr>
+                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Pan</td>
+                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: 'none', background: '#F7F8F9' }}>Middle click</td>
+                  </tr>
+                  <tr>
+                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Zoom</td>
+                    <td style={{ padding: '6px', border: 'none', background: '#F7F8F9' }}>Right click</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </aside>
         <canvas id="niivue-canvas-slice"></canvas>
