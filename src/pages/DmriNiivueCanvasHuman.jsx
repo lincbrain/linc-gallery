@@ -27,8 +27,8 @@ export const DmriNiivueCanvasHuman = () => (
               opacity: 1,
             },
             {
-              name: "sub-Ha1_sample-hemi_acq-highres_desc-CSD+fodf+dec.nii.gz",
-              url: "https://dandiarchive.s3.amazonaws.com/blobs/cc1/3d0/cc13d0c0-5d49-4014-a843-e890f80ceab2",
+              name: "sub-Ha1_sample-RightHemi_acq-HighRes_desc-CSD+dec+unitvec.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/20c/804/20c804d5-c99d-4ede-b4ed-c1926d652a6f",
               opacity: 0,
             },
             {
@@ -49,6 +49,13 @@ export const DmriNiivueCanvasHuman = () => (
               opacity: 0,
               cal_min: 0,
               cal_max: 0.8,
+            },
+            {
+              name: "sub-Ha1_sample-RightHemi_acq-HighRes_desc-CSD+dec+scalar.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/951/6ef/9516efb5-b8aa-4fe5-971b-809d4b52e003",
+              opacity: 0,
+              cal_min: 0,
+              cal_max: 0.8,
             }
         ];
 
@@ -62,13 +69,17 @@ export const DmriNiivueCanvasHuman = () => (
         await niivue_slice.current.volumes[1].loadImgV1();
         await niivue_slice.current.volumes[2].loadImgV1();
         niivue_slice.current.setInterpolation(true); // V1 lines require nearest neighbor interpolation
+        niivue_slice.current.setModulationImage(niivue_slice.current.volumes[1].id, niivue_slice.current.volumes[5].id)
+
         niivue_slice.current.setColormap(niivue_slice.current.volumes[3].id, "jet");
         niivue_slice.current.setColormap(niivue_slice.current.volumes[4].id, "jet");
+
         niivue_slice.current.volumes[0].colorbarVisible=false;
         niivue_slice.current.volumes[1].colorbarVisible=false;
         niivue_slice.current.volumes[2].colorbarVisible=false;
         niivue_slice.current.volumes[3].colorbarVisible=false;
         niivue_slice.current.volumes[4].colorbarVisible=false;
+        niivue_slice.current.volumes[5].colorbarVisible=false;
         niivue_slice.current.updateGLVolume();
     }
     loadImages();
@@ -140,16 +151,15 @@ export const DmriNiivueCanvasHuman = () => (
                 Isotropic component (l0)
               </label>
             </div>
-            <div style={{ opacity: 0.4, cursor: "not-allowed" }}>
+            <div>
               <input
                 type="checkbox"
                 id="showFODF"
                 checked={isFODF}
                 onChange={handleFODFChange}
-                disabled
               />
               <label htmlFor="showFODF" style={{ marginLeft: "5px" }}>
-                Direction-encoded color (DEC) map (coming soon)
+                Direction-encoded color (DEC) map
               </label>
             </div>
             <div style={{ opacity: 0.4, cursor: "not-allowed" }}>
