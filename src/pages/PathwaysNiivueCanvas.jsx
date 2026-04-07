@@ -261,16 +261,7 @@ export const PathwaysNiivueCanvas = () => (
             colormap: "whiteBackgroundGray",
           },
       ];
-    const trackList =[
-        {
-          url: "https://dandiarchive.s3.amazonaws.com/blobs/67e/980/67e980ca-9220-4960-8b0a-dd4ac48d1c4b",
-          name:"sub-Hb1_sample-hemi_acq-highb_desc-stn+atlas+merged.trk",
-        },]
-    const segmentationList=[
-        {
-          url: "https://dandiarchive.s3.amazonaws.com/blobs/67e/980/67e980ca-9220-4960-8b0a-dd4ac48d1c4b",
-          name: "sub-Hb1_sample-hemi_acq-highb_desc-stn+atlas+merged.trk",
-        },
+    const nucleiList=[
       ]
 
     // Initialize viewer
@@ -278,7 +269,10 @@ export const PathwaysNiivueCanvas = () => (
     niivue_slice.current.opts.dragMode = DRAG_MODE.slicer3D;
 
     // Load data
-    await niivue_render.current.loadMeshes(segmentationList);
+    await niivue_render.current.loadMeshes([...trackList, ...nucleiList]);
+    niivue_render.current.meshes.forEach((mesh, i) => {
+      originalIndexCounts.current[i] = mesh.indexCount;
+    });
     await niivue_slice.current.loadVolumes(imageList);
     await niivue_slice.current.loadMeshes(trackList);
     await niivue_slice.current.setMeshThicknessOn2D(1);
@@ -286,7 +280,7 @@ export const PathwaysNiivueCanvas = () => (
     loadImages();
   }, []);
 
-  // Handlers for showing MRI, streamlines
+  // Handlers for showing MRI, crosshair, and each tract
   const [isMRI, setIsMRI] = useState(true);
 
   const handleMRIChange = (event) => {
@@ -305,11 +299,34 @@ export const PathwaysNiivueCanvas = () => (
       setIsCrosshair(crosshairState);
     };
 
+  const [tractVisibility, setTractVisibility] = useState(
+    trackList.map(() => true)
+  );
+
+  const originalIndexCounts = React.useRef({});
+
+  const handleTractChange = (index, event) => {
+    const tractState = event.target.checked;
+    const mesh = niivue_render.current.meshes[index];
+    mesh.indexCount = tractState ? originalIndexCounts.current[index] : 0;
+    niivue_render.current.updateGLVolume();
+    setTractVisibility(prev => prev.map((v, i) => i === index ? tractState : v));
+  };
+
+  const handleShowAllTracts = (event) => {
+    const tractState = event.target.checked;
+    niivue_render.current.meshes.forEach((mesh, i) => {
+      mesh.indexCount = tractState ? originalIndexCounts.current[i] : 0;
+    });
+    niivue_render.current.updateGLVolume();
+    setTractVisibility(trackList.map(() => tractState));
+  };
+
   return (
       <div className="sidebar-and-niivue-container">
         <aside class="sidebar-container">
           <div class="global-controls">
-            <h4>Layers</h4>
+            <h4>Coronal View Layers</h4>
             <div>
               <input
                 type="checkbox"
@@ -332,9 +349,36 @@ export const PathwaysNiivueCanvas = () => (
                 Crosshair
               </label>
             </div>
-            <div style={{ position: 'absolute', top: '40%', width: 'calc(100% - 40px)' }}>
+            <hr />
+            <h4>Tracts</h4>
+            <div>
+              <input
+                type="checkbox"
+                id="showAllTracts"
+                checked={tractVisibility.every(v => v)}
+                onChange={handleShowAllTracts}
+              />
+              <label htmlFor="showAllTracts" style={{ marginLeft: "5px" }}>
+                Show all
+              </label>
+            </div>
+            {trackList.map((tract, index) => (
+              <div key={index}>
+                <input
+                  type="checkbox"
+                  id={`tract-${index}`}
+                  checked={tractVisibility[index]}
+                  onChange={(event) => handleTractChange(index, event)}
+                />
+                <label htmlFor={`tract-${index}`} style={{ marginLeft: "5px" }}>
+                  {tract.label}
+                </label>
+              </div>
+            ))}
+
+            <div>
               <hr />
-              <h4>Mouse controls for coronal view</h4>
+              <h4>Coronal View Mouse Controls</h4>
               <table style={{ width: '100%', fontSize: '0.9em' }}>
                 <tbody>
                   <tr style={{ border: 'none' }}>
