@@ -73,17 +73,6 @@ export const PathwaysNiivueCanvas = () => (
       setIsMRI(mriState);
     };
 
-  const [isStreamlines, setIsStreamlines] = useState(true);
-
-  const handleStreamlinesChange = (event) => {
-      const streamlinesState = event.target.checked;
-      niivue_render.current.meshes[0].visible = streamlinesState;
-      niivue_render.current.updateGLVolume();
-      niivue_slice.current.meshes[0].visible = streamlinesState;
-      niivue_slice.current.updateGLVolume();
-      setIsStreamlines(streamlinesState);
-    };
-
   const [isCrosshair, setIsCrosshair] = useState(true);
 
   const handleCrosshairChange = (event) => {
@@ -107,17 +96,6 @@ export const PathwaysNiivueCanvas = () => (
               />
               <label htmlFor="showMRI" style={{ marginLeft: "5px" }}>
                 Isotropic component (l0)
-              </label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="showStreamlines"
-                checked={isStreamlines}
-                onChange={handleStreamlinesChange}
-              />
-              <label htmlFor="showStreamlines" style={{ marginLeft: "5px" }}>
-                Streamlines
               </label>
             </div>
             <div>
