@@ -310,6 +310,11 @@ export const PathwaysNiivueCanvas = () => (
     const mesh = niivue_render.current.meshes[index];
     mesh.indexCount = tractState ? originalIndexCounts.current[index] : 0;
     niivue_render.current.updateGLVolume();
+
+    const slice = niivue_slice.current.meshes[index];
+    slice.indexCount = tractState ? originalIndexCounts.current[index] : 0;
+    niivue_slice.current.updateGLVolume();
+
     setTractVisibility(prev => prev.map((v, i) => i === index ? tractState : v));
   };
 
@@ -319,6 +324,12 @@ export const PathwaysNiivueCanvas = () => (
       mesh.indexCount = tractState ? originalIndexCounts.current[i] : 0;
     });
     niivue_render.current.updateGLVolume();
+
+    niivue_slice.current.meshes.forEach((mesh, i) => {
+      mesh.indexCount = tractState ? originalIndexCounts.current[i] : 0;
+    });
+    niivue_slice.current.updateGLVolume();
+
     setTractVisibility(trackList.map(() => tractState));
   };
 
