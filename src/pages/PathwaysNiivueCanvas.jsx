@@ -296,9 +296,13 @@ export const PathwaysNiivueCanvas = () => (
     await niivue_render.current.loadMeshes([...trackList, ...nucleiList]);
     niivue_render.current.meshes.forEach((mesh, i) => {
       originalIndexCounts.current[i] = mesh.indexCount;
+      niivue_render.current.setMeshProperty(mesh.id, 'fiberColor', 'Fixed');
     });
     await niivue_slice.current.loadVolumes(imageList);
     await niivue_slice.current.loadMeshes(trackList);
+    niivue_slice.current.meshes.forEach((mesh) => {
+      niivue_slice.current.setMeshProperty(mesh.id, 'fiberColor', 'Fixed');
+    });
     await niivue_slice.current.setMeshThicknessOn2D(1);
     }
     loadImages();
