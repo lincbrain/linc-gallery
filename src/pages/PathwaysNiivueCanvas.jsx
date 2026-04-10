@@ -409,7 +409,18 @@ export const PathwaysNiivueCanvas = () => (
                   checked={tractVisibility[index]}
                   onChange={(event) => handleTractChange(index, event)}
                 />
-                <label htmlFor={`tract-${index}`} style={{ marginLeft: "5px" }}>
+                <span
+                  style={{
+                    display: "inline-block",
+                    width: "12px",
+                    height: "12px",
+                    marginLeft: "5px",
+                    marginRight: "4px",
+                    backgroundColor: `rgba(${tract.rgba255[0]}, ${tract.rgba255[1]}, ${tract.rgba255[2]}, ${tract.rgba255[3] / 255})`,
+                    flexShrink: 0,
+                  }}
+                />
+                <label htmlFor={`tract-${index}`}>
                   {tract.label}
                 </label>
               </div>
