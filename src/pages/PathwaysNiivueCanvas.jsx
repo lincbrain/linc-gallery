@@ -267,6 +267,8 @@ export const PathwaysNiivueCanvas = () => (
     // Initialize viewer
     await niivue_slice.current.setSliceType(niivue_slice.current.sliceTypeCoronal);
     niivue_slice.current.opts.dragMode = DRAG_MODE.slicer3D;
+    niivue_slice.current.opts.loadingText = 'Please do not refresh.'
+    niivue_render.current.opts.loadingText = 'Loading (1-2 minutes)...'
 
     // Load data
     await niivue_render.current.loadMeshes([...trackList, ...nucleiList]);
