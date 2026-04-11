@@ -276,6 +276,15 @@ export const PathwaysNiivueCanvas = () => (
     };
     niivue_slice.current.addColormap('whiteBackgroundGray', whiteBackgroundGray);
 
+    const nucleiColormap = {
+      R: [255, 244, 199, 136, 193, 148, 205, 83,  128, 233, 206],
+      G: [255, 64,  52,  206, 226, 224, 125, 215, 106, 69,  136],
+      B: [255, 172, 164, 220, 240, 191, 182, 216, 85,  255, 129],
+      A: [0,   255, 255, 255, 255, 255, 255, 255, 255, 255, 255],
+      I: [0,   1,   2,   3,   4,   5,   6,   7,   8,   9,   10]
+    };
+    niivue_slice.current.addColormap('nucleiColormap', nucleiColormap);
+
     const imageList = [
           {
             url:"https://dandiarchive.s3.amazonaws.com/blobs/5df/2ec/5df2ec3d-ec43-4a33-aa38-49a141f8f05d",
@@ -284,7 +293,13 @@ export const PathwaysNiivueCanvas = () => (
           },
       ];
     const nucleiList=[
-      ]
+          {
+            url:"https://dandiarchive.s3.amazonaws.com/blobs/0a3/8c1/0a38c1b3-2f80-41a3-9514-ee09e0834247",
+            name: "sub-Ha1_sample-righthemi_atlas-BGPathwaysMaffei2026_space-orig_label-SubcorcticalNuclei_dseg.nii.gz",
+            colormap: "nucleiColormap",
+            opacity: 1,
+          },
+      ];
 
     // Initialize viewer
     await niivue_slice.current.setSliceType(niivue_slice.current.sliceTypeCoronal);
@@ -298,7 +313,9 @@ export const PathwaysNiivueCanvas = () => (
       originalIndexCounts.current[i] = mesh.indexCount;
       niivue_render.current.setMeshProperty(mesh.id, 'fiberColor', 'Fixed');
     });
-    await niivue_slice.current.loadVolumes(imageList);
+
+    await niivue_slice.current.loadVolumes([...imageList, ...nucleiList]);
+    niivue_slice.current.setInterpolation(true);
     await niivue_slice.current.loadMeshes(trackList);
     niivue_slice.current.meshes.forEach((mesh) => {
       niivue_slice.current.setMeshProperty(mesh.id, 'fiberColor', 'Fixed');
@@ -388,6 +405,9 @@ export const PathwaysNiivueCanvas = () => (
                 Crosshair
               </label>
             </div>
+
+            <hr />
+            <h4>Nuclei</h4>
             <hr />
             <h4>Tracts</h4>
             <div>
