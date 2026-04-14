@@ -10,6 +10,7 @@ export const DmriNiivueCanvasMacaque = () => (
 
   React.useEffect(() => {
     async function loadImages() {
+        if (niivue_slice.current) return;
 
         niivue_slice.current = new Niivue({logLevel: 'debug',
                                     backColor: [0, 0, 0, 1],
@@ -72,7 +73,23 @@ export const DmriNiivueCanvasMacaque = () => (
         niivue_slice.current.volumes[4].colorbarVisible=false;
         niivue_slice.current.updateGLVolume();
     }
-    loadImages();
+
+    // Load only when the tab is first shown, not at page load
+    const tabPanel = document.getElementById('niivue-canvas-slice-macaque')?.closest('[role="tabpanel"]');
+    if (!tabPanel || !tabPanel.hasAttribute('hidden')) {
+      loadImages();
+      return;
+    }
+
+    // Load once the the tab becomes visible
+    const observer = new MutationObserver(() => {
+      if (!tabPanel.hasAttribute('hidden')) {
+        observer.disconnect();
+        loadImages();
+      }
+    });
+    observer.observe(tabPanel, { attributes: true, attributeFilter: ['hidden'] });
+    return () => observer.disconnect();
   }, []);
 
   // Handlers for displaying each volume with checkboxes
