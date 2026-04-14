@@ -81,7 +81,7 @@ export const DmriNiivueCanvasMacaque = () => (
       return;
     }
 
-    // Load once the the tab becomes visible
+    // Load once the tab becomes visible
     const observer = new MutationObserver(() => {
       if (!tabPanel.hasAttribute('hidden')) {
         observer.disconnect();
