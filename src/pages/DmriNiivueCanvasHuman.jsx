@@ -136,24 +136,18 @@ export const DmriNiivueCanvasHuman = () => (
   const handleSomaChange = (event) => {
       const somaState = event.target.checked;
       niivue_slice.current.volumes[5].opacity = somaState ? 1 : 0;
+      const neuriteVisible = niivue_slice.current.volumes[6].opacity > 0;
       niivue_slice.current.volumes[5].colorbarVisible = somaState;
-      if (somaState) {
-        niivue_slice.current.volumes[6].opacity = 0;
-        niivue_slice.current.volumes[6].colorbarVisible = false;
-        setIsNeurite(false);
-      }
+      niivue_slice.current.volumes[6].colorbarVisible = !somaState && neuriteVisible;
       niivue_slice.current.updateGLVolume();
       setIsSoma(somaState);
     };
   const handleNeuriteChange = (event) => {
       const neuriteState = event.target.checked;
       niivue_slice.current.volumes[6].opacity = neuriteState ? 1 : 0;
-      niivue_slice.current.volumes[6].colorbarVisible = neuriteState;
-      if (neuriteState) {
-        niivue_slice.current.volumes[5].opacity = 0;
-        niivue_slice.current.volumes[5].colorbarVisible = false;
-        setIsSoma(false);
-      }
+      const somaVisible = niivue_slice.current.volumes[5].opacity > 0;
+      niivue_slice.current.volumes[5].colorbarVisible = somaVisible;
+      niivue_slice.current.volumes[6].colorbarVisible = !somaVisible && neuriteState;
       niivue_slice.current.updateGLVolume();
       setIsNeurite(neuriteState);
     };
