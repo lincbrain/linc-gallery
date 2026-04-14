@@ -49,7 +49,7 @@ export const DmriNiivueCanvasHuman = () => (
               url: "https://dandiarchive.s3.amazonaws.com/blobs/1d7/463/1d746354-d49d-48b6-bef1-d62219d77774",
               opacity: 0,
               cal_min: 0,
-              cal_max: 0.8,
+              cal_max: 350,
             },
             {
               name: "sub-Ha1_sample-hemi_acq-highres_desc-SANDIdot+fsoma.nii.gz",
@@ -81,8 +81,8 @@ export const DmriNiivueCanvasHuman = () => (
         niivue_slice.current.setModulationImage(niivue_slice.current.volumes[1].id, niivue_slice.current.volumes[2].id)
         niivue_slice.current.setModulationImage(niivue_slice.current.volumes[3].id, niivue_slice.current.volumes[4].id)
 
-        niivue_slice.current.setColormap(niivue_slice.current.volumes[5].id, "jet");
-        niivue_slice.current.setColormap(niivue_slice.current.volumes[6].id, "jet");
+        niivue_slice.current.setColormap(niivue_slice.current.volumes[5].id, "turbo");
+        niivue_slice.current.setColormap(niivue_slice.current.volumes[6].id, "turbo");
         for (let i = 0; i < niivue_slice.current.volumes.length; i++) {
             niivue_slice.current.volumes[i].colorbarVisible = false;
         }
