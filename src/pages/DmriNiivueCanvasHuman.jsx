@@ -49,7 +49,7 @@ export const DmriNiivueCanvasHuman = () => (
               url: "https://dandiarchive.s3.amazonaws.com/blobs/1d7/463/1d746354-d49d-48b6-bef1-d62219d77774",
               opacity: 0,
               cal_min: 0,
-              cal_max: 0.8,
+              cal_max: 350,
             },
             {
               name: "sub-Ha1_sample-hemi_acq-highres_desc-SANDIdot+fsoma.nii.gz",
