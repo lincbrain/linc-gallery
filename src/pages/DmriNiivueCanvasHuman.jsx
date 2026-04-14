@@ -28,14 +28,28 @@ export const DmriNiivueCanvasHuman = () => (
               opacity: 1,
             },
             {
-              name: "sub-Ha1_sample-RightHemi_acq-HighRes_desc-CSD+dec+unitvec.nii.gz",
+              name: "sub-Ha1_sample-RightHemi_acq-HighRes+MultiShell_desc-CSD+dec+univec.nii.gz",
               url: "https://dandiarchive.s3.amazonaws.com/blobs/20c/804/20c804d5-c99d-4ede-b4ed-c1926d652a6f",
+              opacity: 1,
+            },
+            {
+              name: "sub-Ha1_sample-RightHemi_acq-HighRes+MultiShell_desc-CSD+dec+scalar.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/951/6ef/9516efb5-b8aa-4fe5-971b-809d4b52e003",
+              opacity: 0,
+              cal_min: 0,
+              cal_max: 0.8,
+            },
+            {
+              name: "sub-Ha1_sample-RightHemi_acq-HighRes+MultiShell_desc-CSD+tdi+univec.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/2e8/77d/2e877d91-fe98-4684-a5e1-60c5ef064382",
               opacity: 0,
             },
             {
-              name: "sub-Ha1_sample-hemi_acq-highres_res-p4_desc-CSD+tdi.nii.gz",
-              url: "https://dandiarchive.s3.amazonaws.com/blobs/f69/9ec/f699ec38-cb5b-46ff-92eb-b3ea2a75d3bb",
+              name: "sub-Ha1_sample-RightHemi_acq-HighRes+MultiShell_desc-CSD+tdi+scalar.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/1d7/463/1d746354-d49d-48b6-bef1-d62219d77774",
               opacity: 0,
+              cal_min: 0,
+              cal_max: 0.8,
             },
             {
               name: "sub-Ha1_sample-hemi_acq-highres_desc-SANDIdot+fsoma.nii.gz",
@@ -51,13 +65,6 @@ export const DmriNiivueCanvasHuman = () => (
               cal_min: 0,
               cal_max: 0.8,
             },
-            {
-              name: "sub-Ha1_sample-RightHemi_acq-HighRes_desc-CSD+dec+scalar.nii.gz",
-              url: "https://dandiarchive.s3.amazonaws.com/blobs/951/6ef/9516efb5-b8aa-4fe5-971b-809d4b52e003",
-              opacity: 0,
-              cal_min: 0,
-              cal_max: 0.8,
-            }
         ];
 
         // Initialize viewer
@@ -69,19 +76,17 @@ export const DmriNiivueCanvasHuman = () => (
         // Load data
         await niivue_slice.current.loadVolumes(imageList);
         await niivue_slice.current.volumes[1].loadImgV1();
-        await niivue_slice.current.volumes[2].loadImgV1();
+        await niivue_slice.current.volumes[3].loadImgV1();
         niivue_slice.current.setInterpolation(true); // V1 lines require nearest neighbor interpolation
-        niivue_slice.current.setModulationImage(niivue_slice.current.volumes[1].id, niivue_slice.current.volumes[5].id)
+        niivue_slice.current.setModulationImage(niivue_slice.current.volumes[1].id, niivue_slice.current.volumes[2].id)
+        niivue_slice.current.setModulationImage(niivue_slice.current.volumes[3].id, niivue_slice.current.volumes[4].id)
 
-        niivue_slice.current.setColormap(niivue_slice.current.volumes[3].id, "jet");
-        niivue_slice.current.setColormap(niivue_slice.current.volumes[4].id, "jet");
+        niivue_slice.current.setColormap(niivue_slice.current.volumes[5].id, "jet");
+        niivue_slice.current.setColormap(niivue_slice.current.volumes[6].id, "jet");
+        for (let i = 0; i < niivue_slice.current.volumes.length; i++) {
+            niivue_slice.current.volumes[i].colorbarVisible = false;
+        }
 
-        niivue_slice.current.volumes[0].colorbarVisible=false;
-        niivue_slice.current.volumes[1].colorbarVisible=false;
-        niivue_slice.current.volumes[2].colorbarVisible=false;
-        niivue_slice.current.volumes[3].colorbarVisible=false;
-        niivue_slice.current.volumes[4].colorbarVisible=false;
-        niivue_slice.current.volumes[5].colorbarVisible=false;
         niivue_slice.current.updateGLVolume();
     }
 
@@ -124,17 +129,17 @@ export const DmriNiivueCanvasHuman = () => (
     };
   const handleDensityChange = (event) => {
       const densityState = event.target.checked;
-      niivue_slice.current.volumes[2].opacity = densityState ? 1 : 0;
+      niivue_slice.current.volumes[3].opacity = densityState ? 1 : 0;
       niivue_slice.current.updateGLVolume();
       setIsDensity(densityState);
     };
   const handleSomaChange = (event) => {
       const somaState = event.target.checked;
-      niivue_slice.current.volumes[3].opacity = somaState ? 1 : 0;
-      niivue_slice.current.volumes[3].colorbarVisible = somaState;
+      niivue_slice.current.volumes[5].opacity = somaState ? 1 : 0;
+      niivue_slice.current.volumes[5].colorbarVisible = somaState;
       if (somaState) {
-        niivue_slice.current.volumes[4].opacity = 0;
-        niivue_slice.current.volumes[4].colorbarVisible = false;
+        niivue_slice.current.volumes[6].opacity = 0;
+        niivue_slice.current.volumes[6].colorbarVisible = false;
         setIsNeurite(false);
       }
       niivue_slice.current.updateGLVolume();
@@ -142,11 +147,11 @@ export const DmriNiivueCanvasHuman = () => (
     };
   const handleNeuriteChange = (event) => {
       const neuriteState = event.target.checked;
-      niivue_slice.current.volumes[4].opacity = neuriteState ? 1 : 0;
-      niivue_slice.current.volumes[4].colorbarVisible = neuriteState;
+      niivue_slice.current.volumes[6].opacity = neuriteState ? 1 : 0;
+      niivue_slice.current.volumes[6].colorbarVisible = neuriteState;
       if (neuriteState) {
-        niivue_slice.current.volumes[3].opacity = 0;
-        niivue_slice.current.volumes[3].colorbarVisible = false;
+        niivue_slice.current.volumes[5].opacity = 0;
+        niivue_slice.current.volumes[5].colorbarVisible = false;
         setIsSoma(false);
       }
       niivue_slice.current.updateGLVolume();
@@ -180,16 +185,15 @@ export const DmriNiivueCanvasHuman = () => (
                 Direction-encoded color (DEC) map
               </label>
             </div>
-            <div style={{ opacity: 0.4, cursor: "not-allowed" }}>
+            <div>
               <input
                 type="checkbox"
                 id="showDensity"
                 checked={isDensity}
                 onChange={handleDensityChange}
-                disabled
               />
               <label htmlFor="showDensity" style={{ marginLeft: "5px" }}>
-                Tract density (coming soon)
+                Tract density
               </label>
             </div>
             <div>
