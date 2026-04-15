@@ -28,14 +28,28 @@ export const DmriNiivueCanvasMacaque = () => (
               opacity: 1,
             },
             {
-              name: "sub-M3_sample-brain_acq-HighRes+MultiShell_desc-CSD+fodf+dec.nii.gz",
-              url: "https://dandiarchive.s3.amazonaws.com/blobs/135/9b3/1359b386-1ecd-4e69-a1b7-3cb2575b11e0",
+              name: "sub-M3_sample-Brain_acq-HighRes+MultiShell_desc-CSD+dec+univec.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/564/a89/564a89d2-cb11-4e4b-a881-282c1ffc54a4",
+              opacity: 1,
+            },
+            {
+              name: "sub-M3_sample-Brain_acq-HighRes+MultiShell_desc-CSD+dec+scalar.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/707/fa1/707fa179-20a3-4d5b-bce6-a5f574836417",
+              opacity: 0,
+              cal_min: 0,
+              cal_max: 0.9,
+            },
+            {
+              name: "sub-M3_sample-Brain_acq-HighRes+MultiShell_desc-CSD+tdi+univec.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/f98/4d4/f984d4eb-3159-4017-80c2-32d388d4fa5f",
               opacity: 0,
             },
             {
-              name: "sub-M3_sample-brain_acq-HighRes+MultiShell_desc-CSD+tdi.nii.gz",
-              url: "https://dandiarchive.s3.amazonaws.com/blobs/e15/941/e15941f4-2482-4f23-87af-e824161a4b0f",
+              name: "sub-M3_sample-Brain_acq-HighRes+MultiShell_desc-CSD+tdi+scalar.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/0e4/ef2/0e4ef272-96d6-4df4-a408-6344032cece1",
               opacity: 0,
+              cal_min: 0,
+              cal_max: 1100,
             },
             { // TODO: Replace placeholder image
               name: "soma_placeholder.nii.gz",
@@ -50,7 +64,14 @@ export const DmriNiivueCanvasMacaque = () => (
               opacity: 0,
               cal_min: 0,
               cal_max: 0.8,
-            }
+            },
+            { // TODO: Replace placeholder image
+              name: "soma_radius_placeholder.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/e56/e59/e56e5984-8b5f-40dc-99f7-e2bda53cfd25",
+              opacity: 0,
+              cal_min: 0,
+              cal_max: 0.8,
+            },
         ];
 
         // Initialize viewer
@@ -62,15 +83,20 @@ export const DmriNiivueCanvasMacaque = () => (
         // Load data
         await niivue_slice.current.loadVolumes(imageList);
         await niivue_slice.current.volumes[1].loadImgV1();
-        await niivue_slice.current.volumes[2].loadImgV1();
+        await niivue_slice.current.volumes[3].loadImgV1();
         niivue_slice.current.setInterpolation(true); // V1 lines require nearest neighbor interpolation
-        niivue_slice.current.setColormap(niivue_slice.current.volumes[3].id, "jet");
-        niivue_slice.current.setColormap(niivue_slice.current.volumes[4].id, "jet");
-        niivue_slice.current.volumes[0].colorbarVisible=false;
-        niivue_slice.current.volumes[1].colorbarVisible=false;
-        niivue_slice.current.volumes[2].colorbarVisible=false;
-        niivue_slice.current.volumes[3].colorbarVisible=false;
-        niivue_slice.current.volumes[4].colorbarVisible=false;
+        niivue_slice.current.setModulationImage(niivue_slice.current.volumes[1].id, niivue_slice.current.volumes[2].id)
+        niivue_slice.current.setModulationImage(niivue_slice.current.volumes[3].id, niivue_slice.current.volumes[4].id)
+
+        niivue_slice.current.setColormap(niivue_slice.current.volumes[5].id, "turbo");
+        niivue_slice.current.setColormap(niivue_slice.current.volumes[6].id, "turbo");
+        niivue_slice.current.setColormap(niivue_slice.current.volumes[7].id, "turbo");
+        for (let i = 0; i < niivue_slice.current.volumes.length; i++) {
+          niivue_slice.current.volumes[i].colorbarVisible = false;
+        }
+
+        niivue_slice.current.scene.crosshairPos = [0.66, 0.5, 0.5];
+
         niivue_slice.current.updateGLVolume();
     }
 
@@ -94,10 +120,12 @@ export const DmriNiivueCanvasMacaque = () => (
 
   // Handlers for displaying each volume with checkboxes
   const [isMRI, setIsMRI] = useState(true);
-  const [isFODF, setIsFODF] = useState(false);
+  const [isFODF, setIsFODF] = useState(true);
   const [isDensity, setIsDensity] = useState(false);
   const [isSoma, setIsSoma] = useState(false);
   const [isNeurite, setIsNeurite] = useState(false);
+  const [isSomaRadius, setIsSomaRadius] = useState(false);
+  const [isCrosshair, setIsCrosshair] = useState(true);
 
   const handleMRIChange = (event) => {
       const mriState = event.target.checked;
@@ -113,27 +141,48 @@ export const DmriNiivueCanvasMacaque = () => (
     };
   const handleDensityChange = (event) => {
       const densityState = event.target.checked;
-      niivue_slice.current.volumes[2].opacity = densityState ? 1 : 0;
+      niivue_slice.current.volumes[3].opacity = densityState ? 1 : 0;
       niivue_slice.current.updateGLVolume();
       setIsDensity(densityState);
     };
   const handleSomaChange = (event) => {
       const somaState = event.target.checked;
-      niivue_slice.current.volumes[3].opacity = somaState ? 1 : 0;
-      const neuriteVisible = niivue_slice.current.volumes[4].opacity > 0;
-      niivue_slice.current.volumes[3].colorbarVisible = somaState;
-      niivue_slice.current.volumes[4].colorbarVisible = !somaState && neuriteVisible;
+      niivue_slice.current.volumes[5].opacity = somaState ? 1 : 0;
+      const neuriteVisible = niivue_slice.current.volumes[6].opacity > 0;
+      const somaRadiusVisible = niivue_slice.current.volumes[7].opacity > 0;
+      niivue_slice.current.volumes[5].colorbarVisible = somaState;
+      niivue_slice.current.volumes[6].colorbarVisible = !somaState && neuriteVisible;
+      niivue_slice.current.volumes[7].colorbarVisible = !somaState && !neuriteVisible && somaRadiusVisible;
       niivue_slice.current.updateGLVolume();
       setIsSoma(somaState);
     };
   const handleNeuriteChange = (event) => {
       const neuriteState = event.target.checked;
-      niivue_slice.current.volumes[4].opacity = neuriteState ? 1 : 0;
-      const somaVisible = niivue_slice.current.volumes[3].opacity > 0;
-      niivue_slice.current.volumes[3].colorbarVisible = somaVisible;
-      niivue_slice.current.volumes[4].colorbarVisible = !somaVisible && neuriteState;
+      niivue_slice.current.volumes[6].opacity = neuriteState ? 1 : 0;
+      const somaVisible = niivue_slice.current.volumes[5].opacity > 0;
+      const somaRadiusVisible = niivue_slice.current.volumes[7].opacity > 0;
+      niivue_slice.current.volumes[5].colorbarVisible = somaVisible;
+      niivue_slice.current.volumes[6].colorbarVisible = !somaVisible && neuriteState;
+      niivue_slice.current.volumes[7].colorbarVisible = !somaVisible && !neuriteState && somaRadiusVisible;
       niivue_slice.current.updateGLVolume();
       setIsNeurite(neuriteState);
+    };
+  const handleSomaRadiusChange = (event) => {
+      const somaRadiusState = event.target.checked;
+      niivue_slice.current.volumes[7].opacity = somaRadiusState ? 1 : 0;
+      const somaVisible = niivue_slice.current.volumes[5].opacity > 0;
+      const neuriteVisible = niivue_slice.current.volumes[6].opacity > 0;
+      niivue_slice.current.volumes[5].colorbarVisible = somaVisible;
+      niivue_slice.current.volumes[6].colorbarVisible = !somaVisible && neuriteState;
+      niivue_slice.current.volumes[7].colorbarVisible = !somaVisible && !neuriteVisible && somaRadiusState;
+      niivue_slice.current.updateGLVolume();
+      setIsSomaRadius(somaRadiusState);
+    };
+  const handleCrosshairChange = (event) => {
+      const crosshairState = event.target.checked;
+      niivue_slice.current.opts.crosshairWidth = crosshairState ? 1 : 0;
+      niivue_slice.current.drawScene();
+      setIsCrosshair(crosshairState);
     };
 
   return (
@@ -183,7 +232,7 @@ export const DmriNiivueCanvasMacaque = () => (
                 disabled
               />
               <label htmlFor="showSoma" style={{ marginLeft: "5px" }}>
-                Intra-soma signal fraction (coming soon)
+                Intra-soma signal fraction
               </label>
             </div>
             <div style={{ opacity: 0.4, cursor: "not-allowed" }}>
@@ -195,10 +244,33 @@ export const DmriNiivueCanvasMacaque = () => (
                 disabled
               />
               <label htmlFor="showNeurite" style={{ marginLeft: "5px" }}>
-                Intra-neurite signal fraction (coming soon)
+                Intra-neurite signal fraction
               </label>
             </div>
-            <div style={{ position: 'absolute', top: '40%', width: 'calc(100% - 40px)' }}>
+            <div style={{ opacity: 0.4, cursor: "not-allowed" }}>
+              <input
+                type="checkbox"
+                id="showSomaRadius"
+                checked={isSomaRadius}
+                onChange={handleSomaRadiusChange}
+                disabled
+              />
+              <label htmlFor="showSomaRadius" style={{ marginLeft: "5px" }}>
+                Soma radius
+              </label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="showCrosshair"
+                checked={isCrosshair}
+                onChange={handleCrosshairChange}
+              />
+              <label htmlFor="showCrosshair" style={{ marginLeft: "5px" }}>
+                Crosshair
+              </label>
+            </div>
+            <div style={{ paddingTop: "0px" }}>
               <hr />
               <h4>Mouse controls</h4>
               <table style={{ width: '100%', fontSize: '0.9em' }}>
