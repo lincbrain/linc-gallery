@@ -132,25 +132,25 @@ export const DmriNiivueCanvasMacaque = () => (
     };
   const handleDensityChange = (event) => {
       const densityState = event.target.checked;
-      niivue_slice.current.volumes[2].opacity = densityState ? 1 : 0;
+      niivue_slice.current.volumes[3].opacity = densityState ? 1 : 0;
       niivue_slice.current.updateGLVolume();
       setIsDensity(densityState);
     };
   const handleSomaChange = (event) => {
       const somaState = event.target.checked;
-      niivue_slice.current.volumes[3].opacity = somaState ? 1 : 0;
+      niivue_slice.current.volumes[5].opacity = somaState ? 1 : 0;
       const neuriteVisible = niivue_slice.current.volumes[4].opacity > 0;
-      niivue_slice.current.volumes[3].colorbarVisible = somaState;
-      niivue_slice.current.volumes[4].colorbarVisible = !somaState && neuriteVisible;
+      niivue_slice.current.volumes[5].colorbarVisible = somaState;
+      niivue_slice.current.volumes[6].colorbarVisible = !somaState && neuriteVisible;
       niivue_slice.current.updateGLVolume();
       setIsSoma(somaState);
     };
   const handleNeuriteChange = (event) => {
       const neuriteState = event.target.checked;
-      niivue_slice.current.volumes[4].opacity = neuriteState ? 1 : 0;
-      const somaVisible = niivue_slice.current.volumes[3].opacity > 0;
-      niivue_slice.current.volumes[3].colorbarVisible = somaVisible;
-      niivue_slice.current.volumes[4].colorbarVisible = !somaVisible && neuriteState;
+      niivue_slice.current.volumes[6].opacity = neuriteState ? 1 : 0;
+      const somaVisible = niivue_slice.current.volumes[5].opacity > 0;
+      niivue_slice.current.volumes[5].colorbarVisible = somaVisible;
+      niivue_slice.current.volumes[6].colorbarVisible = !somaVisible && neuriteState;
       niivue_slice.current.updateGLVolume();
       setIsNeurite(neuriteState);
     };
