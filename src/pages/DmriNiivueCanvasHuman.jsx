@@ -232,7 +232,7 @@ export const DmriNiivueCanvasHuman = () => (
                 Crosshair
               </label>
             </div>
-            <div style={{ position: 'absolute', top: '40%', width: 'calc(100% - 40px)' }}>
+            <div style={{ paddingTop: "26.5px" }}>
               <hr />
               <h4>Mouse controls</h4>
               <table style={{ width: '100%', fontSize: '0.9em' }}>
