@@ -51,23 +51,23 @@ export const DmriNiivueCanvasMacaque = () => (
               cal_min: 0,
               cal_max: 1100,
             },
-            { // TODO: Replace placeholder image
-              name: "soma_placeholder.nii.gz",
-              url: "https://dandiarchive.s3.amazonaws.com/blobs/e56/e59/e56e5984-8b5f-40dc-99f7-e2bda53cfd25",
+            {
+              name: "sub-M3_sample-Brain_acq-MultiDim_desc-MultiTE+fsoma.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/d5a/67c/d5a67cdd-b37d-4db1-b433-a2ca78cb80a4",
               opacity: 0,
               cal_min: 0,
               cal_max: 0.8,
             },
-            { // TODO: Replace placeholder image
-              name: "neurite_placeholder.nii.gz",
-              url: "https://dandiarchive.s3.amazonaws.com/blobs/e56/e59/e56e5984-8b5f-40dc-99f7-e2bda53cfd25",
+            {
+              name: "sub-M3_sample-Brain_acq-MultiDim_desc-MultiTE+fneurite.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/8b7/394/8b7394a4-a318-4fc6-9a53-c62fb1457f58",
               opacity: 0,
               cal_min: 0,
               cal_max: 0.8,
             },
-            { // TODO: Replace placeholder image
-              name: "soma_radius_placeholder.nii.gz",
-              url: "https://dandiarchive.s3.amazonaws.com/blobs/e56/e59/e56e5984-8b5f-40dc-99f7-e2bda53cfd25",
+            {
+              name: "sub-M3_sample-Brain_acq-MultiDim_desc-MultiTE+Rsoma.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/8e6/92f/8e692f33-d709-4da8-927a-2ae9d9f71d88",
               opacity: 0,
               cal_min: 0,
               cal_max: 0.8,
