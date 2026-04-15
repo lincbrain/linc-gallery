@@ -16,7 +16,7 @@ export const DmriNiivueCanvasHuman = () => (
                                     backColor: [0, 0, 0, 1],
                                     isColorbar: true,
                                     isRuler: false,
-                                    crosshairWidth: 1,
+                                    crosshairWidth: 0,
                                     multiplanarPadPixels: 50,
                                 });
         niivue_slice.current.attachToCanvas(document.getElementById('niivue-canvas-slice-human'))
@@ -71,7 +71,7 @@ export const DmriNiivueCanvasHuman = () => (
         await niivue_slice.current.setSliceType(niivue_slice.current.sliceTypeMultiplanar);
         niivue_slice.current.setMultiplanarLayout(3);
         niivue_slice.current.opts.dragMode = DRAG_MODE.slicer3D;
-        niivue_slice.current.opts.loadingText = 'Please do not refresh. Loading (1-2 minutes)...'
+        niivue_slice.current.opts.loadingText = 'Please do not refresh. Loading (~1 minute)...'
 
         // Load data
         await niivue_slice.current.loadVolumes(imageList);
@@ -116,7 +116,7 @@ export const DmriNiivueCanvasHuman = () => (
   const [isDensity, setIsDensity] = useState(false);
   const [isSoma, setIsSoma] = useState(false);
   const [isNeurite, setIsNeurite] = useState(false);
-  const [isCrosshair, setIsCrosshair] = useState(true);
+  const [isCrosshair, setIsCrosshair] = useState(false);
 
   const handleMRIChange = (event) => {
       const mriState = event.target.checked;
@@ -166,6 +166,9 @@ export const DmriNiivueCanvasHuman = () => (
         <aside class="sidebar-container">
           <div class="global-controls">
             <h4>Layers</h4>
+            <div style={{ fontSize: "0.8em", fontStyle: "italic", color: "#888", marginBottom: "4px" }}>
+              Axonal architecture
+            </div>
             <div>
               <input
                 type="checkbox"
@@ -199,6 +202,9 @@ export const DmriNiivueCanvasHuman = () => (
                 Tract density
               </label>
             </div>
+            <div style={{ fontSize: "0.8em", fontStyle: "italic", color: "#888", marginTop: "8px", marginBottom: "4px" }}>
+              Tissue microstructure
+            </div>
             <div>
               <input
                 type="checkbox"
@@ -220,6 +226,9 @@ export const DmriNiivueCanvasHuman = () => (
               <label htmlFor="showNeurite" style={{ marginLeft: "5px" }}>
                 Intra-neurite signal fraction
               </label>
+            </div>
+            <div style={{ fontSize: "0.8em", fontStyle: "italic", color: "#888", marginTop: "8px", marginBottom: "4px" }}>
+              Display options
             </div>
             <div>
               <input
