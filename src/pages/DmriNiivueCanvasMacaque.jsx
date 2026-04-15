@@ -228,37 +228,34 @@ export const DmriNiivueCanvasMacaque = () => (
                 Tract density
               </label>
             </div>
-            <div style={{ opacity: 0.4, cursor: "not-allowed" }}>
+            <div>
               <input
                 type="checkbox"
                 id="showSoma"
                 checked={isSoma}
                 onChange={handleSomaChange}
-                disabled
               />
               <label htmlFor="showSoma" style={{ marginLeft: "5px" }}>
                 Intra-soma signal fraction
               </label>
             </div>
-            <div style={{ opacity: 0.4, cursor: "not-allowed" }}>
+            <div>
               <input
                 type="checkbox"
                 id="showNeurite"
                 checked={isNeurite}
                 onChange={handleNeuriteChange}
-                disabled
               />
               <label htmlFor="showNeurite" style={{ marginLeft: "5px" }}>
                 Intra-neurite signal fraction
               </label>
             </div>
-            <div style={{ opacity: 0.4, cursor: "not-allowed" }}>
+            <div>
               <input
                 type="checkbox"
                 id="showSomaRadius"
                 checked={isSomaRadius}
                 onChange={handleSomaRadiusChange}
-                disabled
               />
               <label htmlFor="showSomaRadius" style={{ marginLeft: "5px" }}>
                 Soma radius
