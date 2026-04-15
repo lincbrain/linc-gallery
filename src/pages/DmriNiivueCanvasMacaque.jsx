@@ -103,7 +103,7 @@ export const DmriNiivueCanvasMacaque = () => (
         niivue_highres.current.opts.dragMode = DRAG_MODE.slicer3D;
         niivue_highres.current.opts.loadingText = 'Please do not refresh. Loading (~1 minute)...'
 
-          // Load data
+        // Load data
         await niivue_lowres.current.loadVolumes(imageListLowRes);
         niivue_lowres.current.setColormap(niivue_lowres.current.volumes[1].id, "turbo");
         niivue_lowres.current.setColormap(niivue_lowres.current.volumes[2].id, "turbo");
