@@ -87,6 +87,8 @@ export const DmriNiivueCanvasHuman = () => (
             niivue_slice.current.volumes[i].colorbarVisible = false;
         }
 
+        niivue_slice.current.scene.crosshairPos = [0.4, 0.5, 0.5];
+
         niivue_slice.current.updateGLVolume();
     }
 
