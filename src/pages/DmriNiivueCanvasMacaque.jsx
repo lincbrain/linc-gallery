@@ -86,6 +86,9 @@ export const DmriNiivueCanvasMacaque = () => (
         for (let i = 0; i < niivue_slice.current.volumes.length; i++) {
           niivue_slice.current.volumes[i].colorbarVisible = false;
         }
+
+        niivue_slice.current.scene.crosshairPos = [0.66, 0.5, 0.5];
+
         niivue_slice.current.updateGLVolume();
     }
 
