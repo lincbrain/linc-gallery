@@ -28,14 +28,28 @@ export const DmriNiivueCanvasMacaque = () => (
               opacity: 1,
             },
             {
-              name: "sub-M3_sample-brain_acq-HighRes+MultiShell_desc-CSD+fodf+dec.nii.gz",
-              url: "https://dandiarchive.s3.amazonaws.com/blobs/135/9b3/1359b386-1ecd-4e69-a1b7-3cb2575b11e0",
+              name: "sub-M3_sample-Brain_acq-HighRes+MultiShell_desc-CSD+dec+univec.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/564/a89/564a89d2-cb11-4e4b-a881-282c1ffc54a4",
               opacity: 0,
             },
             {
-              name: "sub-M3_sample-brain_acq-HighRes+MultiShell_desc-CSD+tdi.nii.gz",
-              url: "https://dandiarchive.s3.amazonaws.com/blobs/e15/941/e15941f4-2482-4f23-87af-e824161a4b0f",
+              name: "sub-M3_sample-Brain_acq-HighRes+MultiShell_desc-CSD+dec+scalar.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/707/fa1/707fa179-20a3-4d5b-bce6-a5f574836417",
               opacity: 0,
+              cal_min: 0,
+              cal_max: 0.9,
+            },
+            {
+              name: "sub-M3_sample-Brain_acq-HighRes+MultiShell_desc-CSD+tdi+univec.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/f98/4d4/f984d4eb-3159-4017-80c2-32d388d4fa5f",
+              opacity: 0,
+            },
+            {
+              name: "sub-M3_sample-Brain_acq-HighRes+MultiShell_desc-CSD+tdi+scalar.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/0e4/ef2/0e4ef272-96d6-4df4-a408-6344032cece1",
+              opacity: 0,
+              cal_min: 0,
+              cal_max: 1100,
             },
             { // TODO: Replace placeholder image
               name: "soma_placeholder.nii.gz",
