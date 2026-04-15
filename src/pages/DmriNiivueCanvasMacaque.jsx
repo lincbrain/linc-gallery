@@ -30,7 +30,7 @@ export const DmriNiivueCanvasMacaque = () => (
             {
               name: "sub-M3_sample-Brain_acq-HighRes+MultiShell_desc-CSD+dec+univec.nii.gz",
               url: "https://dandiarchive.s3.amazonaws.com/blobs/564/a89/564a89d2-cb11-4e4b-a881-282c1ffc54a4",
-              opacity: 0,
+              opacity: 1,
             },
             {
               name: "sub-M3_sample-Brain_acq-HighRes+MultiShell_desc-CSD+dec+scalar.nii.gz",
@@ -108,7 +108,7 @@ export const DmriNiivueCanvasMacaque = () => (
 
   // Handlers for displaying each volume with checkboxes
   const [isMRI, setIsMRI] = useState(true);
-  const [isFODF, setIsFODF] = useState(false);
+  const [isFODF, setIsFODF] = useState(true);
   const [isDensity, setIsDensity] = useState(false);
   const [isSoma, setIsSoma] = useState(false);
   const [isNeurite, setIsNeurite] = useState(false);
