@@ -76,15 +76,16 @@ export const DmriNiivueCanvasMacaque = () => (
         // Load data
         await niivue_slice.current.loadVolumes(imageList);
         await niivue_slice.current.volumes[1].loadImgV1();
-        await niivue_slice.current.volumes[2].loadImgV1();
+        await niivue_slice.current.volumes[3].loadImgV1();
         niivue_slice.current.setInterpolation(true); // V1 lines require nearest neighbor interpolation
-        niivue_slice.current.setColormap(niivue_slice.current.volumes[3].id, "jet");
-        niivue_slice.current.setColormap(niivue_slice.current.volumes[4].id, "jet");
-        niivue_slice.current.volumes[0].colorbarVisible=false;
-        niivue_slice.current.volumes[1].colorbarVisible=false;
-        niivue_slice.current.volumes[2].colorbarVisible=false;
-        niivue_slice.current.volumes[3].colorbarVisible=false;
-        niivue_slice.current.volumes[4].colorbarVisible=false;
+        niivue_slice.current.setModulationImage(niivue_slice.current.volumes[1].id, niivue_slice.current.volumes[2].id)
+        niivue_slice.current.setModulationImage(niivue_slice.current.volumes[3].id, niivue_slice.current.volumes[4].id)
+
+        niivue_slice.current.setColormap(niivue_slice.current.volumes[5].id, "turbo");
+        niivue_slice.current.setColormap(niivue_slice.current.volumes[6].id, "turbo");
+        for (let i = 0; i < niivue_slice.current.volumes.length; i++) {
+          niivue_slice.current.volumes[i].colorbarVisible = false;
+        }
         niivue_slice.current.updateGLVolume();
     }
 
