@@ -208,7 +208,7 @@ export const DmriNiivueCanvasMacaque = () => (
                 disabled
               />
               <label htmlFor="showSoma" style={{ marginLeft: "5px" }}>
-                Intra-soma signal fraction (coming soon)
+                Intra-soma signal fraction
               </label>
             </div>
             <div style={{ opacity: 0.4, cursor: "not-allowed" }}>
