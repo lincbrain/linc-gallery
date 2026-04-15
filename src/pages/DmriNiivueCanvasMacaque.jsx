@@ -112,6 +112,7 @@ export const DmriNiivueCanvasMacaque = () => (
   const [isDensity, setIsDensity] = useState(false);
   const [isSoma, setIsSoma] = useState(false);
   const [isNeurite, setIsNeurite] = useState(false);
+  const [isCrosshair, setIsCrosshair] = useState(true);
 
   const handleMRIChange = (event) => {
       const mriState = event.target.checked;
@@ -148,6 +149,12 @@ export const DmriNiivueCanvasMacaque = () => (
       niivue_slice.current.volumes[4].colorbarVisible = !somaVisible && neuriteState;
       niivue_slice.current.updateGLVolume();
       setIsNeurite(neuriteState);
+    };
+  const handleCrosshairChange = (event) => {
+      const crosshairState = event.target.checked;
+      niivue_slice.current.opts.crosshairWidth = crosshairState ? 1 : 0;
+      niivue_slice.current.drawScene();
+      setIsCrosshair(crosshairState);
     };
 
   return (
@@ -209,7 +216,18 @@ export const DmriNiivueCanvasMacaque = () => (
                 disabled
               />
               <label htmlFor="showNeurite" style={{ marginLeft: "5px" }}>
-                Intra-neurite signal fraction (coming soon)
+                Intra-neurite signal fraction
+              </label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="showCrosshair"
+                checked={isCrosshair}
+                onChange={handleCrosshairChange}
+              />
+              <label htmlFor="showCrosshair" style={{ marginLeft: "5px" }}>
+                Crosshair
               </label>
             </div>
             <div style={{ position: 'absolute', top: '40%', width: 'calc(100% - 40px)' }}>
