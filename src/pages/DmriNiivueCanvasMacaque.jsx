@@ -72,6 +72,11 @@ export const DmriNiivueCanvasMacaque = () => (
               cal_min: 0,
               cal_max: 0.8,
             },
+            {
+              name: "sub-M3_sample-Brain_acq-MultiDim_desc-T2w.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/34a/5a6/34a5a64e-927f-40a9-95e7-88b33fc6d8aa",
+              opacity: 0,
+            },
         ];
 
         // Initialize viewer
