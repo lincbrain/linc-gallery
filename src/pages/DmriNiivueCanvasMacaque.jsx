@@ -195,6 +195,9 @@ export const DmriNiivueCanvasMacaque = () => (
         <aside class="sidebar-container">
           <div class="global-controls">
             <h4>Layers</h4>
+            <div style={{ fontSize: "0.8em", fontStyle: "italic", color: "#888", marginBottom: "4px" }}>
+              Axonal architecture
+            </div>
             <div>
               <input
                 type="checkbox"
@@ -228,6 +231,9 @@ export const DmriNiivueCanvasMacaque = () => (
                 Tract density
               </label>
             </div>
+            <div style={{ fontSize: "0.8em", fontStyle: "italic", color: "#888", marginTop: "8px", marginBottom: "4px" }}>
+              Tissue microstructure
+            </div>
             <div>
               <input
                 type="checkbox"
@@ -260,6 +266,9 @@ export const DmriNiivueCanvasMacaque = () => (
               <label htmlFor="showSomaRadius" style={{ marginLeft: "5px" }}>
                 Soma radius
               </label>
+            </div>
+            <div style={{ fontSize: "0.8em", fontStyle: "italic", color: "#888", marginTop: "8px", marginBottom: "4px" }}>
+              Display options
             </div>
             <div>
               <input
