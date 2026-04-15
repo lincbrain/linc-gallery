@@ -16,7 +16,7 @@ export const DmriNiivueCanvasHuman = () => (
                                     backColor: [0, 0, 0, 1],
                                     isColorbar: true,
                                     isRuler: false,
-                                    crosshairWidth: 1,
+                                    crosshairWidth: 0,
                                     multiplanarPadPixels: 50,
                                 });
         niivue_slice.current.attachToCanvas(document.getElementById('niivue-canvas-slice-human'))
@@ -116,7 +116,7 @@ export const DmriNiivueCanvasHuman = () => (
   const [isDensity, setIsDensity] = useState(false);
   const [isSoma, setIsSoma] = useState(false);
   const [isNeurite, setIsNeurite] = useState(false);
-  const [isCrosshair, setIsCrosshair] = useState(true);
+  const [isCrosshair, setIsCrosshair] = useState(false);
 
   const handleMRIChange = (event) => {
       const mriState = event.target.checked;
