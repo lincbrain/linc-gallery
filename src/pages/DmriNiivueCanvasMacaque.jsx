@@ -64,7 +64,14 @@ export const DmriNiivueCanvasMacaque = () => (
               opacity: 0,
               cal_min: 0,
               cal_max: 0.8,
-            }
+            },
+            { // TODO: Replace placeholder image
+              name: "soma_radius_placeholder.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/e56/e59/e56e5984-8b5f-40dc-99f7-e2bda53cfd25",
+              opacity: 0,
+              cal_min: 0,
+              cal_max: 0.8,
+            },
         ];
 
         // Initialize viewer
@@ -83,6 +90,7 @@ export const DmriNiivueCanvasMacaque = () => (
 
         niivue_slice.current.setColormap(niivue_slice.current.volumes[5].id, "turbo");
         niivue_slice.current.setColormap(niivue_slice.current.volumes[6].id, "turbo");
+        niivue_slice.current.setColormap(niivue_slice.current.volumes[7].id, "turbo");
         for (let i = 0; i < niivue_slice.current.volumes.length; i++) {
           niivue_slice.current.volumes[i].colorbarVisible = false;
         }
@@ -116,6 +124,7 @@ export const DmriNiivueCanvasMacaque = () => (
   const [isDensity, setIsDensity] = useState(false);
   const [isSoma, setIsSoma] = useState(false);
   const [isNeurite, setIsNeurite] = useState(false);
+  const [isSomaRadius, setIsSomaRadius] = useState(false);
   const [isCrosshair, setIsCrosshair] = useState(true);
 
   const handleMRIChange = (event) => {
@@ -139,9 +148,11 @@ export const DmriNiivueCanvasMacaque = () => (
   const handleSomaChange = (event) => {
       const somaState = event.target.checked;
       niivue_slice.current.volumes[5].opacity = somaState ? 1 : 0;
-      const neuriteVisible = niivue_slice.current.volumes[4].opacity > 0;
+      const neuriteVisible = niivue_slice.current.volumes[6].opacity > 0;
+      const somaRadiusVisible = niivue_slice.current.volumes[7].opacity > 0;
       niivue_slice.current.volumes[5].colorbarVisible = somaState;
       niivue_slice.current.volumes[6].colorbarVisible = !somaState && neuriteVisible;
+      niivue_slice.current.volumes[7].colorbarVisible = !somaState && !neuriteVisible && somaRadiusVisible;
       niivue_slice.current.updateGLVolume();
       setIsSoma(somaState);
     };
@@ -149,10 +160,23 @@ export const DmriNiivueCanvasMacaque = () => (
       const neuriteState = event.target.checked;
       niivue_slice.current.volumes[6].opacity = neuriteState ? 1 : 0;
       const somaVisible = niivue_slice.current.volumes[5].opacity > 0;
+      const somaRadiusVisible = niivue_slice.current.volumes[7].opacity > 0;
       niivue_slice.current.volumes[5].colorbarVisible = somaVisible;
       niivue_slice.current.volumes[6].colorbarVisible = !somaVisible && neuriteState;
+      niivue_slice.current.volumes[7].colorbarVisible = !somaVisible && !neuriteState && somaRadiusVisible;
       niivue_slice.current.updateGLVolume();
       setIsNeurite(neuriteState);
+    };
+  const handleSomaRadiusChange = (event) => {
+      const somaRadiusState = event.target.checked;
+      niivue_slice.current.volumes[7].opacity = somaRadiusState ? 1 : 0;
+      const somaVisible = niivue_slice.current.volumes[5].opacity > 0;
+      const neuriteVisible = niivue_slice.current.volumes[6].opacity > 0;
+      niivue_slice.current.volumes[5].colorbarVisible = somaVisible;
+      niivue_slice.current.volumes[6].colorbarVisible = !somaVisible && neuriteState;
+      niivue_slice.current.volumes[7].colorbarVisible = !somaVisible && !neuriteVisible && somaRadiusState;
+      niivue_slice.current.updateGLVolume();
+      setIsSomaRadius(somaRadiusState);
     };
   const handleCrosshairChange = (event) => {
       const crosshairState = event.target.checked;
@@ -221,6 +245,18 @@ export const DmriNiivueCanvasMacaque = () => (
               />
               <label htmlFor="showNeurite" style={{ marginLeft: "5px" }}>
                 Intra-neurite signal fraction
+              </label>
+            </div>
+            <div style={{ opacity: 0.4, cursor: "not-allowed" }}>
+              <input
+                type="checkbox"
+                id="showSomaRadius"
+                checked={isSomaRadius}
+                onChange={handleSomaRadiusChange}
+                disabled
+              />
+              <label htmlFor="showSomaRadius" style={{ marginLeft: "5px" }}>
+                Soma radius
               </label>
             </div>
             <div>
