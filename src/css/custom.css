@@ -170,6 +170,18 @@
   min-height: 80vh;
   max-height: 80vh;
 }
+/* Prevent NiiVue canvas redrawing upon tab switch, since Docusaurus collapses the canvas with the hidden attribute. */
+.viewer-card-content {
+  position: relative;
+}
+
+.viewer-card [role="tabpanel"][hidden] {
+  display: block !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  width: 100% !important;
+}
 
 .resource-card:hover {
   transform: translateY(-3px);

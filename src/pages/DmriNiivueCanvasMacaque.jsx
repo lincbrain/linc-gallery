@@ -6,123 +6,234 @@ export const DmriNiivueCanvasMacaque = () => (
     <BrowserOnly fallback={<div>Loading...</div>}>
   {() => {
 
-  const niivue_slice = React.useRef(null);
+  const niivue_highres = React.useRef(null);
+  const niivue_lowres = React.useRef(null);
 
   React.useEffect(() => {
     async function loadImages() {
+        if (niivue_highres.current && niivue_lowres.current) return;
 
-        niivue_slice.current = new Niivue({logLevel: 'debug',
+        niivue_highres.current = new Niivue({logLevel: 'debug',
                                     backColor: [0, 0, 0, 1],
                                     isColorbar: true,
                                     isRuler: false,
-                                    crosshairWidth: 1,
+                                    crosshairWidth: 0,
                                     multiplanarPadPixels: 50,
                                 });
-        niivue_slice.current.attachToCanvas(document.getElementById('niivue-canvas-slice-macaque'))
+        niivue_lowres.current = new Niivue({logLevel: 'debug',
+                                    backColor: [0, 0, 0, 1],
+                                    isColorbar: true,
+                                    isRuler: false,
+                                    crosshairWidth: 0,
+                                    multiplanarPadPixels: 50,
+                                });
+        niivue_highres.current.attachToCanvas(document.getElementById('niivue-canvas-slice-macaque-highres'))
+        niivue_lowres.current.attachToCanvas(document.getElementById('niivue-canvas-slice-macaque-lowres'))
 
-        const imageList = [
+        const imageListHighRes = [
             {
               name: "sub-M3_sample-brain_acq-HighRes+MultiShell_desc-CSD+fodf+l0.nii.gz",  
               url: "https://dandiarchive.s3.amazonaws.com/blobs/e56/e59/e56e5984-8b5f-40dc-99f7-e2bda53cfd25",
               opacity: 1,
             },
             {
-              name: "sub-M3_sample-brain_acq-HighRes+MultiShell_desc-CSD+fodf+dec.nii.gz",
-              url: "https://dandiarchive.s3.amazonaws.com/blobs/135/9b3/1359b386-1ecd-4e69-a1b7-3cb2575b11e0",
+              name: "sub-M3_sample-Brain_acq-HighRes+MultiShell_desc-CSD+dec+univec.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/564/a89/564a89d2-cb11-4e4b-a881-282c1ffc54a4",
+              opacity: 1,
+            },
+            {
+              name: "sub-M3_sample-Brain_acq-HighRes+MultiShell_desc-CSD+dec+scalar.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/707/fa1/707fa179-20a3-4d5b-bce6-a5f574836417",
+              opacity: 0,
+              cal_min: 0,
+              cal_max: 0.9,
+            },
+            {
+              name: "sub-M3_sample-Brain_acq-HighRes+MultiShell_desc-CSD+tdi+univec.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/f98/4d4/f984d4eb-3159-4017-80c2-32d388d4fa5f",
               opacity: 0,
             },
             {
-              name: "sub-M3_sample-brain_acq-HighRes+MultiShell_desc-CSD+tdi.nii.gz",
-              url: "https://dandiarchive.s3.amazonaws.com/blobs/e15/941/e15941f4-2482-4f23-87af-e824161a4b0f",
-              opacity: 0,
-            },
-            { // TODO: Replace placeholder image
-              name: "soma_placeholder.nii.gz",
-              url: "https://dandiarchive.s3.amazonaws.com/blobs/e56/e59/e56e5984-8b5f-40dc-99f7-e2bda53cfd25",
+              name: "sub-M3_sample-Brain_acq-HighRes+MultiShell_desc-CSD+tdi+scalar.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/0e4/ef2/0e4ef272-96d6-4df4-a408-6344032cece1",
               opacity: 0,
               cal_min: 0,
-              cal_max: 0.8,
+              cal_max: 1100,
             },
-            { // TODO: Replace placeholder image
-              name: "neurite_placeholder.nii.gz",
-              url: "https://dandiarchive.s3.amazonaws.com/blobs/e56/e59/e56e5984-8b5f-40dc-99f7-e2bda53cfd25",
+        ];
+        const imageListLowRes = [
+            {
+              name: "sub-M3_sample-Brain_acq-MultiDim_desc-T2w.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/34a/5a6/34a5a64e-927f-40a9-95e7-88b33fc6d8aa",
               opacity: 0,
               cal_min: 0,
-              cal_max: 0.8,
-            }
+              cal_max: 75000,
+            },
+            {
+              name: "sub-M3_sample-Brain_acq-MultiDim_desc-MultiTE+fsoma.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/d5a/67c/d5a67cdd-b37d-4db1-b433-a2ca78cb80a4",
+              opacity: 0,
+              cal_min: 0,
+              cal_max: 1,
+            },
+            {
+              name: "sub-M3_sample-Brain_acq-MultiDim_desc-MultiTE+fneurite.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/8b7/394/8b7394a4-a318-4fc6-9a53-c62fb1457f58",
+              opacity: 0,
+              cal_min: 0,
+              cal_max: 1,
+            },
+            {
+              name: "sub-M3_sample-Brain_acq-MultiDim_desc-MultiTE+Rsoma.nii.gz",
+              url: "https://dandiarchive.s3.amazonaws.com/blobs/8e6/92f/8e692f33-d709-4da8-927a-2ae9d9f71d88",
+              opacity: 0,
+              cal_min: 2,
+              cal_max: 8,
+            },
         ];
 
-        // Initialize viewer
-        await niivue_slice.current.setSliceType(niivue_slice.current.sliceTypeMultiplanar);
-        niivue_slice.current.setMultiplanarLayout(3);
-        niivue_slice.current.opts.dragMode = DRAG_MODE.slicer3D;
-        niivue_slice.current.opts.loadingText = 'Please do not refresh. Loading (1-2 minutes)...'
+        // Initialize viewers
+        await niivue_lowres.current.setSliceType(niivue_lowres.current.sliceTypeMultiplanar);
+        niivue_lowres.current.setMultiplanarLayout(3);
+        niivue_lowres.current.opts.dragMode = DRAG_MODE.slicer3D;
+        niivue_lowres.current.opts.loadingText = 'Please do not refresh. Loading (~1 minute)...'
+
+        await niivue_highres.current.setSliceType(niivue_highres.current.sliceTypeMultiplanar);
+        niivue_highres.current.setMultiplanarLayout(3);
+        niivue_highres.current.opts.dragMode = DRAG_MODE.slicer3D;
+        niivue_highres.current.opts.loadingText = 'Please do not refresh. Loading (~1 minute)...'
 
         // Load data
-        await niivue_slice.current.loadVolumes(imageList);
-        await niivue_slice.current.volumes[1].loadImgV1();
-        await niivue_slice.current.volumes[2].loadImgV1();
-        niivue_slice.current.setInterpolation(true); // V1 lines require nearest neighbor interpolation
-        niivue_slice.current.setColormap(niivue_slice.current.volumes[3].id, "jet");
-        niivue_slice.current.setColormap(niivue_slice.current.volumes[4].id, "jet");
-        niivue_slice.current.volumes[0].colorbarVisible=false;
-        niivue_slice.current.volumes[1].colorbarVisible=false;
-        niivue_slice.current.volumes[2].colorbarVisible=false;
-        niivue_slice.current.volumes[3].colorbarVisible=false;
-        niivue_slice.current.volumes[4].colorbarVisible=false;
-        niivue_slice.current.updateGLVolume();
+        await niivue_lowres.current.loadVolumes(imageListLowRes);
+        niivue_lowres.current.setColormap(niivue_lowres.current.volumes[1].id, "turbo");
+        niivue_lowres.current.setColormap(niivue_lowres.current.volumes[2].id, "turbo");
+        niivue_lowres.current.setColormap(niivue_lowres.current.volumes[3].id, "turbo");
+        for (let i = 0; i < niivue_lowres.current.volumes.length; i++) {
+          niivue_lowres.current.volumes[i].colorbarVisible = false;
+        }
+
+        await niivue_highres.current.loadVolumes(imageListHighRes);
+        await niivue_highres.current.volumes[1].loadImgV1();
+        await niivue_highres.current.volumes[3].loadImgV1();
+        niivue_highres.current.setInterpolation(true); // V1 lines require nearest neighbor interpolation
+        niivue_highres.current.setModulationImage(niivue_highres.current.volumes[1].id, niivue_highres.current.volumes[2].id)
+        niivue_highres.current.setModulationImage(niivue_highres.current.volumes[3].id, niivue_highres.current.volumes[4].id)
+        for (let i = 0; i < niivue_highres.current.volumes.length; i++) {
+          niivue_highres.current.volumes[i].colorbarVisible = false;
+        }
+        niivue_highres.current.scene.crosshairPos = [0.66, 0.5, 0.5];
+
+        niivue_highres.current.updateGLVolume();
+        niivue_lowres.current.updateGLVolume();
+      }
+
+    // Load only when the tab is first shown, not at page load
+    const tabPanel = document.getElementById('niivue-canvas-slice-macaque')?.closest('[role="tabpanel"]');
+    if (!tabPanel || !tabPanel.hasAttribute('hidden')) {
+      loadImages();
+      return;
     }
-    loadImages();
+
+    // Load once the tab becomes visible
+    const observer = new MutationObserver(() => {
+      if (!tabPanel.hasAttribute('hidden')) {
+        observer.disconnect();
+        loadImages();
+      }
+    });
+    observer.observe(tabPanel, { attributes: true, attributeFilter: ['hidden'] });
+    return () => observer.disconnect();
   }, []);
 
   // Handlers for displaying each volume with checkboxes
   const [isMRI, setIsMRI] = useState(true);
-  const [isFODF, setIsFODF] = useState(false);
+  const [isFODF, setIsFODF] = useState(true);
   const [isDensity, setIsDensity] = useState(false);
   const [isSoma, setIsSoma] = useState(false);
   const [isNeurite, setIsNeurite] = useState(false);
+  const [isSomaRadius, setIsSomaRadius] = useState(false);
+  const [isCrosshair, setIsCrosshair] = useState(false);
+
+  // Force NiiVue to re-measure canvas dimensions after it becomes visible.
+  const showLowResCanvas = isSoma || isNeurite || isSomaRadius;
+  React.useEffect(() => {
+    if (showLowResCanvas) {
+      niivue_lowres.current?.resizeListener();
+    } else {
+      niivue_highres.current?.resizeListener();
+    }
+  }, [showLowResCanvas]);
 
   const handleMRIChange = (event) => {
       const mriState = event.target.checked;
-      niivue_slice.current.volumes[0].opacity = mriState ? 1 : 0;
-      niivue_slice.current.updateGLVolume();
+      niivue_highres.current.volumes[0].opacity = mriState ? 1 : 0;
+      niivue_highres.current.updateGLVolume();
       setIsMRI(mriState);
     };
   const handleFODFChange = (event) => {
       const fodfState = event.target.checked;
-      niivue_slice.current.volumes[1].opacity = fodfState ? 1 : 0;
-      niivue_slice.current.updateGLVolume();
+      niivue_highres.current.volumes[1].opacity = fodfState ? 1 : 0;
+      niivue_highres.current.updateGLVolume();
       setIsFODF(fodfState);
     };
   const handleDensityChange = (event) => {
       const densityState = event.target.checked;
-      niivue_slice.current.volumes[2].opacity = densityState ? 1 : 0;
-      niivue_slice.current.updateGLVolume();
+      niivue_highres.current.volumes[3].opacity = densityState ? 1 : 0;
+      niivue_highres.current.updateGLVolume();
       setIsDensity(densityState);
     };
   const handleSomaChange = (event) => {
       const somaState = event.target.checked;
-      niivue_slice.current.volumes[3].opacity = somaState ? 1 : 0;
-      niivue_slice.current.volumes[3].colorbarVisible = somaState;
-      if (somaState) {
-        niivue_slice.current.volumes[4].opacity = 0;
-        niivue_slice.current.volumes[4].colorbarVisible = false;
-        setIsNeurite(false);
-      }
-      niivue_slice.current.updateGLVolume();
+      const neuriteVisible = niivue_lowres.current.volumes[2].opacity > 0;
+      const somaRadiusVisible = niivue_lowres.current.volumes[3].opacity > 0;
+
+      niivue_lowres.current.volumes[0].opacity = (somaState || neuriteVisible || somaRadiusVisible) ? 1 : 0;
+      niivue_lowres.current.volumes[1].opacity = somaState ? 1 : 0;
+
+      niivue_lowres.current.volumes[3].colorbarVisible = somaRadiusVisible;
+      niivue_lowres.current.volumes[1].colorbarVisible = !somaRadiusVisible && (somaState || neuriteVisible);
+      niivue_lowres.current.volumes[2].colorbarVisible = false;
+
+      niivue_lowres.current.updateGLVolume();
       setIsSoma(somaState);
     };
   const handleNeuriteChange = (event) => {
       const neuriteState = event.target.checked;
-      niivue_slice.current.volumes[4].opacity = neuriteState ? 1 : 0;
-      niivue_slice.current.volumes[4].colorbarVisible = neuriteState;
-      if (neuriteState) {
-        niivue_slice.current.volumes[3].opacity = 0;
-        niivue_slice.current.volumes[3].colorbarVisible = false;
-        setIsSoma(false);
-      }
-      niivue_slice.current.updateGLVolume();
+      const somaVisible = niivue_lowres.current.volumes[1].opacity > 0;
+      const somaRadiusVisible = niivue_lowres.current.volumes[3].opacity > 0;
+
+      niivue_lowres.current.volumes[0].opacity = (somaVisible || neuriteState || somaRadiusVisible) ? 1 : 0;
+      niivue_lowres.current.volumes[2].opacity = neuriteState ? 1 : 0;
+
+      niivue_lowres.current.volumes[3].colorbarVisible = somaRadiusVisible;
+      niivue_lowres.current.volumes[1].colorbarVisible = !somaRadiusVisible && (somaVisible || neuriteState);
+      niivue_lowres.current.volumes[2].colorbarVisible = false;
+
+      niivue_lowres.current.updateGLVolume();
       setIsNeurite(neuriteState);
+    };
+  const handleSomaRadiusChange = (event) => {
+      const somaRadiusState = event.target.checked;
+      const somaVisible = niivue_lowres.current.volumes[1].opacity > 0;
+      const neuriteVisible = niivue_lowres.current.volumes[2].opacity > 0;
+
+      niivue_lowres.current.volumes[0].opacity = (somaVisible || neuriteVisible || somaRadiusState) ? 1 : 0;
+      niivue_lowres.current.volumes[3].opacity = somaRadiusState ? 1 : 0;
+
+      niivue_lowres.current.volumes[3].colorbarVisible = somaRadiusState;
+      niivue_lowres.current.volumes[1].colorbarVisible = !somaRadiusState && (somaVisible || neuriteVisible);
+      niivue_lowres.current.volumes[2].colorbarVisible = false;
+
+      niivue_lowres.current.updateGLVolume();
+      setIsSomaRadius(somaRadiusState);
+    };
+  const handleCrosshairChange = (event) => {
+      const crosshairState = event.target.checked;
+      niivue_highres.current.opts.crosshairWidth = crosshairState ? 1 : 0;
+      niivue_highres.current.drawScene();
+      niivue_lowres.current.opts.crosshairWidth = crosshairState ? 1 : 0;
+      niivue_lowres.current.drawScene();
+      setIsCrosshair(crosshairState);
     };
 
   return (
@@ -130,6 +241,9 @@ export const DmriNiivueCanvasMacaque = () => (
         <aside class="sidebar-container">
           <div class="global-controls">
             <h4>Layers</h4>
+            <div style={{ fontSize: "0.8em", fontStyle: "italic", color: "#888", marginBottom: "4px" }}>
+              Axonal architecture
+            </div>
             <div>
               <input
                 type="checkbox"
@@ -163,31 +277,57 @@ export const DmriNiivueCanvasMacaque = () => (
                 Tract density
               </label>
             </div>
-            <div style={{ opacity: 0.4, cursor: "not-allowed" }}>
+            <div style={{ fontSize: "0.8em", fontStyle: "italic", color: "#888", marginTop: "8px", marginBottom: "4px" }}>
+              Tissue microstructure
+            </div>
+            <div>
               <input
                 type="checkbox"
                 id="showSoma"
                 checked={isSoma}
                 onChange={handleSomaChange}
-                disabled
               />
               <label htmlFor="showSoma" style={{ marginLeft: "5px" }}>
-                Intra-soma signal fraction (coming soon)
+                Intra-soma signal fraction
               </label>
             </div>
-            <div style={{ opacity: 0.4, cursor: "not-allowed" }}>
+            <div>
               <input
                 type="checkbox"
                 id="showNeurite"
                 checked={isNeurite}
                 onChange={handleNeuriteChange}
-                disabled
               />
               <label htmlFor="showNeurite" style={{ marginLeft: "5px" }}>
-                Intra-neurite signal fraction (coming soon)
+                Intra-neurite signal fraction
               </label>
             </div>
-            <div style={{ position: 'absolute', top: '40%', width: 'calc(100% - 40px)' }}>
+            <div>
+              <input
+                type="checkbox"
+                id="showSomaRadius"
+                checked={isSomaRadius}
+                onChange={handleSomaRadiusChange}
+              />
+              <label htmlFor="showSomaRadius" style={{ marginLeft: "5px" }}>
+                Soma radius
+              </label>
+            </div>
+            <div style={{ fontSize: "0.8em", fontStyle: "italic", color: "#888", marginTop: "8px", marginBottom: "4px" }}>
+              Display options
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="showCrosshair"
+                checked={isCrosshair}
+                onChange={handleCrosshairChange}
+              />
+              <label htmlFor="showCrosshair" style={{ marginLeft: "5px" }}>
+                Crosshair
+              </label>
+            </div>
+            <div style={{ paddingTop: "0px" }}>
               <hr />
               <h4>Mouse controls</h4>
               <table style={{ width: '100%', fontSize: '0.9em' }}>
@@ -214,7 +354,12 @@ export const DmriNiivueCanvasMacaque = () => (
           </div>
         </aside>
         <div className="niivue-container">
-          <canvas id="niivue-canvas-slice-macaque"></canvas>
+          <div style={{ display: showLowResCanvas ? 'none' : 'flex', flex: 1, minWidth: 0 }}>
+            <canvas id="niivue-canvas-slice-macaque-highres"></canvas>
+          </div>
+          <div style={{ display: showLowResCanvas ? 'flex' : 'none', flex: 1, minWidth: 0 }}>
+            <canvas id="niivue-canvas-slice-macaque-lowres"></canvas>
+          </div>
         </div>
       </div>
   );
