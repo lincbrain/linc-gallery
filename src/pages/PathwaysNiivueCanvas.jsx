@@ -308,7 +308,7 @@ export const PathwaysNiivueCanvas = () => (
     niivue_render.current.opts.loadingText = 'Loading (1-2 minutes)...'
 
     // Load data
-    await niivue_render.current.loadMeshes([...trackList, ...nucleiList]);
+    await niivue_render.current.loadMeshes(trackList);
     niivue_render.current.meshes.forEach((mesh, i) => {
       originalIndexCounts.current[i] = mesh.indexCount;
       niivue_render.current.setMeshProperty(mesh.id, 'fiberColor', 'Fixed');
