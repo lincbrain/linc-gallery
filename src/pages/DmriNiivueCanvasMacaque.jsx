@@ -157,8 +157,10 @@ export const DmriNiivueCanvasMacaque = () => (
   // Force NiiVue to re-measure canvas dimensions after it becomes visible.
   const showLowResCanvas = isSoma || isNeurite || isSomaRadius;
   React.useEffect(() => {
-    if (showLowResCanvas && niivue_lowres.current) {
-      niivue_lowres.current.resizeListener();
+    if (showLowResCanvas) {
+      niivue_lowres.current?.resizeListener();
+    } else {
+      niivue_highres.current?.resizeListener();
     }
   }, [showLowResCanvas]);
 
@@ -352,8 +354,12 @@ export const DmriNiivueCanvasMacaque = () => (
           </div>
         </aside>
         <div className="niivue-container">
-          <canvas id="niivue-canvas-slice-macaque-highres" style={{ display: showLowResCanvas ? 'none' : 'block' }}></canvas>
-          <canvas id="niivue-canvas-slice-macaque-lowres" style={{ display: showLowResCanvas ? 'block' : 'none' }}></canvas>
+          <div style={{ display: showLowResCanvas ? 'none' : 'flex', flex: 1, minWidth: 0 }}>
+            <canvas id="niivue-canvas-slice-macaque-highres"></canvas>
+          </div>
+          <div style={{ display: showLowResCanvas ? 'flex' : 'none', flex: 1, minWidth: 0 }}>
+            <canvas id="niivue-canvas-slice-macaque-lowres"></canvas>
+          </div>
         </div>
       </div>
   );
