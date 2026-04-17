@@ -35,6 +35,9 @@
       "last 3 safari version"
     ]
   },
+  "overrides": {
+    "webpack": "~5.105.4"
+  },
   "engines": {
     "node": ">=18.0"
   }
