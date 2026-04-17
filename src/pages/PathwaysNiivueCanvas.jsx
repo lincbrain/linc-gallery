@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Niivue, DRAG_MODE } from "@niivue/niivue";
+import { Niivue, DRAG_MODE, cmapper } from "@niivue/niivue";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 
 const trackList = [
@@ -247,6 +247,27 @@ const trackList = [
     // },
 ];
 
+const nucleiLabelList = {
+  R:      [0, 244, 199, 136, 193, 148, 205,  83, 128, 233, 206],
+  G:      [0,  64,  52, 206, 226, 224, 125, 215, 106,  69, 136],
+  B:      [0, 172, 164, 220, 240, 191, 182, 216,  85, 255, 129],
+  A:      [0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255],
+  I:      [0,   1,   2,   3,   4,   5,   6,   7,   8,   9,  10],
+  labels: [
+    "Background",
+    "Subthalamic Nucleus",
+    "Substantia Nigra",
+    "Zona Incerta",
+    "Globus Pallidus Internus",
+    "Globus Pallidus Externus",
+    "Peduncolopontine Nucleus",
+    "Red Nucleus",
+    "Field Forel 2",
+    "Mammillary Body",
+    "Habenula",
+  ],
+};
+
 export const PathwaysNiivueCanvas = () => (
     <BrowserOnly fallback={<div>Loading...</div>}>
   {() => {
@@ -276,6 +297,7 @@ export const PathwaysNiivueCanvas = () => (
     };
     niivue_slice.current.addColormap('whiteBackgroundGray', whiteBackgroundGray);
 
+
     const imageList = [
           {
             url:"https://dandiarchive.s3.amazonaws.com/blobs/5df/2ec/5df2ec3d-ec43-4a33-aa38-49a141f8f05d",
@@ -284,7 +306,12 @@ export const PathwaysNiivueCanvas = () => (
           },
       ];
     const nucleiList=[
-      ]
+          {
+            url:"https://dandiarchive.s3.amazonaws.com/blobs/0a3/8c1/0a38c1b3-2f80-41a3-9514-ee09e0834247",
+            name: "sub-Ha1_sample-righthemi_atlas-BGPathwaysMaffei2026_space-orig_label-SubcorcticalNuclei_dseg.nii.gz",
+            opacity: 1,
+          },
+      ];
 
     // Initialize viewer
     await niivue_slice.current.setSliceType(niivue_slice.current.sliceTypeCoronal);
@@ -293,12 +320,15 @@ export const PathwaysNiivueCanvas = () => (
     niivue_render.current.opts.loadingText = 'Loading (1-2 minutes)...'
 
     // Load data
-    await niivue_render.current.loadMeshes([...trackList, ...nucleiList]);
+    await niivue_render.current.loadMeshes(trackList);
     niivue_render.current.meshes.forEach((mesh, i) => {
       originalIndexCounts.current[i] = mesh.indexCount;
       niivue_render.current.setMeshProperty(mesh.id, 'fiberColor', 'Fixed');
     });
-    await niivue_slice.current.loadVolumes(imageList);
+
+    await niivue_slice.current.loadVolumes([...imageList, ...nucleiList]);
+    niivue_slice.current.volumes[1].colormapLabel = cmapper.makeLabelLut(nucleiLabelList);
+    niivue_slice.current.setInterpolation(true);
     await niivue_slice.current.loadMeshes(trackList);
     niivue_slice.current.meshes.forEach((mesh) => {
       niivue_slice.current.setMeshProperty(mesh.id, 'fiberColor', 'Fixed');
@@ -361,6 +391,29 @@ export const PathwaysNiivueCanvas = () => (
     setTractVisibility(trackList.map(() => tractState));
   };
 
+  const [nucleiVisibility, setNucleiVisibility] = useState(
+    nucleiLabelList.labels.map(() => true)
+  );
+
+  const applyNucleiLut = (indices, visible) => {
+    indices.forEach(i => { nucleiLabelList.A[i] = visible ? 255 : 0; });
+    niivue_slice.current.volumes[1].colormapLabel = cmapper.makeLabelLut(nucleiLabelList);
+    niivue_slice.current.updateGLVolume();
+  };
+
+  const handleNucleusChange = (index, event) => {
+    const visible = event.target.checked;
+    applyNucleiLut([index], visible);
+    setNucleiVisibility(prev => prev.map((v, i) => i === index ? visible : v));
+  };
+
+  const handleShowAllNuclei = (event) => {
+    const visible = event.target.checked;
+    const indices = nucleiLabelList.labels.map((_, i) => i).filter(i => i !== 0);
+    applyNucleiLut(indices, visible);
+    setNucleiVisibility(prev => prev.map((v, i) => i === 0 ? v : visible));
+  };
+
   return (
       <div className="sidebar-and-niivue-container">
         <aside class="sidebar-container">
@@ -388,6 +441,45 @@ export const PathwaysNiivueCanvas = () => (
                 Crosshair
               </label>
             </div>
+
+            <hr />
+            <h4>Nuclei</h4>
+            <div>
+              <input
+                type="checkbox"
+                id="showAllNuclei"
+                checked={nucleiVisibility.slice(1).every(v => v)}
+                onChange={handleShowAllNuclei}
+              />
+              <label htmlFor="showAllNuclei" style={{ marginLeft: "5px" }}>
+                Show all
+              </label>
+            </div>
+            {nucleiLabelList.labels.map((label, index) => index === 0 ? null : (
+              <div key={index}>
+                <input
+                  type="checkbox"
+                  id={`nucleus-${index}`}
+                  checked={nucleiVisibility[index]}
+                  onChange={(event) => handleNucleusChange(index, event)}
+                />
+                <span
+                  style={{
+                    display: "inline-block",
+                    width: "12px",
+                    height: "12px",
+                    marginLeft: "5px",
+                    marginRight: "4px",
+                    backgroundColor: `rgba(${nucleiLabelList.R[index]}, ${nucleiLabelList.G[index]}, ${nucleiLabelList.B[index]}, 1)`,
+                    flexShrink: 0,
+                  }}
+                />
+                <label htmlFor={`nucleus-${index}`}>
+                  {label}
+                </label>
+              </div>
+            ))}
+
             <hr />
             <h4>Tracts</h4>
             <div>
