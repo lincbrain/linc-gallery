@@ -348,14 +348,15 @@ export const PathwaysNiivueCanvas = () => (
       niivue_render.current.setMeshProperty(mesh.id, 'fiberColor', 'Fixed');
     });
 
-    await niivue_slice.current.loadVolumes([...imageList, ...nucleiList]);
-    niivue_slice.current.volumes[1].colormapLabel = cmapper.makeLabelLut(nucleiLabelList);
-    niivue_slice.current.setInterpolation(true);
     await niivue_slice.current.loadMeshes(trackList);
     niivue_slice.current.meshes.forEach((mesh) => {
       niivue_slice.current.setMeshProperty(mesh.id, 'fiberColor', 'Fixed');
     });
     await niivue_slice.current.setMeshThicknessOn2D(1);
+
+    await niivue_slice.current.loadVolumes([...imageList, ...nucleiList]);
+    niivue_slice.current.volumes[1].colormapLabel = cmapper.makeLabelLut(nucleiLabelList);
+    niivue_slice.current.setInterpolation(true);
     }
     loadImages();
   }, []);
