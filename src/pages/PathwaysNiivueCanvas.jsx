@@ -248,12 +248,13 @@ const trackList = [
 ];
 
 const nucleiLabelList = {
-  R:      [244, 199, 136, 193, 148, 205,  83, 128, 233, 206],
-  G:      [ 64,  52, 206, 226, 224, 125, 215, 106,  69, 136],
-  B:      [172, 164, 220, 240, 191, 182, 216,  85, 255, 129],
-  A:      [255, 255, 255, 255, 255, 255, 255, 255, 255, 255],
-  I:      [  1,   2,   3,   4,   5,   6,   7,   8,   9,  10],
+  R:      [0, 244, 199, 136, 193, 148, 205,  83, 128, 233, 206],
+  G:      [0,  64,  52, 206, 226, 224, 125, 215, 106,  69, 136],
+  B:      [0, 172, 164, 220, 240, 191, 182, 216,  85, 255, 129],
+  A:      [0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255],
+  I:      [0,   1,   2,   3,   4,   5,   6,   7,   8,   9,  10],
   labels: [
+    "Background",
     "Subthalamic Nucleus",
     "Substantia Nigra",
     "Zona Incerta",
@@ -326,8 +327,7 @@ export const PathwaysNiivueCanvas = () => (
     });
 
     await niivue_slice.current.loadVolumes([...imageList, ...nucleiList]);
-    niivue_slice.current.addColormap('nucleiColormap', nucleiLabelList);
-    niivue_slice.current.volumes[1].colormap = 'nucleiColormap';
+    niivue_slice.current.volumes[1].colormapLabel = cmapper.makeLabelLut(nucleiLabelList);
     niivue_slice.current.setInterpolation(true);
     await niivue_slice.current.loadMeshes(trackList);
     niivue_slice.current.meshes.forEach((mesh) => {
@@ -391,6 +391,28 @@ export const PathwaysNiivueCanvas = () => (
     setTractVisibility(trackList.map(() => tractState));
   };
 
+  const [nucleiVisibility, setNucleiVisibility] = useState(
+    nucleiLabelList.labels.map(() => true)
+  );
+
+  const applyNucleiLut = (indices, visible) => {
+    indices.forEach(i => { nucleiLabelList.A[i] = visible ? 255 : 0; });
+    niivue_slice.current.volumes[1].colormapLabel = cmapper.makeLabelLut(nucleiLabelList);
+    niivue_slice.current.updateGLVolume();
+  };
+
+  const handleNucleusChange = (index, event) => {
+    const visible = event.target.checked;
+    applyNucleiLut([index], visible);
+    setNucleiVisibility(prev => prev.map((v, i) => i === index ? visible : v));
+  };
+
+  const handleShowAllNuclei = (event) => {
+    const visible = event.target.checked;
+    applyNucleiLut(nucleiLabelList.labels.map((_, i) => i), visible);
+    setNucleiVisibility(nucleiLabelList.labels.map(() => visible));
+  };
+
   return (
       <div className="sidebar-and-niivue-container">
         <aside class="sidebar-container">
@@ -421,6 +443,42 @@ export const PathwaysNiivueCanvas = () => (
 
             <hr />
             <h4>Nuclei</h4>
+            <div>
+              <input
+                type="checkbox"
+                id="showAllNuclei"
+                checked={nucleiVisibility.every(v => v)}
+                onChange={handleShowAllNuclei}
+              />
+              <label htmlFor="showAllNuclei" style={{ marginLeft: "5px" }}>
+                Show all
+              </label>
+            </div>
+            {nucleiLabelList.labels.map((label, index) => index === 0 ? null : (
+              <div key={index}>
+                <input
+                  type="checkbox"
+                  id={`nucleus-${index}`}
+                  checked={nucleiVisibility[index]}
+                  onChange={(event) => handleNucleusChange(index, event)}
+                />
+                <span
+                  style={{
+                    display: "inline-block",
+                    width: "12px",
+                    height: "12px",
+                    marginLeft: "5px",
+                    marginRight: "4px",
+                    backgroundColor: `rgba(${nucleiLabelList.R[index]}, ${nucleiLabelList.G[index]}, ${nucleiLabelList.B[index]}, 1)`,
+                    flexShrink: 0,
+                  }}
+                />
+                <label htmlFor={`nucleus-${index}`}>
+                  {label}
+                </label>
+              </div>
+            ))}
+
             <hr />
             <h4>Tracts</h4>
             <div>
