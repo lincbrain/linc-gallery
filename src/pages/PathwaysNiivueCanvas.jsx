@@ -251,6 +251,7 @@ const nucleiLabelList = {
   R:      [244, 199, 136, 193, 148, 205,  83, 128, 233, 206],
   G:      [ 64,  52, 206, 226, 224, 125, 215, 106,  69, 136],
   B:      [172, 164, 220, 240, 191, 182, 216,  85, 255, 129],
+  A:      [255, 255, 255, 255, 255, 255, 255, 255, 255, 255],
   I:      [  1,   2,   3,   4,   5,   6,   7,   8,   9,  10],
   labels: [
     "Subthalamic Nucleus",
@@ -325,6 +326,8 @@ export const PathwaysNiivueCanvas = () => (
     });
 
     await niivue_slice.current.loadVolumes([...imageList, ...nucleiList]);
+    niivue_slice.current.addColormap('nucleiColormap', nucleiLabelList);
+    niivue_slice.current.volumes[1].colormap = 'nucleiColormap';
     niivue_slice.current.setInterpolation(true);
     await niivue_slice.current.loadMeshes(trackList);
     niivue_slice.current.meshes.forEach((mesh) => {
