@@ -247,18 +247,24 @@ const trackList = [
     // },
 ];
 
-const nucleiLabelList = [
-  { index: 1,  label: "Subthalamic Nucleus",       rgb: [244,  64, 172] },
-  { index: 2,  label: "Substantia Nigra",           rgb: [199,  52, 164] },
-  { index: 3,  label: "Zona Incerta",               rgb: [136, 206, 220] },
-  { index: 4,  label: "Globus Pallidus Internus",   rgb: [193, 226, 240] },
-  { index: 5,  label: "Globus Pallidus Externus",   rgb: [148, 224, 191] },
-  { index: 6,  label: "Peduncolopontine Nucleus",   rgb: [205, 125, 182] },
-  { index: 7,  label: "Red Nucleus",                rgb: [ 83, 215, 216] },
-  { index: 8,  label: "Field Forel 2",              rgb: [128, 106,  85] },
-  { index: 9,  label: "Mammillary Body",            rgb: [233,  69, 255] },
-  { index: 10, label: "Habenula",                   rgb: [206, 136, 129] },
-];
+const nucleiLabelList = {
+  R:      [244, 199, 136, 193, 148, 205,  83, 128, 233, 206],
+  G:      [ 64,  52, 206, 226, 224, 125, 215, 106,  69, 136],
+  B:      [172, 164, 220, 240, 191, 182, 216,  85, 255, 129],
+  I:      [  1,   2,   3,   4,   5,   6,   7,   8,   9,  10],
+  labels: [
+    "Subthalamic Nucleus",
+    "Substantia Nigra",
+    "Zona Incerta",
+    "Globus Pallidus Internus",
+    "Globus Pallidus Externus",
+    "Peduncolopontine Nucleus",
+    "Red Nucleus",
+    "Field Forel 2",
+    "Mammillary Body",
+    "Habenula",
+  ],
+};
 
 export const PathwaysNiivueCanvas = () => (
     <BrowserOnly fallback={<div>Loading...</div>}>
