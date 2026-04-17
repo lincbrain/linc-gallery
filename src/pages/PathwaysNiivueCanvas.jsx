@@ -409,8 +409,9 @@ export const PathwaysNiivueCanvas = () => (
 
   const handleShowAllNuclei = (event) => {
     const visible = event.target.checked;
-    applyNucleiLut(nucleiLabelList.labels.map((_, i) => i), visible);
-    setNucleiVisibility(nucleiLabelList.labels.map(() => visible));
+    const indices = nucleiLabelList.labels.map((_, i) => i).filter(i => i !== 0);
+    applyNucleiLut(indices, visible);
+    setNucleiVisibility(prev => prev.map((v, i) => i === 0 ? v : visible));
   };
 
   return (
@@ -447,7 +448,7 @@ export const PathwaysNiivueCanvas = () => (
               <input
                 type="checkbox"
                 id="showAllNuclei"
-                checked={nucleiVisibility.every(v => v)}
+                checked={nucleiVisibility.slice(1).every(v => v)}
                 onChange={handleShowAllNuclei}
               />
               <label htmlFor="showAllNuclei" style={{ marginLeft: "5px" }}>
