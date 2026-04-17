@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Niivue, DRAG_MODE } from "@niivue/niivue";
+import { Niivue, DRAG_MODE, cmapper } from "@niivue/niivue";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 
 const trackList = [
