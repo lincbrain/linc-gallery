@@ -305,7 +305,8 @@ export const PathwaysNiivueCanvas = () => (
     niivue_render.current = new Niivue({logLevel: 'debug',
                                   backColor: [1, 1, 1, 1],
                                   show3Dcrosshair: false,
-                                  isColorbar: false});
+                                  isColorbar: false,
+                                  isOrientCube: true});
 
     niivue_slice.current.attachToCanvas(document.getElementById('niivue-canvas-slice'))
     niivue_render.current.attachToCanvas(document.getElementById('niivue-canvas-render'))
@@ -380,6 +381,15 @@ export const PathwaysNiivueCanvas = () => (
       setIsCrosshair(crosshairState);
     };
 
+  const [isOrientCube, setIsOrientCube] = useState(true);
+
+  const handleOrientCubeChange = (event) => {
+      const orientCubeState = event.target.checked;
+      niivue_render.current.opts.isOrientCube = orientCubeState;
+      niivue_render.current.drawScene();
+      setIsOrientCube(orientCubeState);
+    };
+
   const [tractVisibility, setTractVisibility] = useState(
     trackList.map(() => true)
   );
@@ -441,7 +451,7 @@ export const PathwaysNiivueCanvas = () => (
       <div className="sidebar-and-niivue-container">
         <aside class="sidebar-container">
           <div class="global-controls">
-            <h4>Coronal View Layers</h4>
+            <h4>Coronal View</h4>
             <div>
               <input
                 type="checkbox"
@@ -462,6 +472,20 @@ export const PathwaysNiivueCanvas = () => (
               />
               <label htmlFor="showCrosshair" style={{ marginLeft: "5px" }}>
                 Crosshair
+              </label>
+            </div>
+
+            <hr />
+            <h4>3D View</h4>
+            <div>
+              <input
+                type="checkbox"
+                id="showOrientCube"
+                checked={isOrientCube}
+                onChange={handleOrientCubeChange}
+              />
+              <label htmlFor="showOrientCube" style={{ marginLeft: "5px" }}>
+                Orientation cube
               </label>
             </div>
 
