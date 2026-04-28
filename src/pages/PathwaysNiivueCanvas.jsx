@@ -305,7 +305,8 @@ export const PathwaysNiivueCanvas = () => (
     niivue_render.current = new Niivue({logLevel: 'debug',
                                   backColor: [1, 1, 1, 1],
                                   show3Dcrosshair: false,
-                                  isColorbar: false});
+                                  isColorbar: false,
+                                  isOrientCube: true});
 
     niivue_slice.current.attachToCanvas(document.getElementById('niivue-canvas-slice'))
     niivue_render.current.attachToCanvas(document.getElementById('niivue-canvas-render'))
@@ -378,6 +379,15 @@ export const PathwaysNiivueCanvas = () => (
       niivue_slice.current.opts.crosshairWidth = crosshairState ? 1 : 0;
       niivue_slice.current.drawScene();
       setIsCrosshair(crosshairState);
+    };
+
+  const [isOrientCube, setIsOrientCube] = useState(true);
+
+  const handleOrientCubeChange = (event) => {
+      const orientCubeState = event.target.checked;
+      niivue_render.current.opts.isOrientCube = orientCubeState;
+      niivue_render.current.drawScene();
+      setIsOrientCube(orientCubeState);
     };
 
   const [tractVisibility, setTractVisibility] = useState(
@@ -462,6 +472,20 @@ export const PathwaysNiivueCanvas = () => (
               />
               <label htmlFor="showCrosshair" style={{ marginLeft: "5px" }}>
                 Crosshair
+              </label>
+            </div>
+
+            <hr />
+            <h4>3D View</h4>
+            <div>
+              <input
+                type="checkbox"
+                id="showOrientCube"
+                checked={isOrientCube}
+                onChange={handleOrientCubeChange}
+              />
+              <label htmlFor="showOrientCube" style={{ marginLeft: "5px" }}>
+                Orientation cube
               </label>
             </div>
 
