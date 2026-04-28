@@ -451,7 +451,7 @@ export const PathwaysNiivueCanvas = () => (
       <div className="sidebar-and-niivue-container">
         <aside class="sidebar-container">
           <div class="global-controls">
-            <h4>Coronal View Layers</h4>
+            <h4>Coronal View</h4>
             <div>
               <input
                 type="checkbox"
