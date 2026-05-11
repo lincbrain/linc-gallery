@@ -96,11 +96,13 @@ export const DmriNiivueCanvasMacaque = () => (
         await niivue_lowres.current.setSliceType(niivue_lowres.current.sliceTypeMultiplanar);
         niivue_lowres.current.setMultiplanarLayout(3);
         niivue_lowres.current.opts.dragMode = DRAG_MODE.slicer3D;
+        niivue_lowres.current.opts.isRadiologicalConvention = true;
         niivue_lowres.current.opts.loadingText = 'Please do not refresh. Loading (~1 minute)...'
 
         await niivue_highres.current.setSliceType(niivue_highres.current.sliceTypeMultiplanar);
         niivue_highres.current.setMultiplanarLayout(3);
         niivue_highres.current.opts.dragMode = DRAG_MODE.slicer3D;
+        niivue_highres.current.opts.isRadiologicalConvention = true;
         niivue_highres.current.opts.loadingText = 'Please do not refresh. Loading (~1 minute)...'
 
         // Load data
