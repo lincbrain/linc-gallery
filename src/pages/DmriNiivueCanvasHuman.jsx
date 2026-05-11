@@ -71,6 +71,7 @@ export const DmriNiivueCanvasHuman = () => (
         await niivue_slice.current.setSliceType(niivue_slice.current.sliceTypeMultiplanar);
         niivue_slice.current.setMultiplanarLayout(3);
         niivue_slice.current.opts.dragMode = DRAG_MODE.slicer3D;
+        niivue_slice.current.opts.isRadiologicalConvention = true;
         niivue_slice.current.opts.loadingText = 'Please do not refresh. Loading (~1 minute)...'
 
         // Load data
