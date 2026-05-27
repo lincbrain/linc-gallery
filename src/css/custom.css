@@ -150,6 +150,13 @@
   overflow: hidden;
 }
 
+.viewer-card-note {
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-900);
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .viewer-card-mobile-message {
   display: none;
 }
