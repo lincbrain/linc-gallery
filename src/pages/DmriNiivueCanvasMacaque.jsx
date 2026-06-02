@@ -335,20 +335,20 @@ export const DmriNiivueCanvasMacaque = () => (
               <table style={{ width: '100%', fontSize: '0.9em' }}>
                 <tbody>
                   <tr style={{ border: 'none' }}>
-                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Scroll slices</td>
-                    <td style={{ padding: '6px' , borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: 'none', background: '#F7F8F9' }}>Scroll wheel</td>
+                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid var(--ifm-color-emphasis-300)', background: 'var(--ifm-background-color)' }}>Scroll slices</td>
+                    <td style={{ padding: '6px' , borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: 'none', background: 'var(--ifm-background-color)' }}>Scroll wheel</td>
                   </tr>
                   <tr>
-                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Move crosshair</td>
-                    <td style={{ padding: '6px', border: 'none', background: '#F7F8F9' }}>Left click</td>
+                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid var(--ifm-color-emphasis-300)', background: 'var(--ifm-background-color)' }}>Move crosshair</td>
+                    <td style={{ padding: '6px', border: 'none', background: 'var(--ifm-background-color)' }}>Left click</td>
                   </tr>
                   <tr>
-                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Pan</td>
-                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: 'none', background: '#F7F8F9' }}>Middle click</td>
+                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid var(--ifm-color-emphasis-300)', background: 'var(--ifm-background-color)' }}>Pan</td>
+                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: 'none', background: 'var(--ifm-background-color)' }}>Middle click</td>
                   </tr>
                   <tr>
-                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Zoom</td>
-                    <td style={{ padding: '6px', border: 'none', background: '#F7F8F9' }}>Right click</td>
+                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid var(--ifm-color-emphasis-300)', background: 'var(--ifm-background-color)' }}>Zoom</td>
+                    <td style={{ padding: '6px', border: 'none', background: 'var(--ifm-background-color)' }}>Right click</td>
                   </tr>
                 </tbody>
               </table>

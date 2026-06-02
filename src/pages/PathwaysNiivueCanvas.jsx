@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Niivue, DRAG_MODE, cmapper } from "@niivue/niivue";
 import BrowserOnly from "@docusaurus/BrowserOnly";
+import { useColorMode } from "@docusaurus/theme-common";
 
 const trackList = [
     {
@@ -296,14 +297,19 @@ export const PathwaysNiivueCanvas = () => (
   const niivue_render = React.useRef(null);
   const niivue_slice = React.useRef(null);
 
+  const { colorMode } = useColorMode();
+  const isDark = colorMode === 'dark';
+  const backColor = isDark ? [0, 0, 0, 1] : [1, 1, 1, 1];
+  const imageColormap = isDark ? 'gray' : 'whiteBackgroundGray';
+
   React.useEffect(() => {
     async function loadImages() {
     niivue_slice.current = new Niivue({logLevel: 'debug',
-                                  backColor: [1, 1, 1, 1],
+                                  backColor: backColor,
                                   crosshairWidth: 1,
                                   isColorbar: false});
     niivue_render.current = new Niivue({logLevel: 'debug',
-                                  backColor: [1, 1, 1, 1],
+                                  backColor: backColor,
                                   show3Dcrosshair: false,
                                   isColorbar: false,
                                   isOrientCube: true});
@@ -325,7 +331,7 @@ export const PathwaysNiivueCanvas = () => (
           {
             url:"https://dandiarchive.s3.amazonaws.com/blobs/5df/2ec/5df2ec3d-ec43-4a33-aa38-49a141f8f05d",
             name: "sub-Hb1_sample-hemi_acq-highb_desc-mean+norm+brain.nii.gz",
-            colormap: "whiteBackgroundGray",
+            colormap: imageColormap,
           },
       ];
     const nucleiList=[
@@ -362,6 +368,20 @@ export const PathwaysNiivueCanvas = () => (
     }
     loadImages();
   }, []);
+
+  // React to light/dark toggles to update the background of both canvases and
+  // the slice image colormap
+  React.useEffect(() => {
+    [niivue_slice.current, niivue_render.current].forEach((nv) => {
+      if (!nv) return;
+      nv.opts.backColor = backColor;
+      nv.drawScene();
+    });
+    if (niivue_slice.current?.volumes?.length) {
+      niivue_slice.current.volumes[0].colormap = imageColormap;
+      niivue_slice.current.updateGLVolume();
+    }
+  }, [colorMode]);
 
   // Handlers for showing MRI, crosshair, and each tract
   const [isMRI, setIsMRI] = useState(true);
@@ -572,20 +592,20 @@ export const PathwaysNiivueCanvas = () => (
               <table style={{ width: '100%', fontSize: '0.9em' }}>
                 <tbody>
                   <tr style={{ border: 'none' }}>
-                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Scroll slices</td>
-                    <td style={{ padding: '6px' , borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: 'none', background: '#F7F8F9' }}>Scroll wheel</td>
+                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid var(--ifm-color-emphasis-300)', background: 'var(--ifm-background-color)' }}>Scroll slices</td>
+                    <td style={{ padding: '6px' , borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: 'none', background: 'var(--ifm-background-color)' }}>Scroll wheel</td>
                   </tr>
                   <tr>
-                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Move crosshair</td>
-                    <td style={{ padding: '6px', border: 'none', background: '#F7F8F9' }}>Left click</td>
+                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid var(--ifm-color-emphasis-300)', background: 'var(--ifm-background-color)' }}>Move crosshair</td>
+                    <td style={{ padding: '6px', border: 'none', background: 'var(--ifm-background-color)' }}>Left click</td>
                   </tr>
                   <tr>
-                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Pan</td>
-                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: 'none', background: '#F7F8F9' }}>Middle click</td>
+                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid var(--ifm-color-emphasis-300)', background: 'var(--ifm-background-color)' }}>Pan</td>
+                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: 'none', background: 'var(--ifm-background-color)' }}>Middle click</td>
                   </tr>
                   <tr>
-                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid #ddd', background: '#F7F8F9' }}>Zoom</td>
-                    <td style={{ padding: '6px', border: 'none', background: '#F7F8F9' }}>Right click</td>
+                    <td style={{ padding: '6px', borderTop: 'none', borderBottom: 'none', borderLeft: 'none', borderRight: '1px solid var(--ifm-color-emphasis-300)', background: 'var(--ifm-background-color)' }}>Zoom</td>
+                    <td style={{ padding: '6px', border: 'none', background: 'var(--ifm-background-color)' }}>Right click</td>
                   </tr>
                 </tbody>
               </table>
