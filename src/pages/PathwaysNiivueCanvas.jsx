@@ -402,6 +402,49 @@ export const PathwaysNiivueCanvas = () => (
       setIsCrosshair(crosshairState);
     };
 
+  // Animate, looping continuously through the coronal slices
+  const [isPlaying, setIsPlaying] = useState(false);
+  const playRafRef = React.useRef(null);
+  const playLastTimeRef = React.useRef(0);
+  const SLICES_PER_SECOND = 12;
+
+  const animateCoronalSlice = (now) => {
+    const nv = niivue_slice.current;
+    if (!nv || !nv.volumes.length) {
+      playRafRef.current = requestAnimationFrame(animateCoronalSlice);
+      return;
+    }
+    if (!playLastTimeRef.current) playLastTimeRef.current = now;
+    const elapsed = (now - playLastTimeRef.current) / 1000; // seconds
+    playLastTimeRef.current = now;
+
+    const numSlices = nv.volumes[0].dims[2];
+    // Advance the crosshair fraction by the elapsed time, looping at the volume edge
+    let y = nv.scene.crosshairPos[1] + (SLICES_PER_SECOND / numSlices) * elapsed;
+    y -= Math.floor(y); // wrap into [0, 1) to loop continuously
+    nv.scene.crosshairPos[1] = y;
+    nv.drawScene();
+
+    playRafRef.current = requestAnimationFrame(animateCoronalSlice);
+  };
+
+  const handlePlayToggle = () => {
+    if (isPlaying) {
+      cancelAnimationFrame(playRafRef.current);
+      playRafRef.current = null;
+      setIsPlaying(false);
+    } else {
+      playLastTimeRef.current = 0;
+      playRafRef.current = requestAnimationFrame(animateCoronalSlice);
+      setIsPlaying(true);
+    }
+  };
+
+  // Stop the animation when the component unmounts
+  React.useEffect(() => () => {
+    if (playRafRef.current) cancelAnimationFrame(playRafRef.current);
+  }, []);
+
   const [isOrientCube, setIsOrientCube] = useState(true);
 
   const handleOrientCubeChange = (event) => {
@@ -410,6 +453,34 @@ export const PathwaysNiivueCanvas = () => (
       niivue_render.current.drawScene();
       setIsOrientCube(orientCubeState);
     };
+
+  // Continuously rotate the 3D render view
+  const [isRotating, setIsRotating] = useState(false);
+  const rotateIntervalRef = React.useRef(null);
+
+  const stepRotation = () => {
+    const nv = niivue_render.current;
+    if (!nv) return;
+    // Increment the azimuth to spin the camera around the volume, wrapping at 360
+    const azimuth = (nv.scene.renderAzimuth + 2) % 360;
+    nv.setRenderAzimuthElevation(azimuth, nv.scene.renderElevation);
+  };
+
+  const handleRotateToggle = () => {
+    if (isRotating) {
+      clearInterval(rotateIntervalRef.current);
+      rotateIntervalRef.current = null;
+      setIsRotating(false);
+    } else {
+      rotateIntervalRef.current = setInterval(stepRotation, 50);
+      setIsRotating(true);
+    }
+  };
+
+  // Stop the rotation when the component unmounts
+  React.useEffect(() => () => {
+    if (rotateIntervalRef.current) clearInterval(rotateIntervalRef.current);
+  }, []);
 
   const [tractVisibility, setTractVisibility] = useState(
     trackList.map(() => true)
@@ -495,6 +566,15 @@ export const PathwaysNiivueCanvas = () => (
                 Crosshair
               </label>
             </div>
+            <div style={{ marginTop: "8px" }}>
+              <button
+                type="button"
+                className="button button--sm button--primary"
+                onClick={handlePlayToggle}
+              >
+                {isPlaying ? "⏸ Pause slices" : "▶ Play slices"}
+              </button>
+            </div>
 
             <hr />
             <h4>3D View</h4>
@@ -508,6 +588,15 @@ export const PathwaysNiivueCanvas = () => (
               <label htmlFor="showOrientCube" style={{ marginLeft: "5px" }}>
                 Orientation cube
               </label>
+            </div>
+            <div style={{ marginTop: "8px" }}>
+              <button
+                type="button"
+                className="button button--sm button--primary"
+                onClick={handleRotateToggle}
+              >
+                {isRotating ? "⏸ Pause rotation" : "▶ Rotate view"}
+              </button>
             </div>
 
             <hr />
