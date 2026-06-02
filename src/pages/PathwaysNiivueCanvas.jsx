@@ -420,7 +420,7 @@ export const PathwaysNiivueCanvas = () => (
 
     const numSlices = nv.volumes[0].dims[2];
     // Advance the crosshair fraction by the elapsed time, looping at the volume edge
-    let y = nv.scene.crosshairPos[1] + (SLICES_PER_SECOND / numSlices) * elapsed;
+    let y = nv.scene.crosshairPos[1] - (SLICES_PER_SECOND / numSlices) * elapsed;
     y -= Math.floor(y); // wrap into [0, 1) to loop continuously
     nv.scene.crosshairPos[1] = y;
     nv.drawScene();
