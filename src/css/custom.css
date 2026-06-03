@@ -3,6 +3,16 @@
   --ifm-color-primary: rgb(120, 88, 188);
 }
 
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: #2b7fff;
+}
+
+[data-theme='dark'] input[type="checkbox"],
+[data-theme='dark'] input[type="radio"] {
+  accent-color: #a3c7fa;
+}
+
 /* Homepage features */
 .heroBanner {
   position: relative;
