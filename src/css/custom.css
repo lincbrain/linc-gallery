@@ -211,6 +211,10 @@ input[type="radio"] {
   margin-bottom: 0.5rem;
 }
 
+.tool-section {
+  width: 95vw;
+}
+
 .team-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
