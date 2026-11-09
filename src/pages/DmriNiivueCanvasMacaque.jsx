@@ -130,7 +130,7 @@ export const DmriNiivueCanvasMacaque = () => (
       }
 
     // Load only when the tab is first shown, not at page load
-    const tabPanel = document.getElementById('niivue-canvas-slice-macaque')?.closest('[role="tabpanel"]');
+    const tabPanel = document.getElementById('niivue-canvas-slice-macaque-highres')?.closest('[role="tabpanel"]');
     if (!tabPanel || !tabPanel.hasAttribute('hidden')) {
       loadImages();
       return;
