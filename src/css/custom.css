@@ -3,8 +3,17 @@
   --ifm-color-primary: rgb(120, 88, 188);
 }
 
-/* Homepage features */
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: #2b7fff;
+}
 
+[data-theme='dark'] input[type="checkbox"],
+[data-theme='dark'] input[type="radio"] {
+  accent-color: #a3c7fa;
+}
+
+/* Homepage features */
 .heroBanner {
   position: relative;
   min-height: calc(100vh - 120px);
@@ -62,11 +71,11 @@
   }
 }
 
-
-/* Reduce footer height */
+/* Reduce footer height and match the page background */
 .footer {
   padding-top: 0rem;
   padding-bottom: 0.75rem;
+  --ifm-footer-background-color: var(--ifm-background-color);
 }
 
 .footer__links {
@@ -74,4 +83,197 @@
   margin-bottom: 0;
 }
 
+/* Page stlying */
+.resource-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
 
+.resource-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sidebar-container {
+  width: 330px;
+  background-color: var(--ifm-background-color);
+  padding: 20px;
+  min-height: 72vh;
+  max-height: 72vh;
+  overflow-y: auto;
+  position: sticky;
+  top: 20px;
+}
+
+.sidebar-container h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: var(--ifm-heading-color);
+  font-weight: 500;
+  border-bottom: 2px solid var(--ifm-color-emphasis-200);
+  padding-bottom: 8px;
+}
+
+.sidebar-container h4 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: var(--ifm-heading-color);
+  font-weight: 500;
+}
+
+.sidebar-container-divider {
+  border: none;
+  height: 1px;
+  background-color: var(--ifm-color-emphasis-300);
+  margin: 15px 0;
+}
+
+.sidebar-and-niivue-container {
+  min-height: 72vh;
+  max-height: 72vh;
+  overflow: hidden;
+  display: flex;
+}
+
+.niivue-container{
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  min-width: 0;
+}
+
+.viewer-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  min-width: 95vw;
+  max-width: 95vw;
+  min-height: 90vh;
+  max-height: 90vh;
+  overflow: hidden;
+}
+
+.viewer-card-note {
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-900);
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.viewer-card-mobile-message {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .viewer-card-mobile-message {
+    display: block;
+  }
+
+  .viewer-card-content {
+    display: none;
+  }
+}
+
+.viewer-card iframe {
+  min-width: 93vw;
+  max-width: 93vw;
+  min-height: 80vh;
+  max-height: 80vh;
+}
+/* Prevent NiiVue canvas redrawing upon tab switch, since Docusaurus collapses the canvas with the hidden attribute. */
+.viewer-card-content {
+  position: relative;
+}
+
+.viewer-card [role="tabpanel"][hidden] {
+  display: block !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  width: 100% !important;
+}
+
+.resource-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.resource-card h3 {
+  margin-top: 0;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.tool-section {
+  width: 95vw;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+  min-width: 95vw;
+  max-width: 95vw;
+}
+
+.team-member {
+  padding: 1.5rem;
+  background-color: var(--ifm-background-surface-color);
+  text-align: center;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+}
+
+.team-member img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.team-member h3 {
+  margin-top: auto;
+  margin-bottom: 0.3rem;
+  font-size: 1.2rem;
+  text-align: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.team-member p {
+  font-size: 0.9rem;
+  min-height: 1.4rem;
+}
+
+
+
+@media (max-width: 768px) {
+  .team-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+/* Main content of each page */
+.container:not(.footer .container) {
+  max-width: 95vw !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

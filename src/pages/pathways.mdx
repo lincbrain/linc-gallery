@@ -5,3 +5,42 @@ hide_table_of_contents: true
 
 # Pathway Atlas
 
+import { NiivueBrowserWrapper } from './NiivueBrowserWrapper';
+import { PathwaysNiivueCanvas } from './PathwaysNiivueCanvas';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<div className="resource-cards">
+  <div className="resource-card">
+    <h3>📝 Reference</h3>
+    <p>[Maffei et al., bioRxiv 2026](https://doi.org/10.64898/2026.03.31.715699)</p>
+  </div>
+  <div className="resource-card">
+    <h3>📊 Data</h3>
+    <p>DANDI Archive [001278](https://dandiarchive.org/dandiset/001278)</p>
+  </div>
+  <div className="resource-card">
+    <h3>💻 Source Code</h3>
+    <p>[Repository](https://github.com/lincbrain) on GitHub (Coming soon)</p>
+  </div>
+  <div className="resource-card">
+    <h3>Acknowledgements</h3>
+    <p>National Institutes of Health (NIH)<br/>
+    [BRAIN CONNECTS program](https://www.brain-connects.org/)<br/>
+    [UM1 NS132358](https://reporter.nih.gov/project-details/10672681)</p>
+  </div>
+</div>
+
+<div className="viewer-card">
+  <h3>🔍 Explore the data </h3>
+  <Tabs lazy>
+    <TabItem value="subject-space" label="Human Ha1 space" default>
+      <NiivueBrowserWrapper>
+        <PathwaysNiivueCanvas/>
+      </NiivueBrowserWrapper>
+    </TabItem>
+    <TabItem value="mni-space" label="MNI space">
+      Coming soon
+    </TabItem>
+  </Tabs>
+</div>

@@ -10,7 +10,6 @@ const config = {
   baseUrl: '/',
   organizationName: 'lincbrain',
   projectName: 'linc-gallery',
-  deploymentBranch: 'gh-pages',
   trailingSlash: false,
 
   onBrokenLinks: 'throw',
@@ -29,20 +28,28 @@ const config = {
           customCss: './src/css/custom.css',
         },
         docs: false,
+        gtag: {
+          trackingID: 'G-JT8NM7QK71',
+          anonymizeIP: true,
+        },
       },
     ],
   ],
 
   themeConfig:
     ({
+      image: 'img/linc.logo.color+white.png',
       navbar: {
         logo: {
           alt: 'Logo',
           src: 'img/linc.logo.color+white.notext.png',
         },
         items: [
+          {to: '/dmri', label: 'Diffusion MRI', position: 'right'},
+          {to: '/mri-xray', label: 'MRI & X-ray', position: 'right'},
           {to: '/pathways', label: 'Pathway Atlas', position: 'right'},
-          {to: '/dmri', label: 'High-resolution dMRI', position: 'right'},
+          {to: '/axon-segmentation', label: 'Axon Segmentation', position: 'right'},
+          {to: '/team', label: 'Team', position: 'right'},
           {to: 'https://connects.mgh.harvard.edu/', label: 'Project Homepage', position: 'right'},
         ],
       },
@@ -68,7 +75,8 @@ const config = {
       },
       colorMode: {
           defaultMode: 'light',
-          disableSwitch: true,
+          disableSwitch: false,
+          respectPrefersColorScheme: true,
         },
       prism: {
         theme: prismThemes.github,
