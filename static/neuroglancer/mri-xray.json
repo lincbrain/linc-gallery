@@ -1,0 +1,962 @@
+{
+  "title": "Hb1 datasets in HiP-CT space",
+  "dimensions": {
+    "x": [
+      0.000010072,
+      "m"
+    ],
+    "y": [
+      0.000010072,
+      "m"
+    ],
+    "z": [
+      0.000010072,
+      "m"
+    ]
+  },
+  "displayDimensions": [
+    "x",
+    "y",
+    "z"
+  ],
+  "position": [
+    7100.66943359375,
+    7375.958984375,
+    8574.78515625
+  ],
+  "crossSectionOrientation": [
+    -0.008465742692351341,
+    0.07354719936847687,
+    0.7508567571640015,
+    0.6563026905059814
+  ],
+  "crossSectionScale": 20.085536923187647,
+  "projectionOrientation": [
+    0.034684766083955765,
+    -0.027731234207749367,
+    0.8491946458816528,
+    0.5262094140052795
+  ],
+  "projectionScale": 27198.397831057795,
+  "layers": [
+    {
+      "type": "image",
+      "source": {
+        "url": "https://dandiarchive.s3.amazonaws.com/zarr/5c428664-342c-4bce-b853-7112fee872a8/|zarr3:",
+        "subsources": {
+          "default": true
+        },
+        "enableDefaultSubsources": false
+      },
+      "tab": "rendering",
+      "annotationColor": "#000000",
+      "opacity": 1,
+      "shader": "#uicontrol invlerp normalized\nvoid main() {\n  int val = int(getDataValue().value);\n  if(val == 0) discard;\n  emitGrayscale(normalized());\n}\n",
+      "shaderControls": {
+        "normalized": {
+          "range": [
+            30856,
+            37855
+          ]
+        }
+      },
+      "crossSectionRenderScale": 0.0625,
+      "name": "Whole-hemisphere HiP-CT overview @ 20.07 μm"
+    },
+    {
+      "type": "image",
+      "source": {
+        "url": "https://dandiarchive.s3.amazonaws.com/zarr/d483e140-ccd7-4bcf-8a69-a10b7087381c/|zarr3:",
+        "transform": {
+          "matrix": [
+            [
+              0.9931247168,
+              0.0184512526,
+              0.0029150631,
+              3828.3811544528
+            ],
+            [
+              -0.0157939686,
+              0.9884163429,
+              0.0026193538,
+              4500.1613698159
+            ],
+            [
+              -0.0027621041,
+              0.0008893249,
+              0.9849203335,
+              6071.277024768
+            ]
+          ],
+          "outputDimensions": {
+            "x": [
+              0.000010072,
+              "m"
+            ],
+            "y": [
+              0.000010072,
+              "m"
+            ],
+            "z": [
+              0.000010072,
+              "m"
+            ]
+          }
+        },
+        "subsources": {
+          "default": true
+        },
+        "enableDefaultSubsources": false
+      },
+      "tab": "rendering",
+      "opacity": 0.7,
+      "shader": "#uicontrol invlerp normalized\nvoid main() {\n  int val = int(getDataValue().value);\n  if(val == 0) discard;\n  emitGrayscale(normalized());\n}\n",
+      "shaderControls": {
+        "normalized": {
+          "range": [
+            7294,
+            12023
+          ]
+        }
+      },
+      "volumeRendering": "max",
+      "volumeRenderingDepthSamples": 256,
+      "name": "Whole-hemisphere HiP-CT zoom 1 @ 4.257 μm",
+      "visible": false
+    },
+    {
+      "type": "image",
+      "source": {
+        "url": "https://dandiarchive.s3.amazonaws.com/zarr/0a89ff02-90c4-4d3d-8275-8bc8ee140715/|zarr3:",
+        "transform": {
+          "matrix": [
+            [
+              0.9912468456,
+              0.0196920447,
+              0.000069219,
+              4340.9898231458
+            ],
+            [
+              -0.0167907499,
+              0.9860871874,
+              0.0011206967,
+              5209.8876364259
+            ],
+            [
+              -0.0027869987,
+              -0.0008044963,
+              0.9865808268,
+              6976.6383806323
+            ]
+          ],
+          "outputDimensions": {
+            "x": [
+              0.000010072,
+              "m"
+            ],
+            "y": [
+              0.000010072,
+              "m"
+            ],
+            "z": [
+              0.000010072,
+              "m"
+            ]
+          },
+          "inputDimensions": {
+            "x": [
+              0.000002201,
+              "m"
+            ],
+            "y": [
+              0.000002201,
+              "m"
+            ],
+            "z": [
+              0.000002201,
+              "m"
+            ]
+          }
+        },
+        "subsources": {
+          "default": true
+        },
+        "enableDefaultSubsources": false
+      },
+      "tab": "rendering",
+      "opacity": 1,
+      "shader": "#uicontrol invlerp normalized\nvoid main() {\n  int val = int(getDataValue().value);\n  if(val == 0) discard;\n  emitGrayscale(normalized());\n}\n",
+      "shaderControls": {
+        "normalized": {
+          "range": [
+            6840,
+            10096
+          ],
+          "window": [
+            0,
+            11377
+          ]
+        }
+      },
+      "volumeRendering": "max",
+      "volumeRenderingDepthSamples": 256,
+      "name": "Whole-hemisphere HiP-CT zoom 2 @ 2.201 μm",
+      "visible": false
+    },
+    {
+      "type": "image",
+      "source": {
+        "url": "https://dandiarchive.s3.amazonaws.com/zarr/1cd1a161-ca2c-4121-b97a-eeb98f00ce01/|zarr3:",
+        "transform": {
+          "matrix": [
+            [
+              0.127222225,
+              -0.0995966934,
+              1.0235614556,
+              4256.3891263348
+            ],
+            [
+              -1.0046822391,
+              -0.1419792183,
+              0.1042943449,
+              8527.1764323209
+            ],
+            [
+              0.1179940199,
+              -0.9881479151,
+              -0.1105903539,
+              9070.3793290834
+            ]
+          ],
+          "outputDimensions": {
+            "x": [
+              0.000010072,
+              "m"
+            ],
+            "y": [
+              0.000010072,
+              "m"
+            ],
+            "z": [
+              0.000010072,
+              "m"
+            ]
+          }
+        },
+        "subsources": {
+          "default": true,
+          "bounds": true
+        },
+        "enableDefaultSubsources": false
+      },
+      "tab": "source",
+      "annotationColor": "#eeeeec",
+      "opacity": 0.51,
+      "shader": "#uicontrol invlerp normalized\nvoid main() {\n  int val = int(getDataValue().value);\n  if(val == 0) discard;\n  emitGrayscale(normalized());\n}\n",
+      "shaderControls": {
+        "normalized": {
+          "range": [
+            12539,
+            18805
+          ]
+        }
+      },
+      "volumeRenderingDepthSamples": 256,
+      "name": "Chunk HiP-CT overview @ 10.072 μm",
+      "visible": false
+    },
+    {
+      "type": "image",
+      "source": {
+        "url": "https://dandiarchive.s3.amazonaws.com/zarr/28a250f1-5f86-4a7f-a20e-475ab7b05f3d/|zarr3:",
+        "transform": {
+          "matrix": [
+            [
+              0.1267381609,
+              -0.0979335686,
+              1.0237619753,
+              4578.3268934086
+            ],
+            [
+              -1.0040501005,
+              -0.1444284909,
+              0.1034541326,
+              5936.3223629739
+            ],
+            [
+              0.1192084023,
+              -0.9885284447,
+              -0.1094564334,
+              8844.0587976021
+            ]
+          ],
+          "outputDimensions": {
+            "x": [
+              0.000010072,
+              "m"
+            ],
+            "y": [
+              0.000010072,
+              "m"
+            ],
+            "z": [
+              0.000010072,
+              "m"
+            ]
+          },
+          "inputDimensions": {
+            "x": [
+              8.57e-7,
+              "m"
+            ],
+            "y": [
+              8.57e-7,
+              "m"
+            ],
+            "z": [
+              8.57e-7,
+              "m"
+            ]
+          }
+        }
+      },
+      "tab": "rendering",
+      "shader": "#uicontrol invlerp normalized\nvoid main() {\n  int val = int(getDataValue().value);\n  if(val == 0) discard;\n  emitGrayscale(normalized());\n}\n",
+      "name": "Chunk HiP-CT zoom 1 @ 0.857 μm",
+      "visible": false
+    },
+    {
+      "type": "image",
+      "source": {
+        "url": "https://dandiarchive.s3.amazonaws.com/zarr/b35e8f01-3225-4048-a746-6b453c5da659/|zarr3:",
+        "transform": {
+          "matrix": [
+            [
+              -0.5403606409,
+              -0.2924030083,
+              0.7498323235,
+              5012.8825341693
+            ],
+            [
+              -0.802917024,
+              -0.0652076734,
+              -0.5224657044,
+              6687.9465813239
+            ],
+            [
+              0.2439501288,
+              -1.0032220191,
+              -0.182257624,
+              9241.8538841416
+            ]
+          ],
+          "outputDimensions": {
+            "x": [
+              0.000010072,
+              "m"
+            ],
+            "y": [
+              0.000010072,
+              "m"
+            ],
+            "z": [
+              0.000010072,
+              "m"
+            ]
+          },
+          "inputDimensions": {
+            "x": [
+              0.0000036900000000000002,
+              "m"
+            ],
+            "y": [
+              0.0000036900000000000002,
+              "m"
+            ],
+            "z": [
+              0.0000036900000000000002,
+              "m"
+            ]
+          }
+        }
+      },
+      "tab": "rendering",
+      "annotationColor": "#ff0000",
+      "opacity": 1,
+      "shader": "#uicontrol invlerp normalized\n#uicontrol float alpha_threshold slider(min=0, max=1)\nvoid main() {\n  int val = int(getDataValue().value);\n  if(val == 0 || normalized() < alpha_threshold) discard;\n  emitGrayscale(normalized());\n}",
+      "shaderControls": {
+        "normalized": {
+          "range": [
+            12899,
+            34058
+          ],
+          "window": [
+            0,
+            42623
+          ]
+        }
+      },
+      "crossSectionRenderScale": 0.0625,
+      "volumeRendering": "on",
+      "name": "Punch 1 untrimmed micro-CT scan @ 3.69 μm",
+      "visible": false
+    },
+    {
+      "type": "image",
+      "source": {
+        "url": "https://dandiarchive.s3.amazonaws.com/zarr/134a2fe3-55b9-44ea-aacd-cd760df01ce6/|zarr3:",
+        "transform": {
+          "matrix": [
+            [
+              -0.1773921669,
+              -1.0234619266,
+              -0.1424097098,
+              9185.1636351638
+            ],
+            [
+              0.6542601068,
+              0.0190633371,
+              -0.7026523803,
+              6151.2452752183
+            ],
+            [
+              0.7332922523,
+              -0.2335983496,
+              0.5892503678,
+              4791.7152959106
+            ]
+          ],
+          "outputDimensions": {
+            "z": [
+              0.000010072,
+              "m"
+            ],
+            "y": [
+              0.000010072,
+              "m"
+            ],
+            "x": [
+              0.000010072,
+              "m"
+            ]
+          }
+        }
+      },
+      "tab": "rendering",
+      "annotationColor": "#00ff00",
+      "opacity": 1,
+      "shader": "#uicontrol invlerp normalized\n#uicontrol float alpha_threshold slider(min=0, max=1)\nvoid main() {\n  int val = int(getDataValue().value);\n  if(val == 0 || normalized() < alpha_threshold) discard;\n  emitGrayscale(normalized());\n}",
+      "shaderControls": {
+        "alpha_threshold": 0.3
+      },
+      "crossSectionRenderScale": 0.0625,
+      "name": "Punch 1 trim 2 micro-CT scan @ 2.143 μm",
+      "visible": false
+    },
+    {
+      "type": "image",
+      "source": {
+        "url": "https://dandiarchive.s3.amazonaws.com/zarr/8a994baf-a833-48ac-bf16-83d997d0a292/|zarr3:",
+        "transform": {
+          "matrix": [
+            [
+              0.2237665528,
+              1.0097934801,
+              -0.1719908836,
+              8847.0535405618
+            ],
+            [
+              -0.6969996941,
+              0.0072037705,
+              -0.6600624238,
+              6267.0009942367
+            ],
+            [
+              -0.6807534741,
+              0.2827806534,
+              0.6297136383,
+              5105.424905293
+            ]
+          ],
+          "outputDimensions": {
+            "z": [
+              0.000010072,
+              "m"
+            ],
+            "y": [
+              0.000010072,
+              "m"
+            ],
+            "x": [
+              0.000010072,
+              "m"
+            ]
+          }
+        }
+      },
+      "tab": "annotations",
+      "annotationColor": "#0000ff",
+      "opacity": 0.88,
+      "shader": "#uicontrol invlerp normalized\nvoid main() {\n  int val = int(getDataValue().value);\n  if(val == 0) discard;\n  emitGrayscale(normalized());\n}\n",
+      "crossSectionRenderScale": 0.0625,
+      "name": "Punch 1 trim 9 micro-CT scan @ 0.369 μm",
+      "visible": false
+    },
+    {
+      "type": "image",
+      "source": {
+        "url": "https://dandiarchive.s3.amazonaws.com/zarr/8507935b-39a0-4ce4-87da-58906eebdb74/|zarr3:",
+        "transform": {
+          "matrix": [
+            [
+              0.9865157008964445,
+              -0.061509244249588736,
+              0.15166866768260406,
+              4605.6770889913205
+            ],
+            [
+              -0.15988327585280607,
+              -0.16408159284657883,
+              0.9734036002560724,
+              6102.93702573503
+            ],
+            [
+              -0.034987283223299526,
+              -0.9845272183950665,
+              -0.17170336703710665,
+              9267.662067468631
+            ]
+          ],
+          "outputDimensions": {
+            "x": [
+              0.000010072,
+              "m"
+            ],
+            "y": [
+              0.000010072,
+              "m"
+            ],
+            "z": [
+              0.000010072,
+              "m"
+            ]
+          }
+        }
+      },
+      "tab": "source",
+      "opacity": 1,
+      "shader": "#uicontrol invlerp normalized\n#uicontrol float alpha_threshold slider(min=0, max=1)\nvoid main() {\n  int val = int(getDataValue().value);\n  if(val == 0 || normalized() < alpha_threshold) discard;\n  emitGrayscale(normalized());\n}",
+      "shaderControls": {
+        "alpha_threshold": 0.2
+      },
+      "crossSectionRenderScale": 0.0625,
+      "volumeRendering": "on",
+      "name": "Punch 2 untrimmed micro-CT scan @ 8.9851 μm",
+      "visible": false
+    },
+    {
+      "type": "image",
+      "source": {
+        "url": "https://dandiarchive.s3.amazonaws.com/zarr/97691c51-846e-4777-b2e5-68ff09b4357b|zarr3:",
+        "transform": {
+          "matrix": [
+            [
+              0,
+              -0.9706247451895452,
+              -0.2066577801327031,
+              -0.11894137391569905,
+              17234.6901382374
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0.12936568221375117,
+              -0.025875830392451758,
+              -0.9915283916015403,
+              17050.41511193342
+            ],
+            [
+              0,
+              -0.20285986367712375,
+              0.9780710625062601,
+              -0.052195768210731366,
+              4510.65795221051
+            ]
+          ],
+          "outputDimensions": {
+            "x": [
+              0.000010072,
+              "m"
+            ],
+            "c^": [
+              1,
+              ""
+            ],
+            "z": [
+              0.000010072,
+              "m"
+            ],
+            "y": [
+              0.000010072,
+              "m"
+            ]
+          },
+          "inputDimensions": {
+            "t": [
+              1,
+              "s"
+            ],
+            "z": [
+              0.00012016598880290984,
+              "m"
+            ],
+            "y": [
+              0.00011968857795000075,
+              "m"
+            ],
+            "x": [
+              0.0001197296679019928,
+              "m"
+            ]
+          }
+        }
+      },
+      "tab": "rendering",
+      "shader": "#uicontrol invlerp normalized\nvoid main() {\n  if(getDataValue() == 0.0) discard;\n  emitGrayscale(normalized());\n}\n",
+      "shaderControls": {
+        "normalized": {
+          "range": [
+            28.27190855579448,
+            50.582540472167494
+          ],
+          "window": [
+            -12.785262549383111,
+            63.335809004806606
+          ]
+        }
+      },
+      "channelDimensions": {
+        "c^": [
+          1,
+          ""
+        ]
+      },
+      "name": "Whole-hemisphere T2*-weighted MRI @ 120 μm",
+      "visible": false
+    },
+    {
+      "type": "segmentation",
+      "source": {
+        "url": "https://dandiarchive.s3.amazonaws.com/blobs/555/6a5/5556a521-9dc1-4621-84e8-28b098bcc02d|gzip:|nifti:",
+        "transform": {
+          "matrix": [
+            [
+              0.2066578036809656,
+              -0.11894137173893321,
+              0.9706247516106515,
+              0,
+              533.6839075453988
+            ],
+            [
+              -0.9780710575341388,
+              -0.052195768522657796,
+              0.20285984257650969,
+              0,
+              10334.67404981535
+            ],
+            [
+              0.0258758302632148,
+              -0.9915283918462396,
+              -0.12936566712460756,
+              0,
+              18795.119942575722
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              0
+            ]
+          ],
+          "outputDimensions": {
+            "x": [
+              0.000010072,
+              "m"
+            ],
+            "y": [
+              0.000010072,
+              "m"
+            ],
+            "z": [
+              0.000010072,
+              "m"
+            ],
+            "c^": [
+              1,
+              "s"
+            ]
+          },
+          "inputDimensions": {
+            "i": [
+              0.0009991392493247987,
+              "m"
+            ],
+            "j": [
+              0.0009994823932647705,
+              "m"
+            ],
+            "k": [
+              0.0009987821578979492,
+              "m"
+            ],
+            "m": [
+              1,
+              ""
+            ]
+          }
+        },
+        "subsources": {
+          "default": true
+        },
+        "enableDefaultSubsources": false
+      },
+      "localDimensions": {
+        "c^": [
+          1,
+          "s"
+        ]
+      },
+      "localPosition": [
+        0.5
+      ],
+      "tab": "rendering",
+      "selectedAlpha": 0.3,
+      "segments": [],
+      "segmentColors": {
+        "0": "#000000",
+        "2": "#f5f5f5",
+        "3": "#cd3e4e",
+        "4": "#781286",
+        "5": "#c43afa",
+        "7": "#dcf8a4",
+        "8": "#e69422",
+        "10": "#00760e",
+        "11": "#7abadc",
+        "12": "#ec0db0",
+        "13": "#0c30ff",
+        "14": "#ccb68e",
+        "17": "#dcd814",
+        "18": "#67ffff",
+        "26": "#ffa500",
+        "42": "#cd3e4e",
+        "46": "#dcf8a4",
+        "47": "#e69422",
+        "77": "#c846ff",
+        "85": "#eaa91e",
+        "819": "#500000",
+        "821": "#ffff00",
+        "822": "#bbfd00",
+        "843": "#ff5000",
+        "865": "#550000",
+        "869": "#aaff00"
+      },
+      "name": "Whole-hemisphere MRI-derived segmentation"
+    },
+    {
+      "type": "image",
+      "source": {
+        "url": "https://dandiarchive.s3.amazonaws.com/zarr/5f41916f-e900-478a-b813-ec1ea095e1ad|zarr3:",
+        "transform": {
+          "matrix": [
+            [
+              0,
+              1,
+              0,
+              0,
+              614.1169758615654
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              -1,
+              0,
+              15684.85953866536
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              4633.23918858438
+            ]
+          ],
+          "outputDimensions": {
+            "x": [
+              0.000010072,
+              "m"
+            ],
+            "c^": [
+              1,
+              ""
+            ],
+            "z": [
+              0.000010072,
+              "m"
+            ],
+            "y": [
+              0.000010072,
+              "m"
+            ]
+          }
+        }
+      },
+      "tab": "rendering",
+      "shader": "#uicontrol invlerp red(channel=0)\n#uicontrol invlerp green(channel=1)\n#uicontrol invlerp blue(channel=2)\nvoid main() {\n  emitRGB(vec3(red(), green(), blue()));\n}\n",
+      "crossSectionRenderScale": 0.0625,
+      "channelDimensions": {
+        "c^": [
+          1,
+          ""
+        ]
+      },
+      "name": "Diffusion MRI direction-encoded colors @ 400 μm",
+      "visible": false
+    },
+    {
+      "type": "image",
+      "source": {
+        "url": "https://dandiarchive.s3.amazonaws.com/zarr/4e3c4b54-9a75-42b4-901b-123b36fd02dd|zarr3:",
+        "transform": {
+          "matrix": [
+            [
+              0,
+              -1,
+              0,
+              15684.85953866536
+            ],
+            [
+              0,
+              0,
+              1,
+              4633.23918858438
+            ],
+            [
+              1,
+              0,
+              0,
+              614.1169758615654
+            ]
+          ],
+          "outputDimensions": {
+            "z": [
+              0.000010072,
+              "m"
+            ],
+            "y": [
+              0.000010072,
+              "m"
+            ],
+            "x": [
+              0.000010072,
+              "m"
+            ]
+          }
+        }
+      },
+      "tab": "source",
+      "shader": "#uicontrol invlerp normalized\nvoid main() {\n  if(getDataValue() == 0.0) discard;\n  emitGrayscale(normalized());\n}\n",
+      "shaderControls": {
+        "normalized": {
+          "range": [
+            0.0048,
+            0.9234
+          ]
+        }
+      },
+      "name": "Diffusion MRI average gradient map @ 400 μm",
+      "visible": false
+    },
+    {
+      "type": "annotation",
+      "source": {
+        "url": "https://dandiarchive.s3.amazonaws.com/zarr/941034d7-d423-41a3-88e8-4c35b23ce211/|neuroglancer-precomputed:",
+        "transform": {
+          "matrix": [
+            [
+              0,
+              -0.32112,
+              0,
+              8328.278693407467
+            ],
+            [
+              0,
+              0,
+              -0.32112,
+              7380.606731532962
+            ],
+            [
+              0.32112,
+              0,
+              0,
+              -9084.090250198571
+            ]
+          ],
+          "outputDimensions": {
+            "x": [
+              0.000010072,
+              "m"
+            ],
+            "y": [
+              0.000010072,
+              "m"
+            ],
+            "z": [
+              0.000010072,
+              "m"
+            ]
+          }
+        },
+        "subsources": {
+          "default": true
+        },
+        "enableDefaultSubsources": false
+      },
+      "tab": "source",
+      "shader": "void main () {\n  setColor(prop_orientation_color());\n  setLineWidth(0.1);\n  setEndpointMarkerSize(0.0);\n}",
+      "name": "Diffusion MRI tractography"
+    }
+  ],
+  "showAxisLines": false,
+  "showSlices": false,
+  "gpuMemoryLimit": 1000000000000,
+  "systemMemoryLimit": 2000000000000,
+  "concurrentDownloads": 1000,
+  "selectedLayer": {
+    "size": 621,
+    "layer": "Whole-hemisphere MRI-derived segmentation"
+  },
+  "crossSectionBackgroundColor": "#000000",
+  "layout": "4panel-alt",
+  "selection": {
+    "size": 910,
+    "visible": false
+  },
+  "layerListPanel": {
+    "size": 718
+  },
+  "uiControlVisibility": {}
+}
