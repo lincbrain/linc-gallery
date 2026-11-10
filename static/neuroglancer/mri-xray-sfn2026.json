@@ -767,7 +767,8 @@
         "865": "#550000",
         "869": "#aaff00"
       },
-      "name": "Whole-hemisphere MRI-derived segmentation"
+      "name": "Whole-hemisphere MRI-derived segmentation",
+      "visible": false
     },
     {
       "type": "image",
