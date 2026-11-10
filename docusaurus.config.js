@@ -42,7 +42,8 @@ const config = {
       navbar: {
         logo: {
           alt: 'Logo',
-          src: 'img/linc.logo.color+white.notext.png',
+          src: 'img/linc.logo.color+white.alpha.notext.png',
+          srcDark: 'img/linc.logo.color+black.alpha.notext.png',
         },
         items: [
           {to: '/dmri', label: 'Diffusion MRI', position: 'right'},
