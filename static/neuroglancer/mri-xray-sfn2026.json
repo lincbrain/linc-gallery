@@ -698,9 +698,9 @@
               0.000010072,
               "m"
             ],
-            "c^": [
+            "m'": [
               1,
-              "s"
+              ""
             ]
           },
           "inputDimensions": {
@@ -728,9 +728,9 @@
         "enableDefaultSubsources": false
       },
       "localDimensions": {
-        "c^": [
+        "m'": [
           1,
-          "s"
+          ""
         ]
       },
       "localPosition": [
