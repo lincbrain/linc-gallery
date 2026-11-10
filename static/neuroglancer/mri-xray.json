@@ -20,9 +20,9 @@
     "z"
   ],
   "position": [
-    7100.66943359375,
-    7375.958984375,
-    8574.78515625
+    7024.5,
+    7253.5,
+    7523.5
   ],
   "crossSectionOrientation": [
     -0.008465742692351341,
@@ -30,7 +30,7 @@
     0.7508567571640015,
     0.6563026905059814
   ],
-  "crossSectionScale": 20.085536923187647,
+  "crossSectionScale": 13.113056305877018,
   "projectionOrientation": [
     0.034684766083955765,
     -0.027731234207749367,
@@ -935,7 +935,8 @@
         },
         "enableDefaultSubsources": false
       },
-      "tab": "source",
+      "tab": "annotations",
+      "crossSectionAnnotationSpacing": 1.3607900001743771,
       "shader": "void main () {\n  setColor(prop_orientation_color());\n  setLineWidth(0.1);\n  setEndpointMarkerSize(0.0);\n}",
       "name": "Diffusion MRI tractography"
     }
@@ -947,10 +948,10 @@
   "concurrentDownloads": 1000,
   "selectedLayer": {
     "size": 621,
-    "layer": "Whole-hemisphere MRI-derived segmentation"
+    "layer": "Diffusion MRI tractography"
   },
   "crossSectionBackgroundColor": "#000000",
-  "layout": "4panel-alt",
+  "layout": "yz",
   "selection": {
     "size": 910,
     "visible": false
