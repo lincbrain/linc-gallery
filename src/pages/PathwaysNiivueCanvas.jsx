@@ -349,7 +349,7 @@ export const PathwaysNiivueCanvas = () => (
     niivue_slice.current.opts.loadingText = 'Please do not refresh.'
     niivue_render.current.opts.loadingText = 'Loading (1-2 minutes)...'
 
-    // Download each tractogram once and give the same bytes to both viewers
+    // Download each tract once and give the same bytes to both viewers
     const downloads = new Map();
     for (const track of trackList) {
       if (!downloads.has(track.url)) {
