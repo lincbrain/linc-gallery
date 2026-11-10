@@ -943,9 +943,6 @@
   ],
   "showAxisLines": false,
   "showSlices": false,
-  "gpuMemoryLimit": 1000000000000,
-  "systemMemoryLimit": 2000000000000,
-  "concurrentDownloads": 1000,
   "selectedLayer": {
     "size": 621,
     "layer": "Diffusion MRI tractography"
