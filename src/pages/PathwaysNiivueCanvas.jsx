@@ -349,14 +349,28 @@ export const PathwaysNiivueCanvas = () => (
     niivue_slice.current.opts.loadingText = 'Please do not refresh.'
     niivue_render.current.opts.loadingText = 'Loading (1-2 minutes)...'
 
+    // Download each tractogram once and give the same bytes to both viewers
+    const downloads = new Map();
+    for (const track of trackList) {
+      if (!downloads.has(track.url)) {
+        downloads.set(track.url, fetch(track.url).then((response) => {
+          if (!response.ok) throw new Error(`Failed to load ${track.url}: ${response.statusText}`);
+          return response.arrayBuffer();
+        }));
+      }
+    }
+    const tracks = await Promise.all(
+      trackList.map(async (track) => ({ ...track, buffer: await downloads.get(track.url) }))
+    );
+
     // Load data
-    await niivue_render.current.loadMeshes(trackList);
+    await niivue_render.current.loadMeshes(tracks);
     niivue_render.current.meshes.forEach((mesh, i) => {
       originalIndexCounts.current[i] = mesh.indexCount;
       niivue_render.current.setMeshProperty(mesh.id, 'fiberColor', 'Fixed');
     });
 
-    await niivue_slice.current.loadMeshes(trackList);
+    await niivue_slice.current.loadMeshes(tracks);
     niivue_slice.current.meshes.forEach((mesh) => {
       niivue_slice.current.setMeshProperty(mesh.id, 'fiberColor', 'Fixed');
     });
