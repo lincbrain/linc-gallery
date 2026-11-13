@@ -16,14 +16,10 @@ input[type="radio"] {
 /* Homepage features */
 .heroBanner {
   position: relative;
-  min-height: calc(100vh - 120px);
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url('/img/homepage-temp.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   overflow: hidden;
 }
 
@@ -48,10 +44,6 @@ input[type="radio"] {
 }
 
 @media screen and (max-width: 996px) {
-  .heroBanner {
-    min-height: calc(100vh - 50px);
-  }
-  
   .heroTitle {
     font-size: 2.5rem;
   }

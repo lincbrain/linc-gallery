@@ -8,23 +8,16 @@ const homepageStyles = `
   .navbar__logo img {
     content: url('/img/linc.logo.color+black.alpha.notext.png');
   }
-  .navbar {
-    background-image: url('/img/homepage-temp.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+  #__docusaurus {
+    background: url('/img/homepage-temp.jpg') center / cover no-repeat;
+  }
+  .navbar,
+  .footer {
+    background: transparent;
+    box-shadow: none;
     color: white;
   }
   .navbar a {
-    color: white;
-  }
-  .footer {
-    background-image: url('/img/homepage-temp.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     color: white;
   }
   .footer a {
