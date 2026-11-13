@@ -75,6 +75,19 @@ input[type="radio"] {
   margin-bottom: 0;
 }
 
+/* Match the copyright's line height to the GitHub link so they align */
+.footer__item {
+  line-height: 2;
+}
+
+/* Keep GitHub and the copyright on one line on mobile */
+@media screen and (max-width: 996px) {
+  .footer__col {
+    --ifm-col-width: 50%;
+    margin-bottom: 0;
+  }
+}
+
 /* Page stlying */
 .resource-cards {
   display: grid;
